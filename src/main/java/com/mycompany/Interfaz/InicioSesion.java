@@ -1,6 +1,7 @@
 
 package com.mycompany.Interfaz;
 
+import com.mycompany.Clases.Cliente;
 import com.mycompany.Enum.EstadoUsuario;
 import com.mycompany.Clases.Usuario;
 import static com.mycompany.GestorArchivos.GuardarArchivoBinario.FILE_USUARIOS;
@@ -10,6 +11,8 @@ import java.io.FileNotFoundException;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.JOptionPane;
 
@@ -108,15 +111,16 @@ public class InicioSesion extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
         String usu=usuarioText.getText();
         String pas=passwordText.getText();
         if(usu!=null && pas!=null){
-            VerificarInicioSesion(usuarioText.getText(),passwordText.getText());
+            VerificarInicioSesion(usu,pas);
         } else{
             JOptionPane.showMessageDialog(null, "HAY CAMPOS VACIOS");
             
         }
-            
+           
     }//GEN-LAST:event_jButton1ActionPerformed
        public void VerificarInicioSesion(String name,String contraseña){
         try {
@@ -128,23 +132,24 @@ public class InicioSesion extends javax.swing.JInternalFrame {
                            int a=persona.getTipo();
                            RediregirArea(a,name);
                            lectura.close();
+                           usuarioText.setText("");
+                           passwordText.setText("");
                       }else{
-                           JOptionPane.showMessageDialog(null,"ACUTALMENTE TU USUARIO NO ESTA ACTIVO");
+                           JOptionPane.showMessageDialog(null,"ACTUALMENTE TU USUARIO NO ESTA ACTIVO");
                        }
                       
                    }else{
                        JOptionPane.showMessageDialog(null, "CONTRASEÑA INCORRECTA");
                        passwordText.setText("");
-                   }
-            
+                   }  
         } catch (FileNotFoundException ex) {
             JOptionPane.showMessageDialog(null, "USUARIO NO EXISTENTE");
             usuarioText.setText("");
             passwordText.setText("");
-        } catch (IOException ex) {
-             JOptionPane.showMessageDialog(null, "ERROR IOExeption");
         } catch (ClassNotFoundException ex) {
             JOptionPane.showMessageDialog(null, "USUARIO NO EXISTENTE");
+        } catch (IOException ex) {
+            Logger.getLogger(InicioSesion.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     public void RediregirArea(int a, String name){
@@ -167,6 +172,9 @@ public class InicioSesion extends javax.swing.JInternalFrame {
             pantalla.removeAll();
             JOptionPane.showMessageDialog(null,"BIENVENIDO OPERADOR");
             break;
+            case 3:
+                 JOptionPane.showMessageDialog(null,"BIENVENIDO USUARIO ");
+                 break;
         }
     }
     

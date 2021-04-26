@@ -1,36 +1,44 @@
-
 package com.mycompany.Clases;
 
-import com.mycompany.Enum.ESTADO_CIVIL;
+import java.io.Serializable;
 import java.util.Date;
 
-public class Cliente {
+public class Cliente implements Serializable{
+   public static final String CASADO="CASADO";
+   public static final String  SOLTERO="SOLTERO";
+   public static final String  DIVORCIADO="DIVORCIADO";
+   public static final String  MASCULINO="MASCULINO";
+   public static final String  FEMENINO="FEMENINO";
+   public static final String  SIN_DEFINIR="SIN DEFINIR";
     private int noPasaporte;
     private String contraseña;
     private Date fecha_nacimiento;
     private String nacionalidad;
-    private ESTADO_CIVIL estado;
+    private String estado;
     private String nombre;
     private String apellido;
+    private String sexo;
     private Date fecha_vencimiento;
     private Date fecha_emision;
     private String paisActual;
     private double millas_Recorridas;
     // CONTRUCTOR PARA UN NUEVO CLIENTE
-    public Cliente(int noPasaporte, String contraseña, Date fecha_nacimiento, String nacionalidad, ESTADO_CIVIL estado, String nombre, String apellido, Date fecha_vencimiento, Date fecha_emision, String paisActual) {
+    public Cliente(int noPasaporte, String contraseña, Date fecha_nacimiento, String nacionalidad,int selecC, String nombre, String apellido,int selecG, Date fecha_vencimiento, Date fecha_emision, String paisActual) {
         this.noPasaporte = noPasaporte;
         this.contraseña = contraseña;
         this.fecha_nacimiento = fecha_nacimiento;
         this.nacionalidad = nacionalidad;
-        this.estado = estado;
+        this.estado = establecerEstadoCivil(selecC);
         this.nombre = nombre;
         this.apellido = apellido;
+        this.sexo= establecerGenero(selecG);
         this.fecha_vencimiento = fecha_vencimiento;
         this.fecha_emision = fecha_emision;
         this.paisActual = paisActual;
+        this.millas_Recorridas = 0;
     }
     //CONTRUCTR PARA LA CARGA DE DATOS
-    public Cliente(int noPasaporte, String contraseña, Date fecha_nacimiento, String nacionalidad, ESTADO_CIVIL estado, String nombre, String apellido, Date fecha_vencimiento, Date fecha_emision, String paisActual, double millas_Recorridas) {
+    public Cliente(int noPasaporte, String contraseña, Date fecha_nacimiento, String nacionalidad,String estado, String nombre, String apellido,String genero, Date fecha_vencimiento, Date fecha_emision, String paisActual, double millas_Recorridas) {
         this.noPasaporte = noPasaporte;
         this.contraseña = contraseña;
         this.fecha_nacimiento = fecha_nacimiento;
@@ -38,6 +46,7 @@ public class Cliente {
         this.estado = estado;
         this.nombre = nombre;
         this.apellido = apellido;
+        this.sexo= genero;
         this.fecha_vencimiento = fecha_vencimiento;
         this.fecha_emision = fecha_emision;
         this.paisActual = paisActual;
@@ -61,7 +70,7 @@ public class Cliente {
         return nacionalidad;
     }
 
-    public ESTADO_CIVIL getEstado() {
+    public String getEstado() {
         return estado;
     }
 
@@ -105,7 +114,7 @@ public class Cliente {
         this.nacionalidad = nacionalidad;
     }
 
-    public void setEstado(ESTADO_CIVIL estado) {
+    public void setEstado(String estado) {
         this.estado = estado;
     }
 
@@ -132,7 +141,38 @@ public class Cliente {
     public void setMillas_Recorridas(double millas_Recorridas) {
         this.millas_Recorridas = millas_Recorridas;
     }
-    
+    public String establecerEstadoCivil(int op){
+        String estado="";
+        switch(op){
+            case 0:
+                estado=CASADO;
+                break;
+            case 1:
+                estado=SOLTERO;
+                break;
+            case 2:
+                estado=DIVORCIADO;
+                break;
+                
+        }
+        return estado;
+    }
+    public String establecerGenero(int opc){
+        String sexo="";
+             switch(opc){
+            case 0:
+                sexo=MASCULINO;
+                break;
+            case 1:
+                sexo=FEMENINO;
+                break;
+            case 2:
+                sexo=SIN_DEFINIR;
+                break;
+                
+        }
+        return sexo;
+    }
     
     
 }

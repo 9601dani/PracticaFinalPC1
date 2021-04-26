@@ -3,7 +3,9 @@ com/mycompany/GestorArchivos/GuardarArchivoBinario.class
 com/mycompany/Interfaz/InicioSesion$1.class
 com/mycompany/Enum/EstadoUsuario.class
 com/mycompany/Clases/Cliente.class
+com/mycompany/Interfaz/IngresarNuevoCliente$3.class
 com/mycompany/Enum/GENERO.class
+com/mycompany/Manejador/ManejadorNuevoCliente.class
 com/mycompany/Clases/Usuario.class
 com/mycompany/Interfaz/MenuPrincipal$1.class
 com/mycompany/Ejecutable/Ejecutable.class
@@ -16,7 +18,6 @@ com/mycompany/Interfaz/IngresarNuevoCliente$2.class
 com/mycompany/Interfaz/MenuPrincipal$2.class
 com/mycompany/Enum/ESTADO_CIVIL.class
 com/mycompany/Interfaz/CrearUsuario$1.class
-com/company/Manejador/ManejadorNuevoCliente.class
 com/mycompany/Interfaz/InicioSesion.class
 com/mycompany/Interfaz/IngresarNuevoCliente$1.class
 com/mycompany/Interfaz/MenuPrincipal$3.class

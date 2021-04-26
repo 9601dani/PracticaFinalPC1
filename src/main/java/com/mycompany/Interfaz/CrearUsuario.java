@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.mycompany.Interfaz;
 
 import com.mycompany.Clases.Usuario;
@@ -11,11 +6,6 @@ import static com.mycompany.GestorArchivos.GuardarArchivoBinario.FILE_USUARIOS;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import javax.swing.JOptionPane;
-
-/**
- *
- * @author daniel
- */
 public class CrearUsuario extends javax.swing.JInternalFrame {
 
     /**
@@ -193,7 +183,6 @@ public class CrearUsuario extends javax.swing.JInternalFrame {
                 if(newNombreText.getText()!=null || newContraseñaText.getText()!=null){
                     usuario = new Usuario(nombre, contra, Area);
                     GuardarArchivoBinario.guardarUsuario(usuario);
-                    JOptionPane.showMessageDialog(null, "Se creo el usuario: "+nombre.toUpperCase() +" Exitosamente");
                     this.setVisible(false);
                     newNombreText.setText("");
                     newContraseñaText.setText("");

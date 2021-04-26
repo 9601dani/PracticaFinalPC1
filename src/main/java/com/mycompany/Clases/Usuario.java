@@ -22,6 +22,13 @@ public class Usuario implements Serializable{
         this.nomArea=asignarArea(tipo);
         this.estado= estado.ACTIVO;
     }
+    public Usuario(String nombre, String contraseña) {
+        this.nombre = nombre;
+        this.contraseña = contraseña;
+        this.tipo = 3;
+        this.nomArea="Usuario";
+        this.estado= estado.ACTIVO;
+    }
    public String asignarArea(int num){
        String nomb="";
        if(num==0){
