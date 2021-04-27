@@ -25,4 +25,8 @@ public class ManejadorNuevoCliente {
                 }   
         }
     }
+    public int quitarGuion(int dato){
+        
+        return dato;
+    }
 }

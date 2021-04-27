@@ -10,8 +10,10 @@ import javax.swing.JOptionPane;
 
 public class IngresarNuevoCliente extends javax.swing.JInternalFrame {
  public static SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-    public IngresarNuevoCliente() {
+ private String noUsuario;
+    public IngresarNuevoCliente(String noUsuario) {
         initComponents();
+        this.noUsuario=noUsuario;
     }
 
     @SuppressWarnings("unchecked")
@@ -29,7 +31,6 @@ public class IngresarNuevoCliente extends javax.swing.JInternalFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        noPasaporteText = new javax.swing.JTextField();
         contraseñaText = new javax.swing.JTextField();
         fechaNacimientoText = new javax.swing.JFormattedTextField();
         nacionalidadText = new javax.swing.JTextField();
@@ -42,6 +43,7 @@ public class IngresarNuevoCliente extends javax.swing.JInternalFrame {
         paisAcutalText = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         botonRegistrar = new javax.swing.JButton();
+        noPasaporteText = new javax.swing.JTextField();
 
         setClosable(true);
 
@@ -138,18 +140,18 @@ public class IngresarNuevoCliente extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(fechaEmisionText)
-                            .addGroup(layout.createSequentialGroup()
+                            .addComponent(fechaVencimientoText)
+                            .addComponent(paisAcutalText)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(noPasaporteText)
                                     .addComponent(contraseñaText)
                                     .addComponent(fechaNacimientoText)
                                     .addComponent(nacionalidadText)
                                     .addComponent(nombreText)
                                     .addComponent(apellidoText)
-                                    .addComponent(comboEstadoCivil, 0, 194, Short.MAX_VALUE)))
-                            .addComponent(fechaVencimientoText)
-                            .addComponent(paisAcutalText))))
+                                    .addComponent(comboEstadoCivil, 0, 194, Short.MAX_VALUE)
+                                    .addComponent(noPasaporteText))))))
                 .addGap(36, 36, 36)
                 .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -167,7 +169,7 @@ public class IngresarNuevoCliente extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
                             .addComponent(noPasaporteText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(19, 19, 19)
+                        .addGap(21, 21, 21)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(contraseñaText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -210,7 +212,7 @@ public class IngresarNuevoCliente extends javax.swing.JInternalFrame {
                     .addComponent(paisAcutalText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(botonRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         pack();

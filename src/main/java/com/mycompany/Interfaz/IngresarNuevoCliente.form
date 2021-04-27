@@ -48,20 +48,20 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="fechaEmisionText" max="32767" attributes="0"/>
-                          <Group type="102" attributes="0">
+                          <Component id="fechaVencimientoText" alignment="0" max="32767" attributes="0"/>
+                          <Component id="paisAcutalText" alignment="0" max="32767" attributes="0"/>
+                          <Group type="102" alignment="1" attributes="0">
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="noPasaporteText" max="32767" attributes="0"/>
                                   <Component id="contraseñaText" max="32767" attributes="0"/>
                                   <Component id="fechaNacimientoText" max="32767" attributes="0"/>
                                   <Component id="nacionalidadText" max="32767" attributes="0"/>
                                   <Component id="nombreText" max="32767" attributes="0"/>
                                   <Component id="apellidoText" max="32767" attributes="0"/>
                                   <Component id="comboEstadoCivil" alignment="0" pref="194" max="32767" attributes="0"/>
+                                  <Component id="noPasaporteText" max="32767" attributes="0"/>
                               </Group>
                           </Group>
-                          <Component id="fechaVencimientoText" alignment="0" max="32767" attributes="0"/>
-                          <Component id="paisAcutalText" alignment="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -86,7 +86,7 @@
                           <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="noPasaporteText" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel2" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
                           <Component id="contraseñaText" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -141,7 +141,7 @@
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="botonRegistrar" min="-2" pref="42" max="-2" attributes="0"/>
-              <EmptySpace pref="15" max="32767" attributes="0"/>
+              <EmptySpace pref="13" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -201,8 +201,6 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="PAIS ACTUAL DE REGISTRO"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="noPasaporteText">
     </Component>
     <Component class="javax.swing.JTextField" name="contrase&#xf1;aText">
     </Component>
@@ -285,6 +283,8 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonRegistrarActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="noPasaporteText">
     </Component>
   </SubComponents>
 </Form>

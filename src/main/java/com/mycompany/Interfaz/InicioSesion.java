@@ -157,14 +157,14 @@ public class InicioSesion extends javax.swing.JInternalFrame {
             case 0: 
             JOptionPane.showMessageDialog(null, "BIENVENIDO ADMIN "+name.toUpperCase());
             pantalla.removeAll();
-            CrearUsuario nuevo= new CrearUsuario();
+            CrearUsuario nuevo= new CrearUsuario(name);
             pantalla.add(nuevo);
             nuevo.show();
             break;
              case 1: 
            JOptionPane.showMessageDialog(null, "BIENVENIDO GERENTE "+name.toUpperCase());
            pantalla.removeAll();
-           IngresarNuevoCliente nuev = new IngresarNuevoCliente();
+           IngresarNuevoCliente nuev = new IngresarNuevoCliente(name);
            pantalla.add(nuev);
            nuev.show();
             break;
@@ -173,7 +173,11 @@ public class InicioSesion extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null,"BIENVENIDO OPERADOR");
             break;
             case 3:
-                 JOptionPane.showMessageDialog(null,"BIENVENIDO USUARIO ");
+                JOptionPane.showMessageDialog(null,"BIENVENIDO USUARIO ");
+                pantalla.removeAll();
+                InterfazMenuUsuario MEU = new InterfazMenuUsuario(name);
+                pantalla.add(MEU);
+                MEU.show();
                  break;
         }
     }
