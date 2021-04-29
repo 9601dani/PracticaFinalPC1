@@ -64,8 +64,8 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="tituloAdmin" min="-2" pref="104" max="-2" attributes="0"/>
                           <Component id="titulo5" min="-2" max="-2" attributes="0"/>
+                          <Component id="tituloAdmin" min="-2" pref="213" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -81,7 +81,7 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="103" groupAlignment="1" attributes="0">
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
@@ -114,11 +114,11 @@
                           <Component id="titulo1" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="Aerolinea" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="tituloAdmin" alignment="1" min="-2" pref="51" max="-2" attributes="0"/>
+                  <Component id="tituloAdmin" min="-2" pref="51" max="-2" attributes="0"/>
               </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
               <Component id="botonNewUsuario" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="56" max="32767" attributes="0"/>

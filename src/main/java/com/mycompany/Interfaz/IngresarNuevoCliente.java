@@ -2,7 +2,10 @@ package com.mycompany.Interfaz;
 
 import com.mycompany.Clases.Usuario;
 import com.mycompany.GestorArchivos.GuardarArchivoBinario;
+import static com.mycompany.GestorArchivos.GuardarArchivoBinario.FILE_CLIENTES;
 import com.mycompany.Manejador.ManejadorNuevoCliente;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -240,26 +243,44 @@ public class IngresarNuevoCliente extends javax.swing.JInternalFrame {
          Date fechaE= formato.parse(fechaEmisionText.getText());
          String pa= paisAcutalText.getText();
          
-         if(noPas!=0 && contra!=null && fechaN!=null && nacio!=null && nom!=null && ape!=null && fechaV!=null && fechaE!=null && pa!=null){
-             ManejadorNuevoCliente NCl= new ManejadorNuevoCliente();
-              NCl.registrarNuevoCliente(noPas, contra, fechaN, nacio, selecC, nom, ape, selecG, fechaV, fechaE, pa);
-             Usuario usuario= new Usuario(Integer.toString(noPas),contra);
-             GuardarArchivoBinario.guardarUsuario(usuario);
-             noPasaporteText.setText("");
-             contraseñaText.setText("");
-             fechaNacimientoText.setText("");
-             nacionalidadText.setText("");
-             comboEstadoCivil.setSelectedIndex(0);
-             nombreText.setText("");
-             apellidoText.setText("");
-             comboGenero.setSelectedIndex(0);
-             fechaVencimientoText.setText("");
-             fechaEmisionText.setText("");
-             paisAcutalText.setText("");
-         }else{
-            JOptionPane.showMessageDialog(null,"REVISA EL INGRESO DE CAMPOS, PARECE QUE HAY CAMPOS VACIOS");
-         }   
          
+            try {
+                FileInputStream archivoB = new FileInputStream(FILE_CLIENTES + "/" + noPas);
+                JOptionPane.showMessageDialog(null, "YA EXISTE ESTE USUARIO");
+                noPasaporteText.setText("");
+                contraseñaText.setText("");
+                fechaNacimientoText.setText("");
+                nacionalidadText.setText("");
+                comboEstadoCivil.setSelectedIndex(0);
+                nombreText.setText("");
+                apellidoText.setText("");
+                comboGenero.setSelectedIndex(0);
+                fechaVencimientoText.setText("");
+                fechaEmisionText.setText("");
+                paisAcutalText.setText("");
+
+            } catch (FileNotFoundException ex) {
+                if (noPas != 0 && contra != null && fechaN != null && nacio != null && nom != null && ape != null && fechaV != null && fechaE != null && pa != null) {
+                    ManejadorNuevoCliente NCl = new ManejadorNuevoCliente();
+                    NCl.registrarNuevoCliente(noPas, contra, fechaN, nacio, selecC, nom, ape, selecG, fechaV, fechaE, pa);
+                    Usuario usuario = new Usuario(Integer.toString(noPas), contra);
+                    GuardarArchivoBinario.guardarUsuario(usuario);
+                    noPasaporteText.setText("");
+                    contraseñaText.setText("");
+                    fechaNacimientoText.setText("");
+                    nacionalidadText.setText("");
+                    comboEstadoCivil.setSelectedIndex(0);
+                    nombreText.setText("");
+                    apellidoText.setText("");
+                    comboGenero.setSelectedIndex(0);
+                    fechaVencimientoText.setText("");
+                    fechaEmisionText.setText("");
+                    paisAcutalText.setText("");
+                } else {
+                    JOptionPane.showMessageDialog(null, "REVISA EL INGRESO DE CAMPOS, PARECE QUE HAY CAMPOS VACIOS");
+                }
+
+         }
      } catch (ParseException ex) {
          System.err.println("ERROR EN LAS FECHAS");
      } catch(java.lang.NumberFormatException ex){

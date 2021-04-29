@@ -6,9 +6,9 @@ import java.io.Serializable;
 public class Aeropuerto implements Serializable{
     private String nombreA;
     private String ciudad;
-    private int pais;
+    private String pais;
 
-    public Aeropuerto(String nombreA, String ciudad, int pais) {
+    public Aeropuerto(String nombreA, String ciudad, String pais) {
         this.nombreA = nombreA;
         this.ciudad = ciudad;
         this.pais = pais;
@@ -22,7 +22,7 @@ public class Aeropuerto implements Serializable{
         return ciudad;
     }
 
-    public int getPais() {
+    public String getPais() {
         return pais;
     }
 
@@ -34,7 +34,7 @@ public class Aeropuerto implements Serializable{
         this.ciudad = ciudad;
     }
 
-    public void setPais(int pais) {
+    public void setPais(String pais) {
         this.pais = pais;
     }
     

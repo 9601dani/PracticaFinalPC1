@@ -13,7 +13,8 @@ private String noUsuario;
     public CrearUsuario(String nom) {
         initComponents();
         this.noUsuario=nom;
-        tituloAdmin.setText(nom.toUpperCase());
+        tituloAdmin.setText("**** "+nom.toUpperCase()+" ****");
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -133,8 +134,8 @@ private String noUsuario;
                     .addGroup(layout.createSequentialGroup()
                         .addGap(65, 65, 65)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tituloAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(titulo5))))
+                            .addComponent(titulo5)
+                            .addComponent(tituloAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(120, 120, 120)
@@ -144,7 +145,7 @@ private String noUsuario;
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -169,10 +170,10 @@ private String noUsuario;
                         .addGap(39, 39, 39)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(titulo1)
-                            .addComponent(Aerolinea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel1))
-                    .addComponent(tituloAdmin, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(Aerolinea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(tituloAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel1)
                 .addGap(33, 33, 33)
                 .addComponent(botonNewUsuario)
                 .addContainerGap(56, Short.MAX_VALUE))
@@ -213,7 +214,7 @@ private String noUsuario;
                                  archivoB2= new FileInputStream(FILE_GERENTE+"/"+Aeroline.toUpperCase());
                                  JOptionPane.showMessageDialog(null, "YA NO PUEDES CREAR OTRO GERENTE PORQUE YA EXISTE UNO DE ESTA AEROLINEA");
                             } catch (FileNotFoundException ex1) {
-                                if(newNombreText.getText()!=""  || newContraseñaText.getText()!=""){
+                                if(newNombreText.getText()!=""  && newContraseñaText.getText()!="" && Aeroline!="" && Aeroline!=null){
                                     usuario = new Usuario(nombre, contra, Area);
                                     GuardarArchivoBinario.guardarUsuario(usuario);
                                     gerente= new Gerente(Aeroline,nombre);
@@ -221,6 +222,7 @@ private String noUsuario;
                                     newNombreText.setText("");
                                     newContraseñaText.setText("");
                                     comboArea.setSelectedIndex(1);
+                                    Aerolinea.setText("");
 
                                 }else{
                                     JOptionPane.showMessageDialog(null,"REVISA EL INGRESO DE CAMPOS");
