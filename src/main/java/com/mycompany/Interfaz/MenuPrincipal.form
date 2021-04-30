@@ -93,16 +93,16 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="imagenLogo" min="-2" max="-2" attributes="0"/>
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="96" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="titulo" min="-2" pref="85" max="-2" attributes="0"/>
                           <Component id="titulo1" min="-2" pref="85" max="-2" attributes="0"/>
                       </Group>
                   </Group>
+                  <Component id="imagenLogo" min="-2" pref="312" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="pantalla" max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -114,12 +114,12 @@
               <Component id="pantalla" max="32767" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">
-              <Component id="imagenLogo" min="-2" pref="189" max="-2" attributes="0"/>
+              <Component id="imagenLogo" min="-2" pref="273" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="titulo" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="87" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
               <Component id="titulo1" min="-2" pref="37" max="-2" attributes="0"/>
-              <EmptySpace pref="181" max="32767" attributes="0"/>
+              <EmptySpace pref="122" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -133,7 +133,7 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="442" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="645" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
@@ -146,7 +146,7 @@
     <Component class="javax.swing.JLabel" name="imagenLogo">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="/home/daniel/NetBeansProjects/Proyecto2IPC/logoEmpresa.png"/>
+          <Image iconType="2" name="/home/daniel/NetBeansProjects/Proyecto2IPC/logoPersonalizado.png"/>
         </Property>
       </Properties>
     </Component>

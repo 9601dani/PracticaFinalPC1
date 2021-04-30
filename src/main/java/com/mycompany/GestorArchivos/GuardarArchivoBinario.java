@@ -13,7 +13,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
-import javax.swing.JOptionPane;
 
 
 public class GuardarArchivoBinario {
@@ -33,7 +32,6 @@ public class GuardarArchivoBinario {
             salida = new ObjectOutputStream(archivoL);
             salida.writeObject(usuario);
             salida.close();
-            JOptionPane.showMessageDialog(null, "Se creo el usuario: "+usuario.getNombre().toUpperCase() +" Exitosamente");
           } catch (FileNotFoundException ex) {
               System.err.println("NO SE ENCONTRO EL ARCHIVO");
           } catch (IOException ex) {
@@ -48,7 +46,6 @@ public class GuardarArchivoBinario {
             salida = new ObjectOutputStream(archivoU);
             salida.writeObject(cliente);
             salida.close();
-            JOptionPane.showMessageDialog(null, "Se creo el usuario: "+cliente.getNombre().toUpperCase() +" Exitosamente");
           } catch (FileNotFoundException ex) {
               System.err.println("NO SE ENCONTRO EL ARCHIVO");
           } catch (IOException ex) {
@@ -63,7 +60,6 @@ public class GuardarArchivoBinario {
             salida = new ObjectOutputStream(archivoU);
             salida.writeObject(tarjeta);
             salida.close();
-            JOptionPane.showMessageDialog(null, "Se Guardo la tarjeta "+ tarjeta.getNumeroTarjeta() +" Exitosamente");
           } catch (FileNotFoundException ex) {
               System.err.println("NO SE ENCONTRO EL ARCHIVO");
           } catch (IOException ex) {
@@ -78,7 +74,6 @@ public class GuardarArchivoBinario {
             salida = new ObjectOutputStream(archivoU);
             salida.writeObject(gerente);
             salida.close();
-            JOptionPane.showMessageDialog(null, "Se Guardo el gerente de la aerolinea"+ gerente.getAerolinea() +" Exitosamente");
           } catch (FileNotFoundException ex) {
               System.err.println("NO SE ENCONTRO EL ARCHIVO GERENTE");
           } catch (IOException ex) {
@@ -93,7 +88,6 @@ public class GuardarArchivoBinario {
             salida = new ObjectOutputStream(archivoU);
             salida.writeObject(aeropuerto);
             salida.close();
-            JOptionPane.showMessageDialog(null, "Se Guardo el aeropuerto"+ aeropuerto.getNombreA() +" de "+ aeropuerto.getCiudad() +" Exitosamente");
           } catch (FileNotFoundException ex) {
               System.err.println("NO SE ENCONTRO EL ARCHIVO AEROPUERTO");
           } catch (IOException ex) {
@@ -108,8 +102,7 @@ public class GuardarArchivoBinario {
             salida = new ObjectOutputStream(archivoU);
             salida.writeObject(distancia);
             salida.close();
-            JOptionPane.showMessageDialog(null, "Se Guardo la distancia de "+ distancia.getAeroOrigen() +" hasta "+ distancia.getAeroDestino());
-          } catch (FileNotFoundException ex) {
+            } catch (FileNotFoundException ex) {
               System.err.println("NO SE ENCONTRO EL ARCHIVO DISTANCIA");
           } catch (IOException ex) {
               System.err.println("ERROR EN EL ARCHIVO DISTANCIA");
@@ -123,12 +116,33 @@ public class GuardarArchivoBinario {
             salida = new ObjectOutputStream(archivoU);
             salida.writeObject(aerolinea);
             salida.close();
-            JOptionPane.showMessageDialog(null, "Se Guardo la aerolinea "+ aerolinea.getNombreaerolinea() +" en el aeropuerto "+ aerolinea.getNombreA());
           } catch (FileNotFoundException ex) {
               System.err.println("NO SE ENCONTRO EL ARCHIVO DISTANCIA");
           } catch (IOException ex) {
               System.err.println("ERROR EN EL ARCHIVO DISTANCIA");
           }
      }
+    public static int VerEstado(String estado) {
+        int x = 0;
+        if (estado.equalsIgnoreCase("CASADO")) {
+            x = 0;
+        } else if (estado.equalsIgnoreCase("SOLTERO")) {
+            x = 1;
+        } else if (estado.equalsIgnoreCase("DIVORCIADO")) {
+            x = 2;
+        }
+        return x;
+    }
+    public static int VerGenero(String estado) {
+        int x = 0;
+        if (estado.equalsIgnoreCase("MASCULINO")) {
+            x = 0;
+        } else if (estado.equalsIgnoreCase("FEMENINO")) {
+            x = 1;
+        } else if (estado.equalsIgnoreCase("SIN_DEFINIR")) {
+            x = 2;
+        }
+        return x;
+    }
      
 }

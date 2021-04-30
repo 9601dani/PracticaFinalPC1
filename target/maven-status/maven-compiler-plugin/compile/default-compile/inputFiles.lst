@@ -1,8 +1,10 @@
 /home/daniel/NetBeansProjects/Proyecto2IPC/src/main/java/com/mycompany/Clases/Aerolinea.java
+/home/daniel/NetBeansProjects/Proyecto2IPC/src/main/java/com/mycompany/Clases/Reservaciones.java
 /home/daniel/NetBeansProjects/Proyecto2IPC/src/main/java/com/mycompany/Interfaz/IngresarNuevaDistancia.java
 /home/daniel/NetBeansProjects/Proyecto2IPC/src/main/java/com/mycompany/Interfaz/IngresoNuevaTarjeta.java
 /home/daniel/NetBeansProjects/Proyecto2IPC/src/main/java/com/mycompany/Ejecutable/Ejecutable.java
 /home/daniel/NetBeansProjects/Proyecto2IPC/src/main/java/com/mycompany/Clases/Distancia.java
+/home/daniel/NetBeansProjects/Proyecto2IPC/src/main/java/com/mycompany/Interfaz/InterfazSubidaDeDatos.java
 /home/daniel/NetBeansProjects/Proyecto2IPC/src/main/java/com/mycompany/Interfaz/InicioSesion.java
 /home/daniel/NetBeansProjects/Proyecto2IPC/src/main/java/com/mycompany/Clases/Tarjeta.java
 /home/daniel/NetBeansProjects/Proyecto2IPC/src/main/java/com/mycompany/Clases/Aeropuerto.java
@@ -18,9 +20,11 @@
 /home/daniel/NetBeansProjects/Proyecto2IPC/src/main/java/com/mycompany/Interfaz/MenuAdmin.java
 /home/daniel/NetBeansProjects/Proyecto2IPC/src/main/java/com/mycompany/Clases/Usuario.java
 /home/daniel/NetBeansProjects/Proyecto2IPC/src/main/java/com/mycompany/Clases/Cliente.java
+/home/daniel/NetBeansProjects/Proyecto2IPC/src/main/java/com/mycompany/GestorArchivos/SubidaDeArchivos.java
 /home/daniel/NetBeansProjects/Proyecto2IPC/src/main/java/com/mycompany/Interfaz/IngresarNuevoCliente.java
 /home/daniel/NetBeansProjects/Proyecto2IPC/src/main/java/com/mycompany/Enum/ESTADO_CIVIL.java
 /home/daniel/NetBeansProjects/Proyecto2IPC/src/main/java/com/mycompany/Interfaz/MenuGerente.java
 /home/daniel/NetBeansProjects/Proyecto2IPC/src/main/java/com/mycompany/Interfaz/InterfazMenuUsuario.java
 /home/daniel/NetBeansProjects/Proyecto2IPC/src/main/java/com/mycompany/Clases/Vuelo.java
+/home/daniel/NetBeansProjects/Proyecto2IPC/src/main/java/com/mycompany/Interfaz/IngresarNuevaAerolinea.java
 /home/daniel/NetBeansProjects/Proyecto2IPC/src/main/java/com/mycompany/Manejador/ManejadorNuevoCliente.java

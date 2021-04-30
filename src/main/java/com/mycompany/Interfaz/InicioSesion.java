@@ -153,29 +153,20 @@ public class InicioSesion extends javax.swing.JInternalFrame {
             NT.show();*/
              String[] clientes=FILE_CLIENTES.list();
              String[] Aclientes= new String[clientes.length];
-             for(int i=0;i<clientes.length;i++){
-                 FileInputStream archivoL = new FileInputStream(FILE_CLIENTES+"/"+clientes[i]);
-            ObjectInputStream lectura = new ObjectInputStream(archivoL);
-            Cliente cliente =(Cliente)lectura.readObject();
-            System.out.println(cliente.getApellido());
-            
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-            String fechaCadena = sdf.format(cliente.getFecha_nacimiento());
-            Aclientes[i]=fechaCadena;
-            
-            System.out.println(fechaCadena);
-            lectura.close();
+             
+            for(int i=0;i<clientes.length;i++){
+                FileInputStream archivoL = new FileInputStream(FILE_CLIENTES+"/"+clientes[i]);
+                ObjectInputStream lectura = new ObjectInputStream(archivoL);
+                Cliente cliente =(Cliente)lectura.readObject();
+                System.out.println(cliente.getApellido());
+
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                String fechaCadena= sdf.format(cliente.getFecha_vencimiento());
+
+                 System.out.println(fechaCadena);
+                 lectura.close();
              }
-             System.out.println("-----------------------------------");
-            for(int j=0;j<Aclientes.length-1;j++){
-               if(Integer.parseInt(Aclientes[j])<=Integer.parseInt(Aclientes[j])){
-                   System.out.println("false");
-               } else{
-                   System.out.println("TRUEEE");
-               }
-               // System.out.println(Aclientes[j]);
-            }
-            
+             System.out.println("-----------------------------------");  
         } catch (FileNotFoundException ex) {
             System.err.println("error con archivo");
         } catch (IOException | ClassNotFoundException ex) {

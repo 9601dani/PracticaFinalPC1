@@ -135,7 +135,7 @@ public class IngresarNuevaDistancia extends javax.swing.JInternalFrame {
             millasText.setText("");
         } catch (FileNotFoundException ex) {
             Distancia des;
-            if (origen != null && destino != null && millaje != 0) {
+            if (origen!= null && destino != null && millaje != 0) {
                 des = new Distancia(origen, destino, millaje);
                 GuardarArchivoBinario.guardarDistancias(des);
                 JOptionPane.showMessageDialog(null, "INGRESAMOS TU SOLICITUD DE DESTINO");
