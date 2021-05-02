@@ -6,8 +6,10 @@ import com.mycompany.Clases.Aeropuerto;
 import com.mycompany.Clases.Cliente;
 import com.mycompany.Clases.Distancia;
 import com.mycompany.Clases.Gerente;
+import com.mycompany.Clases.Reservacion;
 import com.mycompany.Clases.Tarjeta;
 import com.mycompany.Clases.Usuario;
+import com.mycompany.Clases.Vuelo;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -23,6 +25,10 @@ public class GuardarArchivoBinario {
      public static final File FILE_AEROPUERTO= new File("/home/daniel/NetBeansProjects/Proyecto2IPC/Aeropuerto");
      public static final File FILE_DISTANCIA= new File("/home/daniel/NetBeansProjects/Proyecto2IPC/Distancias");
      public static final File FILE_AEROLINEA= new File("/home/daniel/NetBeansProjects/Proyecto2IPC/Aerolineas");
+     public static final File FILE_RESERVACIONES= new File("/home/daniel/NetBeansProjects/Proyecto2IPC/Reservaciones");
+     public static final File FILE_VUELO= new File("/home/daniel/NetBeansProjects/Proyecto2IPC/Vuelo");
+     public static final File FILE_AVIONES= new File("/home/daniel/NetBeansProjects/Proyecto2IPC/Aviones");
+      
      
      public static void guardarUsuario(Usuario usuario){ 
         try {
@@ -108,7 +114,7 @@ public class GuardarArchivoBinario {
               System.err.println("ERROR EN EL ARCHIVO DISTANCIA");
           }
      }
-            public static void guardarAerolineas(Aerolinea aerolinea){  
+    public static void guardarAerolineas(Aerolinea aerolinea){  
           try {
             FileOutputStream archivoU;
             ObjectOutputStream salida;
@@ -121,7 +127,37 @@ public class GuardarArchivoBinario {
           } catch (IOException ex) {
               System.err.println("ERROR EN EL ARCHIVO DISTANCIA");
           }
-     }
+          
+    }
+     public static void guardarResevacion(Reservacion reservacion){
+          try {
+            FileOutputStream archivoU;
+            ObjectOutputStream salida;
+            archivoU = new FileOutputStream(FILE_RESERVACIONES+"/"+reservacion.getNo_Pasaporte()+"_"+reservacion.getCodigo_vuelo());
+            salida = new ObjectOutputStream(archivoU);
+            salida.writeObject(reservacion);
+            salida.close();
+          } catch (FileNotFoundException ex) {
+              System.err.println("NO SE ENCONTRO EL ARCHIVO RESERVACION");
+          } catch (IOException ex) {
+              System.err.println("ERROR EN EL ARCHIVO RESERVACION");
+          }
+     }  
+      public static void guardarVuelo (Vuelo vuelo){
+          try {
+            FileOutputStream archivoU;
+            ObjectOutputStream salida;
+            archivoU = new FileOutputStream(FILE_VUELO+"/"+vuelo.getCodigoVuelo());
+            salida = new ObjectOutputStream(archivoU);
+            salida.writeObject(vuelo);
+            salida.close();
+          } catch (FileNotFoundException ex) {
+              System.err.println("NO SE ENCONTRO EL ARCHIVO VUELO");
+          } catch (IOException ex) {
+              System.err.println("ERROR EN EL ARCHIVO VUELO");
+          }
+     }  
+         
     public static int VerEstado(String estado) {
         int x = 0;
         if (estado.equalsIgnoreCase("CASADO")) {

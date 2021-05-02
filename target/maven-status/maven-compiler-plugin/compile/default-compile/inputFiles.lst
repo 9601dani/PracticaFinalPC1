@@ -1,5 +1,4 @@
 /home/daniel/NetBeansProjects/Proyecto2IPC/src/main/java/com/mycompany/Clases/Aerolinea.java
-/home/daniel/NetBeansProjects/Proyecto2IPC/src/main/java/com/mycompany/Clases/Reservaciones.java
 /home/daniel/NetBeansProjects/Proyecto2IPC/src/main/java/com/mycompany/Interfaz/IngresarNuevaDistancia.java
 /home/daniel/NetBeansProjects/Proyecto2IPC/src/main/java/com/mycompany/Interfaz/IngresoNuevaTarjeta.java
 /home/daniel/NetBeansProjects/Proyecto2IPC/src/main/java/com/mycompany/Ejecutable/Ejecutable.java
@@ -15,6 +14,7 @@
 /home/daniel/NetBeansProjects/Proyecto2IPC/src/main/java/com/mycompany/Enum/GENERO.java
 /home/daniel/NetBeansProjects/Proyecto2IPC/src/main/java/com/mycompany/Clases/Reservacion.java
 /home/daniel/NetBeansProjects/Proyecto2IPC/src/main/java/com/mycompany/Interfaz/MenuPrincipal.java
+/home/daniel/NetBeansProjects/Proyecto2IPC/src/main/java/com/mycompany/Interfaz/RenovacionPasaporte.java
 /home/daniel/NetBeansProjects/Proyecto2IPC/src/main/java/com/mycompany/Clases/Gerente.java
 /home/daniel/NetBeansProjects/Proyecto2IPC/src/main/java/com/mycompany/GestorArchivos/GuardarArchivoBinario.java
 /home/daniel/NetBeansProjects/Proyecto2IPC/src/main/java/com/mycompany/Interfaz/MenuAdmin.java

@@ -5,13 +5,18 @@ import com.mycompany.Clases.Aerolinea;
 import com.mycompany.Clases.Aeropuerto;
 import com.mycompany.Clases.Cliente;
 import com.mycompany.Clases.Distancia;
+import com.mycompany.Clases.Reservacion;
 import com.mycompany.Clases.Tarjeta;
 import com.mycompany.Clases.Usuario;
+import com.mycompany.Clases.Vuelo;
 import static com.mycompany.GestorArchivos.GuardarArchivoBinario.FILE_AEROLINEA;
 import static com.mycompany.GestorArchivos.GuardarArchivoBinario.FILE_AEROPUERTO;
+import static com.mycompany.GestorArchivos.GuardarArchivoBinario.FILE_AVIONES;
 import static com.mycompany.GestorArchivos.GuardarArchivoBinario.FILE_CLIENTES;
 import static com.mycompany.GestorArchivos.GuardarArchivoBinario.FILE_DISTANCIA;
+import static com.mycompany.GestorArchivos.GuardarArchivoBinario.FILE_RESERVACIONES;
 import static com.mycompany.GestorArchivos.GuardarArchivoBinario.FILE_TARJETAS;
+import static com.mycompany.GestorArchivos.GuardarArchivoBinario.FILE_VUELO;
 import com.mycompany.Interfaz.InterfazSubidaDeDatos;
 import java.io.BufferedReader;
 import java.io.File;
@@ -20,7 +25,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.nio.file.Files;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -38,7 +42,9 @@ public class SubidaDeArchivos extends Thread {
     private static final String PASAPORTE= "PASAPORTE";
     private static final String TARJETA = "TARJETA";
     private static final String RENOVACION = "RENOVACION_PASAPORTE";
-    private static final String[] NOMBRES =  { AEROPUERTO, AEROLINEA, DISTANCIA, PASAPORTE, TARJETA, RENOVACION};
+    private static final String RESERVACION="RESERVACION";
+    private static final String VUELO="VUELO";
+    private static final String[] NOMBRES =  { AEROPUERTO, AEROLINEA, DISTANCIA, PASAPORTE, TARJETA, RENOVACION, RESERVACION,VUELO};
     private static String lineaPrincipal=null;
 
     public SubidaDeArchivos(File archivoRecibido, String nombreArchivo,InterfazSubidaDeDatos datos) {
@@ -215,7 +221,7 @@ public class SubidaDeArchivos extends Thread {
                 ObjectInputStream lectura = new ObjectInputStream(archivoL);
                 Cliente cliente;
                 cliente = (Cliente)lectura.readObject(); 
-                if(datosObtenidos[1].equals(sdf.parse(datosObtenidos[1]))){
+                if(datosObtenidos[1].equals(sdf.format(cliente.getFecha_vencimiento()))){
                   datos.introducirDatosALaLista(lineaPrincipal + "NO SE PUDO GUARDAR LA NUEVA FECHA PORQUE ES IGUAL A LA ACTUAL");  
                 }else{
                 int noPasNew=cliente.getNoPasaporte();
@@ -242,11 +248,56 @@ public class SubidaDeArchivos extends Thread {
             } catch (FileNotFoundException e) {
                 datos.introducirDatosALaLista(lineaPrincipal+" NO SE GUARGO PORQUE NO EXISTE UN CLIENTE CON ESTE PASAPORTE ");
             }
-            
-          
-           
         }
-        
+      if( nombreAVerificar.equals(NOMBRES[6])){
+          int noPasNew= Integer.parseInt(datosObtenidos[0]);
+          String codigoVuelo= datosObtenidos[1];
+          int numT= Integer.parseInt(datosObtenidos[2]);
+          String asiento= datosObtenidos[3];
+          Reservacion Rev;
+          try{
+              FileInputStream archivoL = new FileInputStream(FILE_VUELO+"/"+codigoVuelo.toUpperCase());
+                 try {
+                  FileInputStream archivoB = new FileInputStream(FILE_RESERVACIONES + "/" + noPasNew + "_" + codigoVuelo.toUpperCase());
+                  datos.introducirDatosALaLista(lineaPrincipal + "NO SE PUDO CARGAR PORQUE YA ESTA REGISTRADO");
+              } catch (FileNotFoundException e) {
+                  Rev = new Reservacion(noPasNew, codigoVuelo, numT, asiento);
+                  GuardarArchivoBinario.guardarResevacion(Rev);
+                  datos.introducirDatosALaLista(lineaPrincipal + " ***GUARDADA CON EXITO ***");
+              }
+              
+          }catch (FileNotFoundException ex) {
+                  datos.introducirDatosALaLista(lineaPrincipal + "NO SE PUDO CARGAR PORQUE NO EXISTE EL CODIGO DE VUELO");
+          }
+      } 
+      if(nombreAVerificar.equals(NOMBRES[7])){
+            try {
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                String codVuelo= datosObtenidos[0];
+                String codAvion= datosObtenidos[1];
+                String origen= datosObtenidos[2];
+                String destino= datosObtenidos[3];
+                double precioB= Double.parseDouble(datosObtenidos[4]);
+                Date fSalida= sdf.parse(datosObtenidos[5]);
+                  // try {
+                   // FileInputStream archivoL = new FileInputStream(FILE_AVIONES + "/" + codAvion.toUpperCase());
+                     try {
+                        FileInputStream archivoB = new FileInputStream(FILE_DISTANCIA + "/" + origen.toUpperCase() + "_" + destino.toUpperCase());
+                         Vuelo NV= new Vuelo(codVuelo,codAvion,origen,destino,precioB,fSalida);
+                         GuardarArchivoBinario.guardarVuelo(NV);
+                         datos.introducirDatosALaLista(lineaPrincipal + " ***GUARDADA CON EXITO***");
+                     } catch (FileNotFoundException e) {
+                       datos.introducirDatosALaLista(lineaPrincipal + "NO SE PUDO CARGAR PORQUE NO EXISTE DATOS DE LA DISTANCIA ENTRE "+origen.toUpperCase()+" HASTA "+destino.toUpperCase());
+                    }
+
+                //} catch (FileNotFoundException ex) {
+                  //  datos.introducirDatosALaLista(lineaPrincipal + "NO SE PUDO CARGAR PORQUE NO EXISTE EL CODIGO DE VUELO");
+                //}
+            } catch (ParseException ex) {
+                 datos.introducirDatosALaLista(lineaPrincipal + "NO SE PUDO CARGAR PORQUE NO CUMPLE CON EL FORMATO DE FECHA ESTABLECIDO");
+            }
+          
+      }
      }
     
         
