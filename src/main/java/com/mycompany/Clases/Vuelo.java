@@ -11,6 +11,7 @@ public class Vuelo implements Serializable{
     private String aeroDestino;
     private double precioBoleto;
     private Date fechaSalida;
+    private boolean listo;
 
     public Vuelo(String codigoVuelo, String codAvion, String aeroOrigen, String aeroDestino, double precioBoleto, Date fechaSalida) {
         this.codigoVuelo = codigoVuelo;
@@ -19,6 +20,7 @@ public class Vuelo implements Serializable{
         this.aeroDestino = aeroDestino;
         this.precioBoleto = precioBoleto;
         this.fechaSalida = fechaSalida;
+        this.listo=true;
     }
 
     public String getCodigoVuelo() {

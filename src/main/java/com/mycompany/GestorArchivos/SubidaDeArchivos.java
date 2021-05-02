@@ -3,6 +3,7 @@ package com.mycompany.GestorArchivos;
 
 import com.mycompany.Clases.Aerolinea;
 import com.mycompany.Clases.Aeropuerto;
+import com.mycompany.Clases.Avion;
 import com.mycompany.Clases.Cliente;
 import com.mycompany.Clases.Distancia;
 import com.mycompany.Clases.Reservacion;
@@ -28,8 +29,6 @@ import java.io.ObjectInputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class SubidaDeArchivos extends Thread {
@@ -44,7 +43,8 @@ public class SubidaDeArchivos extends Thread {
     private static final String RENOVACION = "RENOVACION_PASAPORTE";
     private static final String RESERVACION="RESERVACION";
     private static final String VUELO="VUELO";
-    private static final String[] NOMBRES =  { AEROPUERTO, AEROLINEA, DISTANCIA, PASAPORTE, TARJETA, RENOVACION, RESERVACION,VUELO};
+    private static final String AVION="AVION";
+    private static final String[] NOMBRES =  { AEROPUERTO, AEROLINEA, DISTANCIA, PASAPORTE, TARJETA, RENOVACION, RESERVACION, VUELO, AVION};
     private static String lineaPrincipal=null;
 
     public SubidaDeArchivos(File archivoRecibido, String nombreArchivo,InterfazSubidaDeDatos datos) {
@@ -279,24 +279,72 @@ public class SubidaDeArchivos extends Thread {
                 String destino= datosObtenidos[3];
                 double precioB= Double.parseDouble(datosObtenidos[4]);
                 Date fSalida= sdf.parse(datosObtenidos[5]);
-                  // try {
-                   // FileInputStream archivoL = new FileInputStream(FILE_AVIONES + "/" + codAvion.toUpperCase());
+                   try {
+                    FileInputStream archivoL = new FileInputStream(FILE_AVIONES + "/" + codAvion.toUpperCase());
                      try {
-                        FileInputStream archivoB = new FileInputStream(FILE_DISTANCIA + "/" + origen.toUpperCase() + "_" + destino.toUpperCase());
-                         Vuelo NV= new Vuelo(codVuelo,codAvion,origen,destino,precioB,fSalida);
-                         GuardarArchivoBinario.guardarVuelo(NV);
-                         datos.introducirDatosALaLista(lineaPrincipal + " ***GUARDADA CON EXITO***");
+                        FileInputStream archivoDistancia= new FileInputStream(FILE_DISTANCIA + "/" + origen.toUpperCase() + "_" + destino.toUpperCase());
+                        ObjectInputStream lecturaDistancia = new ObjectInputStream(archivoDistancia);
+                         Distancia distancia= (Distancia)lecturaDistancia.readObject();
+                           try {
+                             FileInputStream archivoGasNecesaria = new FileInputStream(FILE_AVIONES + "/" +codAvion.toUpperCase());
+                             ObjectInputStream lecturaAvion = new ObjectInputStream(archivoGasNecesaria);
+                             Avion avion= (Avion)lecturaAvion.readObject();
+                             double gasMini= avion.getConsumoMilla()*distancia.getCantMillas();
+                             if(gasMini<= avion.getCantGasolina()){
+                                 Vuelo NV = new Vuelo(codVuelo, codAvion, origen, destino, precioB, fSalida);
+                                 GuardarArchivoBinario.guardarVuelo(NV);
+                                 datos.introducirDatosALaLista(lineaPrincipal + " ***GUARDADA CON EXITO***");
+                           }else{
+                                 datos.introducirDatosALaLista(lineaPrincipal + " NO SE PUDO GUARDAR YA QUE EL AVION NO TIENE EL SUFICIENTE ESPACIO DE GASOLINA");
+                             }
+                             
+                         } catch (FileNotFoundException dis) {
+                             
+                         } catch (ClassNotFoundException ex) {
+                               System.err.println("NO SE PUDO LEER EL AVION DE RESERVACION");
+                        }
+                         
                      } catch (FileNotFoundException e) {
                        datos.introducirDatosALaLista(lineaPrincipal + "NO SE PUDO CARGAR PORQUE NO EXISTE DATOS DE LA DISTANCIA ENTRE "+origen.toUpperCase()+" HASTA "+destino.toUpperCase());
+                    } catch (ClassNotFoundException ex) {
+                         System.err.println("NO SE PUDO LEER LA DISTANCIA");
                     }
 
-                //} catch (FileNotFoundException ex) {
-                  //  datos.introducirDatosALaLista(lineaPrincipal + "NO SE PUDO CARGAR PORQUE NO EXISTE EL CODIGO DE VUELO");
-                //}
+                } catch (FileNotFoundException ex) {
+                    datos.introducirDatosALaLista(lineaPrincipal + "NO SE PUDO CARGAR PORQUE NO EXISTE EL CODIGO DE VUELO");
+                }
             } catch (ParseException ex) {
                  datos.introducirDatosALaLista(lineaPrincipal + "NO SE PUDO CARGAR PORQUE NO CUMPLE CON EL FORMATO DE FECHA ESTABLECIDO");
             }
           
+      }
+      if(nombreAVerificar.equals(NOMBRES[8])){
+                String nomA= datosObtenidos[0];
+                String aeroActual= datosObtenidos[1];
+                String codAvion= datosObtenidos[2];
+                int cap= Integer.parseInt(datosObtenidos[3]);
+                double cantGas= Double.parseDouble(datosObtenidos[4]);
+                double cantPorMilla=Double.parseDouble(datosObtenidos[5]);
+                try{
+                    FileInputStream archivoA = new FileInputStream(FILE_AVIONES + "/" +codAvion.toUpperCase());
+                    datos.introducirDatosALaLista(lineaPrincipal + "NO SE PUDO CARGAR PORQUE YA EXISTE EL REGISTRO");
+                }catch(FileNotFoundException ar){
+                    try {
+                    FileInputStream archivoA = new FileInputStream(FILE_AEROPUERTO + "/" +aeroActual.toUpperCase());
+                     try {
+                        FileInputStream archivoAerolinea = new FileInputStream(FILE_AEROLINEA + "/" +aeroActual.toUpperCase()+"_"+ nomA.toUpperCase());
+                         Avion NA= new Avion(nomA,aeroActual,codAvion,cap,cantGas,cantPorMilla);
+                         GuardarArchivoBinario.guardarAvion(NA);
+                         datos.introducirDatosALaLista(lineaPrincipal + " ***GUARDADA CON EXITO***");
+                     } catch (FileNotFoundException e) {
+                       datos.introducirDatosALaLista(lineaPrincipal + "NO SE PUDO CARGAR PORQUE NO EXISTE LA AEROLINEA EN EL AEROPUERTO");
+                    }
+
+                } catch (FileNotFoundException ex) {
+                    datos.introducirDatosALaLista(lineaPrincipal + "NO SE PUDO CARGAR PORQUE NO EXISTE EL AEROPUERTO");
+                }
+                }
+                   
       }
      }
     

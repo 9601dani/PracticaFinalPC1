@@ -3,6 +3,7 @@ package com.mycompany.GestorArchivos;
 
 import com.mycompany.Clases.Aerolinea;
 import com.mycompany.Clases.Aeropuerto;
+import com.mycompany.Clases.Avion;
 import com.mycompany.Clases.Cliente;
 import com.mycompany.Clases.Distancia;
 import com.mycompany.Clases.Gerente;
@@ -130,10 +131,11 @@ public class GuardarArchivoBinario {
           
     }
      public static void guardarResevacion(Reservacion reservacion){
-          try {
+          
+         try {
             FileOutputStream archivoU;
             ObjectOutputStream salida;
-            archivoU = new FileOutputStream(FILE_RESERVACIONES+"/"+reservacion.getNo_Pasaporte()+"_"+reservacion.getCodigo_vuelo());
+            archivoU = new FileOutputStream(FILE_RESERVACIONES+"/"+reservacion.getNo_Pasaporte()+"_"+reservacion.getCodigo_vuelo().toUpperCase());
             salida = new ObjectOutputStream(archivoU);
             salida.writeObject(reservacion);
             salida.close();
@@ -147,7 +149,7 @@ public class GuardarArchivoBinario {
           try {
             FileOutputStream archivoU;
             ObjectOutputStream salida;
-            archivoU = new FileOutputStream(FILE_VUELO+"/"+vuelo.getCodigoVuelo());
+            archivoU = new FileOutputStream(FILE_VUELO+"/"+vuelo.getCodigoVuelo().toUpperCase());
             salida = new ObjectOutputStream(archivoU);
             salida.writeObject(vuelo);
             salida.close();
@@ -155,6 +157,20 @@ public class GuardarArchivoBinario {
               System.err.println("NO SE ENCONTRO EL ARCHIVO VUELO");
           } catch (IOException ex) {
               System.err.println("ERROR EN EL ARCHIVO VUELO");
+          }
+     }  
+      public static void guardarAvion (Avion avion){
+          try {
+            FileOutputStream archivoU;
+            ObjectOutputStream salida;
+            archivoU = new FileOutputStream(FILE_AVIONES+"/"+avion.getCodigoAvion().toUpperCase());
+            salida = new ObjectOutputStream(archivoU);
+            salida.writeObject(avion);
+            salida.close();
+          } catch (FileNotFoundException ex) {
+              System.err.println("NO SE ENCONTRO EL ARCHIVO DEL AVION");
+          } catch (IOException ex) {
+              System.err.println("ERROR EN EL ARCHIVO AVION");
           }
      }  
          
