@@ -14,6 +14,7 @@ com/mycompany/Clases/Distancia.class
 com/mycompany/Interfaz/InicioSesion.class
 com/mycompany/Interfaz/InterfazMenuUsuario$2.class
 com/mycompany/Interfaz/IngresarNuevoCliente$1.class
+com/mycompany/GestorArchivos/ManejadorMenuGerente.class
 com/mycompany/Interfaz/InterfazMenuUsuario$4.class
 com/mycompany/Interfaz/MenuAdmin$2.class
 com/mycompany/Interfaz/MenuGerente.class
@@ -23,6 +24,7 @@ com/mycompany/Interfaz/IngresarNuevoCliente$3.class
 com/mycompany/Interfaz/MenuAdmin.class
 com/mycompany/Interfaz/RenovacionPasaporte$1.class
 com/mycompany/Interfaz/InterfazMenuUsuario$1.class
+com/mycompany/Clases/Operador.class
 com/mycompany/Interfaz/CrearUsuario$2.class
 com/mycompany/Clases/Gerente.class
 com/mycompany/Interfaz/IngresarNuevaDistancia.class
@@ -34,6 +36,7 @@ com/mycompany/Interfaz/MenuAdmin$6.class
 com/mycompany/Manejador/ManejadorNuevoCliente.class
 com/mycompany/Interfaz/IngresarNuevaAerolinea$1.class
 com/mycompany/Interfaz/IngresoNuevaTarjeta$2.class
+com/mycompany/Interfaz/MenuOperador.class
 com/mycompany/Interfaz/IngresarNuevoAeropuerto.class
 com/mycompany/Interfaz/MenuPrincipal$2.class
 com/mycompany/Interfaz/InterfazSubidaDeDatos$1.class
@@ -45,7 +48,6 @@ com/mycompany/GestorArchivos/SubidaDeArchivos.class
 com/mycompany/Enum/EstadoUsuario.class
 com/mycompany/Interfaz/InterfazSubidaDeDatos.class
 com/mycompany/Enum/GENERO.class
-com/mycompany/Interfaz/MenuGerente$1.class
 com/mycompany/Clases/Usuario.class
 com/mycompany/Interfaz/MenuPrincipal$1.class
 com/mycompany/Interfaz/IngresarNuevoCliente.class

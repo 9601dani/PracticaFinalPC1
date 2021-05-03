@@ -3,14 +3,17 @@ package com.mycompany.Interfaz;
 import com.mycompany.Clases.Aerolinea;
 import com.mycompany.GestorArchivos.GuardarArchivoBinario;
 import static com.mycompany.GestorArchivos.GuardarArchivoBinario.FILE_AEROLINEA;
+import static com.mycompany.GestorArchivos.GuardarArchivoBinario.FILE_AEROPUERTO;
+import static com.mycompany.Interfaz.MenuPrincipal.pantalla;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import javax.swing.JOptionPane;
 
 public class IngresarNuevaAerolinea extends javax.swing.JInternalFrame {
-
+    private String nom;
     public IngresarNuevaAerolinea(String nom) {
         initComponents();
+        this.nom=nom;
         tituloNombre.setText("**** "+nom.toUpperCase()+" ****");
     }
 
@@ -103,22 +106,33 @@ public class IngresarNuevaAerolinea extends javax.swing.JInternalFrame {
         String nomA= aeropuertoText.getText();
         String nomAER=aerolineaText.getText();
         Aerolinea aerolinea;
-          try {
-            FileInputStream archivoB = new FileInputStream(FILE_AEROLINEA + "/" + nomA.toUpperCase() + "_" + nomAER.toUpperCase());
-            JOptionPane.showMessageDialog(null, "YA EXISTE ESTA AEROLINEA EN EL AEROPUERTO " + nomA.toUpperCase());
-            aerolineaText.setText("");
-        } catch (FileNotFoundException ex) {
-            if (nomA != null && nomA != "" && nomAER != null && nomAER != "") {
-                aerolinea = new Aerolinea(nomA, nomAER);
-                GuardarArchivoBinario.guardarAerolineas(aerolinea);
-                JOptionPane.showMessageDialog(null, "HEMOS REGISTRADO TU SOLICITUD");
-                aeropuertoText.setText("");
-                aerolineaText.setText("");
-            } else {
-                JOptionPane.showMessageDialog(null, "HEMOS VISTO QUE HAY CAMPOS VACIOS REVISALOS");
-            }
+          
+              try{
+                  FileInputStream archivoAeropuerto = new FileInputStream(FILE_AEROPUERTO + "/" +nomA.toUpperCase());
+                  try {
+                      FileInputStream archivoB = new FileInputStream(FILE_AEROLINEA + "/" + nomA.toUpperCase() + "_" + nomAER.toUpperCase());
+                      JOptionPane.showMessageDialog(null, "YA EXISTE ESTA AEROLINEA EN EL AEROPUERTO " + nomA.toUpperCase());
+                      aerolineaText.setText("");
+                  } catch (FileNotFoundException ex) {
+                      if (nomA != null && nomA != "" && nomAER != null && nomAER != "") {
+                          aerolinea = new Aerolinea(nomA, nomAER);
+                          GuardarArchivoBinario.guardarAerolineas(aerolinea);
+                          JOptionPane.showMessageDialog(null, "HEMOS REGISTRADO TU SOLICITUD");
+                          aeropuertoText.setText("");
+                          aerolineaText.setText("");
+                      } else {
+                          JOptionPane.showMessageDialog(null, "HEMOS VISTO QUE HAY CAMPOS VACIOS REVISALOS");
+                      }
 
-        }
+                  }
+              }catch (FileNotFoundException ex) {
+                  JOptionPane.showMessageDialog(null, "NO EXISTE EL AEROPUERTO, DEBES REGISTRARLO PRIMERO");
+                  IngresarNuevoAeropuerto NA= new IngresarNuevoAeropuerto(this.nom);
+                  pantalla.add(NA);
+                  NA.show();
+                  
+              }
+         
                 
     }//GEN-LAST:event_botonNuevaAerolineaActionPerformed
 

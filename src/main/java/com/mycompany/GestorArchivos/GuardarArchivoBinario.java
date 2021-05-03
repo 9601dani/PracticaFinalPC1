@@ -7,6 +7,7 @@ import com.mycompany.Clases.Avion;
 import com.mycompany.Clases.Cliente;
 import com.mycompany.Clases.Distancia;
 import com.mycompany.Clases.Gerente;
+import com.mycompany.Clases.Operador;
 import com.mycompany.Clases.Reservacion;
 import com.mycompany.Clases.Tarjeta;
 import com.mycompany.Clases.Usuario;
@@ -29,6 +30,7 @@ public class GuardarArchivoBinario {
      public static final File FILE_RESERVACIONES= new File("/home/daniel/NetBeansProjects/Proyecto2IPC/Reservaciones");
      public static final File FILE_VUELO= new File("/home/daniel/NetBeansProjects/Proyecto2IPC/Vuelo");
      public static final File FILE_AVIONES= new File("/home/daniel/NetBeansProjects/Proyecto2IPC/Aviones");
+     public static final File FILE_OPERADORES= new File("/home/daniel/NetBeansProjects/Proyecto2IPC/Operador");
       
      
      public static void guardarUsuario(Usuario usuario){ 
@@ -43,6 +45,20 @@ public class GuardarArchivoBinario {
               System.err.println("NO SE ENCONTRO EL ARCHIVO");
           } catch (IOException ex) {
               System.err.println("ERROR EN EL ARCHIVO USUARIO");
+          }
+     }
+     public static void guardarOperador(Operador operador){ 
+        try {
+            FileOutputStream archivoL;
+            ObjectOutputStream salida;
+            archivoL = new FileOutputStream(FILE_OPERADORES+"/"+operador.getNombreG());
+            salida = new ObjectOutputStream(archivoL);
+            salida.writeObject(operador);
+            salida.close();
+          } catch (FileNotFoundException ex) {
+              System.err.println("NO SE ENCONTRO EL ARCHIVO");
+          } catch (IOException ex) {
+              System.err.println("ERROR EN EL ARCHIVO OPERADOR");
           }
      }
      public static void guardarUsuarioCliente(Cliente cliente){  

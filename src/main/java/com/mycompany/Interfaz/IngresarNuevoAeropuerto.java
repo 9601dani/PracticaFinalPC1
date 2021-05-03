@@ -149,6 +149,7 @@ public class IngresarNuevoAeropuerto extends javax.swing.JInternalFrame {
                nombreAText.setText("");
                ciuidadText.setText("");
                paisText.setText("");
+               this.dispose();
            } else {
                JOptionPane.showMessageDialog(null, "TENEMOS PROBLEMAS, POQUE HAY CAMOS VACIOS");
            }

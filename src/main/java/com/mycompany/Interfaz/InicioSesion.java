@@ -3,21 +3,22 @@ package com.mycompany.Interfaz;
 
 import com.mycompany.Clases.Cliente;
 import com.mycompany.Clases.Gerente;
+import com.mycompany.Clases.Operador;
 import com.mycompany.Clases.Tarjeta;
 import com.mycompany.Enum.EstadoUsuario;
 import com.mycompany.Clases.Usuario;
+import com.mycompany.GestorArchivos.GuardarArchivoBinario;
 import static com.mycompany.GestorArchivos.GuardarArchivoBinario.FILE_CLIENTES;
 import static com.mycompany.GestorArchivos.GuardarArchivoBinario.FILE_GERENTE;
+import static com.mycompany.GestorArchivos.GuardarArchivoBinario.FILE_OPERADORES;
 import static com.mycompany.GestorArchivos.GuardarArchivoBinario.FILE_TARJETAS;
 import static com.mycompany.GestorArchivos.GuardarArchivoBinario.FILE_USUARIOS;
 import static com.mycompany.Interfaz.MenuPrincipal.pantalla;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -218,6 +219,7 @@ public class InicioSesion extends javax.swing.JInternalFrame {
             break;
              case 1: 
                 JOptionPane.showMessageDialog(null, "BIENVENIDO GERENTE "+name.toUpperCase());
+                pantalla.repaint();
                 pantalla.removeAll();
                 try{
                  String[] nombreLis=FILE_GERENTE.list();
@@ -257,10 +259,27 @@ public class InicioSesion extends javax.swing.JInternalFrame {
              case 2: 
             pantalla.removeAll();
             JOptionPane.showMessageDialog(null,"BIENVENIDO OPERADOR");
+            try {
+                FileInputStream archivoO = new FileInputStream(FILE_OPERADORES + "/" + name);
+                ObjectInputStream lectura1 = new ObjectInputStream(archivoO);
+                Operador operador;
+                operador = (Operador) lectura1.readObject();
+                MenuOperador MO = new MenuOperador(operador);
+                pantalla.repaint();
+                pantalla.add(MO);
+                MO.show();
+                } catch (FileNotFoundException e) {
+                    System.err.println("ERROR NO EXISTE EL ARCHIVO");
+                }catch(IOException ex){
+                    System.err.println("ERROR IOEXCEPTION");
+                }catch(ClassNotFoundException exs){
+                    System.err.println("ERROR AL LEER LA CLASE");
+                }
             break;
             case 3:
                 JOptionPane.showMessageDialog(null,"BIENVENIDO USUARIO ");
                 pantalla.removeAll();
+                pantalla.repaint();
                 InterfazMenuUsuario MEU = new InterfazMenuUsuario(name);
                 pantalla.add(MEU);
                 MEU.show();

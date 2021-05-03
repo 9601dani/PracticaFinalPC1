@@ -23,10 +23,19 @@ public class MenuAdmin extends javax.swing.JInternalFrame {
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItem13 = new javax.swing.JMenuItem();
+        jMenuItem14 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem6 = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        jMenuItem7 = new javax.swing.JMenuItem();
+        jMenuItem8 = new javax.swing.JMenuItem();
+        jMenuItem9 = new javax.swing.JMenuItem();
+        jMenuItem10 = new javax.swing.JMenuItem();
+        jMenuItem11 = new javax.swing.JMenuItem();
+        jMenuItem12 = new javax.swing.JMenuItem();
 
         jLabel1.setFont(new java.awt.Font("aakar", 3, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
@@ -81,6 +90,16 @@ public class MenuAdmin extends javax.swing.JInternalFrame {
         });
         jMenu1.add(jMenuItem4);
 
+        jMenuItem13.setFont(new java.awt.Font("aakar", 3, 12)); // NOI18N
+        jMenuItem13.setIcon(new javax.swing.ImageIcon("/home/daniel/NetBeansProjects/Proyecto2IPC/logo1.png")); // NOI18N
+        jMenuItem13.setText("CREAR NUEVA TARJETA");
+        jMenu1.add(jMenuItem13);
+
+        jMenuItem14.setFont(new java.awt.Font("aakar", 3, 12)); // NOI18N
+        jMenuItem14.setIcon(new javax.swing.ImageIcon("/home/daniel/NetBeansProjects/Proyecto2IPC/logo1.png")); // NOI18N
+        jMenuItem14.setText("CREAR NUEVO CLIENTE");
+        jMenu1.add(jMenuItem14);
+
         jMenuBar1.add(jMenu1);
 
         jMenu2.setIcon(new javax.swing.ImageIcon("/home/daniel/NetBeansProjects/Proyecto2IPC/subidaD.png")); // NOI18N
@@ -115,6 +134,42 @@ public class MenuAdmin extends javax.swing.JInternalFrame {
 
         jMenuBar1.add(jMenu3);
 
+        jMenu4.setIcon(new javax.swing.ImageIcon("/home/daniel/NetBeansProjects/Proyecto2IPC/reporte.png")); // NOI18N
+        jMenu4.setText("REPORTES");
+        jMenu4.setFont(new java.awt.Font("aakar", 3, 14)); // NOI18N
+
+        jMenuItem7.setFont(new java.awt.Font("aakar", 3, 14)); // NOI18N
+        jMenuItem7.setIcon(new javax.swing.ImageIcon("/home/daniel/NetBeansProjects/Proyecto2IPC/avion.png")); // NOI18N
+        jMenuItem7.setText("RUTAS");
+        jMenu4.add(jMenuItem7);
+
+        jMenuItem8.setFont(new java.awt.Font("aakar", 3, 14)); // NOI18N
+        jMenuItem8.setIcon(new javax.swing.ImageIcon("/home/daniel/NetBeansProjects/Proyecto2IPC/vuelosS.png")); // NOI18N
+        jMenuItem8.setText("AEROLINEAS MAS USADAS");
+        jMenu4.add(jMenuItem8);
+
+        jMenuItem9.setFont(new java.awt.Font("aakar", 3, 14)); // NOI18N
+        jMenuItem9.setIcon(new javax.swing.ImageIcon("/home/daniel/NetBeansProjects/Proyecto2IPC/reporte.png")); // NOI18N
+        jMenuItem9.setText("AVIONES");
+        jMenu4.add(jMenuItem9);
+
+        jMenuItem10.setFont(new java.awt.Font("aakar", 3, 14)); // NOI18N
+        jMenuItem10.setIcon(new javax.swing.ImageIcon("/home/daniel/NetBeansProjects/Proyecto2IPC/actua.png")); // NOI18N
+        jMenuItem10.setText("VUELO");
+        jMenu4.add(jMenuItem10);
+
+        jMenuItem11.setFont(new java.awt.Font("aakar", 3, 14)); // NOI18N
+        jMenuItem11.setIcon(new javax.swing.ImageIcon("/home/daniel/NetBeansProjects/Proyecto2IPC/actu.png")); // NOI18N
+        jMenuItem11.setText("DE GASOLINA");
+        jMenu4.add(jMenuItem11);
+
+        jMenuItem12.setFont(new java.awt.Font("aakar", 3, 14)); // NOI18N
+        jMenuItem12.setIcon(new javax.swing.ImageIcon("/home/daniel/NetBeansProjects/Proyecto2IPC/ganancias.png")); // NOI18N
+        jMenuItem12.setText("GANANCIAS");
+        jMenu4.add(jMenuItem12);
+
+        jMenuBar1.add(jMenu4);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -128,7 +183,7 @@ public class MenuAdmin extends javax.swing.JInternalFrame {
                     .addComponent(nomAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(65, 65, 65)
                 .addComponent(logo, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(147, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -137,7 +192,7 @@ public class MenuAdmin extends javax.swing.JInternalFrame {
                 .addComponent(jLabel1)
                 .addGap(4, 4, 4)
                 .addComponent(nomAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(139, Short.MAX_VALUE))
+                .addContainerGap(155, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addComponent(logo, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
@@ -165,7 +220,7 @@ public class MenuAdmin extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-         CrearUsuario nuevo= new CrearUsuario(nomAdmi);
+         IngresarNuevaAerolinea nuevo= new IngresarNuevaAerolinea(nomAdmi);
             pantalla.add(nuevo);
             nuevo.show();
     }//GEN-LAST:event_jMenuItem4ActionPerformed
@@ -188,13 +243,22 @@ public class MenuAdmin extends javax.swing.JInternalFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem10;
+    private javax.swing.JMenuItem jMenuItem11;
+    private javax.swing.JMenuItem jMenuItem12;
+    private javax.swing.JMenuItem jMenuItem13;
+    private javax.swing.JMenuItem jMenuItem14;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem jMenuItem8;
+    private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JLabel logo;
     private javax.swing.JLabel nomAdmin;
     // End of variables declaration//GEN-END:variables

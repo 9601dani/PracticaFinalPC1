@@ -3,6 +3,7 @@ package com.mycompany.Interfaz;
 
 import com.mycompany.Clases.Tarjeta;
 import com.mycompany.GestorArchivos.GuardarArchivoBinario;
+import static com.mycompany.GestorArchivos.GuardarArchivoBinario.FILE_CLIENTES;
 import static com.mycompany.GestorArchivos.GuardarArchivoBinario.FILE_TARJETAS;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -17,6 +18,14 @@ private int noPasaporte;
         initComponents();
         pasaporteText.setText(noTarjeta);
         tarjetaText.setText(Integer.toString(noPasaport));
+    }
+    public IngresoNuevaTarjeta() {
+        initComponents();
+        pasaporteText.setEnabled(true);
+        pasaporteText.setEditable(true);
+        tarjetaText.setEnabled(true);
+        tarjetaText.setEditable(true);
+        
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -134,14 +143,18 @@ private int noPasaporte;
     private void botoNuevaTarjetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botoNuevaTarjetaActionPerformed
         double dineroA= Double.parseDouble(dineroText.getText());
         String cod= codigoText.getText();
+        int pas= Integer.parseInt(pasaporteText.getText());
+        String noT=tarjetaText.getText();
         try {
-                FileInputStream archivoB = new FileInputStream(FILE_TARJETAS + "/" +noTarj );
+            FileInputStream archivoC = new FileInputStream(FILE_CLIENTES + "/" +noPasaporte);
+            try {
+                FileInputStream archivoT = new FileInputStream(FILE_TARJETAS + "/" +noTarj );
                 JOptionPane.showMessageDialog(null, "YA EXISTE ESTA TARJETA");
                 dineroText.setText("");
                 codigoText.setText("");
             } catch (FileNotFoundException ex) {
                 if (dineroA != 0 && (cod != "" || cod != null)) {
-                    Tarjeta NTarjeta = new Tarjeta(noTarj, noPasaporte, dineroA, cod);
+                    Tarjeta NTarjeta = new Tarjeta(noT, pas, dineroA, cod);
                     GuardarArchivoBinario.guardarTarjeta(NTarjeta);
                     JOptionPane.showMessageDialog(null, "VAMOS A INGRESAR LA SOLICITUD");
                     dineroText.setText("");
@@ -151,12 +164,9 @@ private int noPasaporte;
                 }
 
          }
-
-
-        
-        
-        
-       
+        }catch (FileNotFoundException ex) {
+            JOptionPane.showMessageDialog(null, "NO EXISTE EL CLIENTE");
+        }
     }//GEN-LAST:event_botoNuevaTarjetaActionPerformed
 
 

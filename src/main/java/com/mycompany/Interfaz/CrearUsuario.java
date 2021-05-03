@@ -1,9 +1,11 @@
 package com.mycompany.Interfaz;
 
 import com.mycompany.Clases.Gerente;
+import com.mycompany.Clases.Operador;
 import com.mycompany.Clases.Usuario;
 import com.mycompany.GestorArchivos.GuardarArchivoBinario;
 import static com.mycompany.GestorArchivos.GuardarArchivoBinario.FILE_GERENTE;
+import static com.mycompany.GestorArchivos.GuardarArchivoBinario.FILE_OPERADORES;
 import static com.mycompany.GestorArchivos.GuardarArchivoBinario.FILE_USUARIOS;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -219,6 +221,7 @@ private String noUsuario;
                                     GuardarArchivoBinario.guardarUsuario(usuario);
                                     gerente= new Gerente(Aeroline,nombre);
                                     GuardarArchivoBinario.guardarGerente(gerente);
+                                    JOptionPane.showMessageDialog(null, "HEMOS CREADO EL USUARIO EXITOSAMENTE");
                                     newNombreText.setText("");
                                     newContraseñaText.setText("");
                                     comboArea.setSelectedIndex(1);
@@ -233,7 +236,43 @@ private String noUsuario;
                 } else{
                     JOptionPane.showMessageDialog(null, "INGRESA UNA AEROLINEA");
                 }
-        }else{
+        }else if(Area==2){
+            Aerolinea.setVisible(true);
+            titulo1.setVisible(true);
+            String Aeroline= Aerolinea.getText();
+                if(Aeroline!=null && Aeroline!=""){
+                    Usuario usuario;
+                    Operador operador;
+                    FileInputStream archivoB;
+                    FileInputStream archivoB2;
+                        try {
+                            archivoB = new FileInputStream(FILE_USUARIOS+"/"+nombre);
+                            JOptionPane.showMessageDialog(null, "EL USUARIO YA EXISTE");
+                        }catch (FileNotFoundException ex) {
+                            try {
+                                 archivoB2= new FileInputStream(FILE_OPERADORES+"/"+nombre);
+                                 JOptionPane.showMessageDialog(null, "YA EXISTE ESTE OPERADOR INTENTA OTRO NOMBRE");
+                                 newNombreText.setText("");
+                            } catch (FileNotFoundException ex1) {
+                                if(newNombreText.getText()!=""  && newContraseñaText.getText()!="" && Aeroline!="" && Aeroline!=null){
+                                    usuario = new Usuario(nombre, contra, Area);
+                                    GuardarArchivoBinario.guardarUsuario(usuario);
+                                    operador= new Operador(nombre,Aeroline);
+                                    GuardarArchivoBinario.guardarOperador(operador);
+                                    newNombreText.setText("");
+                                    newContraseñaText.setText("");
+                                    comboArea.setSelectedIndex(1);
+                                    Aerolinea.setText("");
+                                }else{
+                                    JOptionPane.showMessageDialog(null,"REVISA EL INGRESO DE CAMPOS");
+                                }
+                             }
+                        }
+                } else{
+                    JOptionPane.showMessageDialog(null, "INGRESA UNA AEROLINEA");
+                }
+        }
+            else{
             Usuario usuario;
             FileInputStream archivoB;
             try {
@@ -252,12 +291,8 @@ private String noUsuario;
                         JOptionPane.showMessageDialog(null,"REVISA EL INGRESO DE CAMPOS");
                     }   
                 }
-        }
-       
-        
+        }  
     }
-   
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField Aerolinea;
     private javax.swing.JButton botonNewUsuario;

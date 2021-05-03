@@ -55,16 +55,16 @@ public class SubidaDeArchivos extends Thread {
     @Override
     public void run(){
         try {// lee el archivo
-            leerNuevoArchivo();
+            leerNuevosArchivos();
         } catch (FileNotFoundException ex) {
-            datos.introducirDatosALaLista("No se puede conectar al archivo");
+            datos.introducirDatosALaLista("ARCHIVO NO ENCONTRADO");
             System.out.println("No se puede leer el archivo");
         } catch (IOException ex) {
             System.err.println("ERROR IOEXEPTION");
         }
         
     }
-    public void leerNuevoArchivo()throws FileNotFoundException, IOException{
+    public void leerNuevosArchivos()throws FileNotFoundException, IOException{
         try{
             FileReader archivo1 = new FileReader(archivo);
             BufferedReader archivo= new BufferedReader(archivo1);
@@ -279,7 +279,11 @@ public class SubidaDeArchivos extends Thread {
                 String destino= datosObtenidos[3];
                 double precioB= Double.parseDouble(datosObtenidos[4]);
                 Date fSalida= sdf.parse(datosObtenidos[5]);
-                   try {
+                try{
+                   FileInputStream archivoL = new FileInputStream(FILE_VUELO + "/" + codVuelo.toUpperCase());
+                   datos.introducirDatosALaLista(lineaPrincipal + " NO SE PUDO CARGAR PORQUE YA EXISTE LA RESERVACION"); 
+                }catch (FileNotFoundException eo) {
+                    try {
                     FileInputStream archivoL = new FileInputStream(FILE_AVIONES + "/" + codAvion.toUpperCase());
                      try {
                         FileInputStream archivoDistancia= new FileInputStream(FILE_DISTANCIA + "/" + origen.toUpperCase() + "_" + destino.toUpperCase());
@@ -289,15 +293,25 @@ public class SubidaDeArchivos extends Thread {
                              FileInputStream archivoGasNecesaria = new FileInputStream(FILE_AVIONES + "/" +codAvion.toUpperCase());
                              ObjectInputStream lecturaAvion = new ObjectInputStream(archivoGasNecesaria);
                              Avion avion= (Avion)lecturaAvion.readObject();
-                             double gasMini= avion.getConsumoMilla()*distancia.getCantMillas();
-                             if(gasMini<= avion.getCantGasolina()){
-                                 Vuelo NV = new Vuelo(codVuelo, codAvion, origen, destino, precioB, fSalida);
-                                 GuardarArchivoBinario.guardarVuelo(NV);
-                                 datos.introducirDatosALaLista(lineaPrincipal + " ***GUARDADA CON EXITO***");
-                           }else{
-                                 datos.introducirDatosALaLista(lineaPrincipal + " NO SE PUDO GUARDAR YA QUE EL AVION NO TIENE EL SUFICIENTE ESPACIO DE GASOLINA");
+                             try {
+                             FileInputStream archivoAeroDestino = new FileInputStream(FILE_AEROLINEA + "/" +destino.toUpperCase()+"_"+avion.getNomAerolinea().toUpperCase());
+                             FileInputStream archivoAerOrigen = new FileInputStream(FILE_AEROLINEA + "/" +origen.toUpperCase()+"_"+avion.getNomAerolinea().toUpperCase());  
+                             double gasMini = avion.getConsumoMilla() * distancia.getCantMillas();
+                                 if (gasMini <= avion.getCantGasolina()) {
+                                     if (avion.getAeropuertoActual().equalsIgnoreCase(origen)) {
+                                         Vuelo NV = new Vuelo(codVuelo, codAvion, origen, destino, precioB, fSalida);
+                                         GuardarArchivoBinario.guardarVuelo(NV);
+                                         datos.introducirDatosALaLista(lineaPrincipal + " ***GUARDADA CON EXITO***");
+                                     } else {
+                                         datos.introducirDatosALaLista(lineaPrincipal + " EL AVION " + avion.getCodigoAvion().toUpperCase() + " NO SE ENCUENTRA EN " + origen.toUpperCase());
+                                     }
+
+                                 } else {
+                                     datos.introducirDatosALaLista(lineaPrincipal + " NO SE PUDO GUARDAR YA QUE EL AVION NO TIENE EL SUFICIENTE ESPACIO DE GASOLINA");
+                                 }
+                             }catch(FileNotFoundException dis){
+                                 datos.introducirDatosALaLista(lineaPrincipal + " NO SE PUDO GUARDAR YA QUE LA AEROLINEA NO EXISTE EN EL AEROPUERTO");
                              }
-                             
                          } catch (FileNotFoundException dis) {
                              
                          } catch (ClassNotFoundException ex) {
@@ -311,7 +325,8 @@ public class SubidaDeArchivos extends Thread {
                     }
 
                 } catch (FileNotFoundException ex) {
-                    datos.introducirDatosALaLista(lineaPrincipal + "NO SE PUDO CARGAR PORQUE NO EXISTE EL CODIGO DE VUELO");
+                    datos.introducirDatosALaLista(lineaPrincipal + "NO SE PUDO CARGAR PORQUE NO EXISTE EL CODIGO DE AVION");
+                }
                 }
             } catch (ParseException ex) {
                  datos.introducirDatosALaLista(lineaPrincipal + "NO SE PUDO CARGAR PORQUE NO CUMPLE CON EL FORMATO DE FECHA ESTABLECIDO");
