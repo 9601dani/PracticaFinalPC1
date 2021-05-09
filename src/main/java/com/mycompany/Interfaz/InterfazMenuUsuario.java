@@ -8,6 +8,7 @@ import static com.mycompany.GestorArchivos.GuardarArchivoBinario.FILE_CLIENTES;
 import static com.mycompany.GestorArchivos.GuardarArchivoBinario.FILE_RESERVACIONES;
 import static com.mycompany.GestorArchivos.GuardarArchivoBinario.FILE_TARJETAS;
 import static com.mycompany.GestorArchivos.GuardarArchivoBinario.FILE_VUELO;
+import static com.mycompany.Interfaz.MenuPrincipal.pantalla;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -58,6 +59,7 @@ public class InterfazMenuUsuario extends javax.swing.JInternalFrame {
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
 
         jLabel1.setText("NO DE USUARIO EN SESION");
 
@@ -109,6 +111,16 @@ public class InterfazMenuUsuario extends javax.swing.JInternalFrame {
             }
         });
         jMenu1.add(jMenuItem4);
+
+        jMenuItem5.setFont(new java.awt.Font("aakar", 3, 12)); // NOI18N
+        jMenuItem5.setIcon(new javax.swing.ImageIcon("/home/daniel/NetBeansProjects/Proyecto2IPC/vuelosS.png")); // NOI18N
+        jMenuItem5.setText("COMPRAR BOLETO");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem5);
 
         jMenuBar1.add(jMenu1);
 
@@ -162,6 +174,12 @@ public class InterfazMenuUsuario extends javax.swing.JInternalFrame {
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         JOptionPane.showMessageDialog(null, "*** DATOS PERSONALES *** \n"+DatosPersonales());
     }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        IngresarReservacion NR = new IngresarReservacion(Integer.parseInt(this.nombreU));
+        pantalla.add(NR);
+        NR.show();
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
     public String boletosComprados(){
         String presentar="";
         String[] resevarciones=FILE_RESERVACIONES.list();
@@ -278,6 +296,7 @@ public class InterfazMenuUsuario extends javax.swing.JInternalFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JLabel noUsuarioText;
     private javax.swing.JLabel nomUsuario;
     private javax.swing.JLabel tituloLogo;

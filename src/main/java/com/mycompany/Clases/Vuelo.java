@@ -1,6 +1,7 @@
 
 package com.mycompany.Clases;
 
+import com.mycompany.Enum.ESTADO_VUELO;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -11,7 +12,7 @@ public class Vuelo implements Serializable{
     private String aeroDestino;
     private double precioBoleto;
     private Date fechaSalida;
-    private boolean listo;
+    private ESTADO_VUELO estado;
 
     public Vuelo(String codigoVuelo, String codAvion, String aeroOrigen, String aeroDestino, double precioBoleto, Date fechaSalida) {
         this.codigoVuelo = codigoVuelo;
@@ -20,7 +21,7 @@ public class Vuelo implements Serializable{
         this.aeroDestino = aeroDestino;
         this.precioBoleto = precioBoleto;
         this.fechaSalida = fechaSalida;
-        this.listo=true;
+        this.estado= ESTADO_VUELO.EN_ESPERA;
     }
 
     public String getCodigoVuelo() {
@@ -47,6 +48,11 @@ public class Vuelo implements Serializable{
         return fechaSalida;
     }
 
+    public ESTADO_VUELO getEstado() {
+        return estado;
+    }
+    
+
     public void setCodigoVuelo(String codigoVuelo) {
         this.codigoVuelo = codigoVuelo;
     }
@@ -69,6 +75,10 @@ public class Vuelo implements Serializable{
 
     public void setFechaSalida(Date fechaSalida) {
         this.fechaSalida = fechaSalida;
+    }
+
+    public void setEstado(ESTADO_VUELO estado) {
+        this.estado = estado;
     }
     
     

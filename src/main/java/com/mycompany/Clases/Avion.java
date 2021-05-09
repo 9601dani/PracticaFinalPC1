@@ -10,6 +10,9 @@ public class Avion implements Serializable{
     private int capacidadP;
     private double cantGasolina;
     private double consumoMilla;
+    private int[]asientos;
+    private int[]pasillos;
+    private int residuo=0;
 
     public Avion(String nomAerolinea, String aeropuertoActual, String codigoAvion, int capacidadP, double cantGasolina, double consumoMilla) {
         this.nomAerolinea = nomAerolinea;
@@ -18,6 +21,43 @@ public class Avion implements Serializable{
         this.capacidadP = capacidadP;
         this.cantGasolina = cantGasolina;
         this.consumoMilla = consumoMilla;
+        
+        //DEFINIR COLUMNAS Y PASILLOS
+        int num1= capacidadP/4;
+        residuo=capacidadP%4;
+        if(residuo>=0){
+            num1=num1+1;
+        }
+        this.pasillos= new int[num1];
+        this.asientos=new int[capacidadP];
+        
+        int numAsiento=0;
+        for (int i = 0; i < capacidadP; i++) {
+                asientos[i]=0;
+        }
+        for(int j=0; j<num1;j++){
+            pasillos[j]=0;
+        }
+        
+    }
+
+    public Avion(String nomAerolinea, String aeropuertoActual, String codigoAvion, int capacidadP, double cantGasolina, double consumoMilla, int[] asientos) {
+        this.nomAerolinea = nomAerolinea;
+        this.aeropuertoActual = aeropuertoActual;
+        this.codigoAvion = codigoAvion;
+        this.capacidadP = capacidadP;
+        this.cantGasolina = cantGasolina;
+        this.consumoMilla = consumoMilla;
+        this.asientos = asientos;
+    }
+    
+
+    public int[] getAsientos() {
+        return asientos;
+    }
+
+    public int[] getPasillos() {
+        return pasillos;
     }
 
     public String getNomAerolinea() {
@@ -67,5 +107,14 @@ public class Avion implements Serializable{
     public void setConsumoMilla(double consumoMilla) {
         this.consumoMilla = consumoMilla;
     }
+
+    public void setAsientos(int[] asientos) {
+        this.asientos = asientos;
+    }
+
+    public void setPasillos(int[] pasillos) {
+        this.pasillos = pasillos;
+    }
+    
     
 }

@@ -1,10 +1,7 @@
 package com.mycompany.Interfaz;
 
 import com.mycompany.GestorArchivos.SubidaDeArchivos;
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -131,12 +128,15 @@ public class InterfazSubidaDeDatos extends javax.swing.JInternalFrame {
     public DefaultListModel getModeloLista(){
         return this.modeloLista;
     }
+    public static void limpiarSubida(){
+        modeloLista.clear();
+    }
     
     // metodo estatico que introduce lineas de texto a la lista 
     public void introducirDatosALaLista(String linea){
         modeloLista.addElement(linea);
     }
-     public void guardarInformacionLista(){
+    /* public void guardarInformacionLista(){
         String[] componentesLista= new String[modeloLista.getSize()];
         int tamañoLista=modeloLista.getSize();
         for(int i=0;i<modeloLista.getSize();i++){
@@ -154,7 +154,7 @@ public class InterfazSubidaDeDatos extends javax.swing.JInternalFrame {
                 System.err.println("ERROR IOEXEPTION");
             }
         }
-    }
+    }*/
     
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
           JFileChooser buscadorArchivos = new JFileChooser();
@@ -189,6 +189,7 @@ public class InterfazSubidaDeDatos extends javax.swing.JInternalFrame {
            // llama al metodo cargar datos de la clase thread
             System.out.println("Se ha almacenado con exito");
             sub = new SubidaDeArchivos(archivoAProcesar, nombreArchivoALeer,this);
+            limpiarSubida();
             //inicia el hilo de los archivos
             sub.start();
         }

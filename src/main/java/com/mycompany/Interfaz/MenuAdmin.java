@@ -93,11 +93,21 @@ public class MenuAdmin extends javax.swing.JInternalFrame {
         jMenuItem13.setFont(new java.awt.Font("aakar", 3, 12)); // NOI18N
         jMenuItem13.setIcon(new javax.swing.ImageIcon("/home/daniel/NetBeansProjects/Proyecto2IPC/logo1.png")); // NOI18N
         jMenuItem13.setText("CREAR NUEVA TARJETA");
+        jMenuItem13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem13ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem13);
 
         jMenuItem14.setFont(new java.awt.Font("aakar", 3, 12)); // NOI18N
         jMenuItem14.setIcon(new javax.swing.ImageIcon("/home/daniel/NetBeansProjects/Proyecto2IPC/logo1.png")); // NOI18N
         jMenuItem14.setText("CREAR NUEVO CLIENTE");
+        jMenuItem14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem14ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem14);
 
         jMenuBar1.add(jMenu1);
@@ -236,6 +246,20 @@ public class MenuAdmin extends javax.swing.JInternalFrame {
         pantalla.add(RP);
         RP.show();
     }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
+        IngresoNuevaTarjeta NT= new IngresoNuevaTarjeta();
+        pantalla.add(NT);
+        NT.show();
+    }//GEN-LAST:event_jMenuItem13ActionPerformed
+
+    private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem14ActionPerformed
+        IngresarNuevoCliente NC= new IngresarNuevoCliente(nomAdmi);
+        pantalla.add(NC);
+        NC.show();
+        
+        
+    }//GEN-LAST:event_jMenuItem14ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

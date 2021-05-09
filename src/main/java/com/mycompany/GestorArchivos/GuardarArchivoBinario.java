@@ -212,5 +212,16 @@ public class GuardarArchivoBinario {
         }
         return x;
     }
+    public void borrarArchivo(File archivoEliminar) {
+
+        File fichero = new File(archivoEliminar.getAbsolutePath());
+
+        if (fichero.delete()) {
+            System.out.println("El fichero ha sido borrado satisfactoriamente");
+        } else {
+            System.out.println("El fichero no pudó ser borrado");
+        }
+
+    }
      
 }

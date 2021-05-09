@@ -19,6 +19,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         imagenLogo = new javax.swing.JLabel();
         titulo = new javax.swing.JLabel();
         titulo1 = new javax.swing.JLabel();
+        logoDaniel = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         inicioSesion = new javax.swing.JMenu();
         botonInicioSesion = new javax.swing.JMenuItem();
@@ -37,7 +38,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         pantalla.setLayout(pantallaLayout);
         pantallaLayout.setHorizontalGroup(
             pantallaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 645, Short.MAX_VALUE)
+            .addGap(0, 552, Short.MAX_VALUE)
         );
         pantallaLayout.setVerticalGroup(
             pantallaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -53,6 +54,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
         titulo1.setFont(new java.awt.Font("aakar", 3, 18)); // NOI18N
         titulo1.setForeground(new java.awt.Color(0, 0, 0));
         titulo1.setText("VISION");
+
+        logoDaniel.setIcon(new javax.swing.ImageIcon("/home/daniel/NetBeansProjects/Proyecto2IPC/logoDaniel.png")); // NOI18N
 
         inicioSesion.setForeground(new java.awt.Color(0, 0, 0));
         inicioSesion.setText("Comenzar");
@@ -104,8 +107,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(titulo1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(imagenLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(imagenLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(logoDaniel, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pantalla))
         );
         layout.setVerticalGroup(
@@ -119,7 +125,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 .addComponent(titulo)
                 .addGap(48, 48, 48)
                 .addComponent(titulo1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(122, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(logoDaniel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(14, 14, 14))
         );
 
         pack();
@@ -155,6 +163,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel imagenLogo;
     private javax.swing.JMenu inicioSesion;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JLabel logoDaniel;
     public static javax.swing.JDesktopPane pantalla;
     private javax.swing.JMenu salir;
     private javax.swing.JLabel titulo;

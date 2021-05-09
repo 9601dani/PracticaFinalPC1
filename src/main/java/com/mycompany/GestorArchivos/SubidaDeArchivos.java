@@ -54,7 +54,7 @@ public class SubidaDeArchivos extends Thread {
     }
     @Override
     public void run(){
-        try {// lee el archivo
+        try {
             leerNuevosArchivos();
         } catch (FileNotFoundException ex) {
             datos.introducirDatosALaLista("ARCHIVO NO ENCONTRADO");
@@ -99,7 +99,7 @@ public class SubidaDeArchivos extends Thread {
                     LArchivo= archivo.readLine();
                 }
             }
-            JOptionPane.showMessageDialog(null, "HEMOS TERMINADO LA CAARGA DE ARCHIVOS");
+            JOptionPane.showMessageDialog(null, "HEMOS TERMINADO LA CARGA DE ARCHIVOS");
             datos.introducirDatosALaLista("-----------------------------------------------------------------------------------------------------------------------------");
             datos.introducirDatosALaLista("**SE COMPLETO LA CARGA DE ARCHIVOS**".toUpperCase());
         }catch(Exception e){ 
@@ -124,18 +124,14 @@ public class SubidaDeArchivos extends Thread {
             String nomA = datosObtenidos[0];
             String ciud = datosObtenidos[1];
             String pa= datosObtenidos[2];
-            // verifica si puede registrarse el usuario
            try {
             FileInputStream archivoB = new FileInputStream(FILE_AEROPUERTO + "/" + nomA.toUpperCase());
             datos.introducirDatosALaLista(lineaPrincipal+" NO SE PUDO CARGAR PORQUE YA ESTA REGISTRADA");
-            
-           
             } catch (FileNotFoundException ex) {
                 aer = new Aeropuerto(nomA,ciud,pa);
                 GuardarArchivoBinario.guardarAeroPuertos(aer);
                datos.introducirDatosALaLista(lineaPrincipal +" ***GUARDADA CON EXITO ***");
-            }
-                
+            }   
         }
         if(nombreAVerificar.equals(NOMBRES[1])){
             Aerolinea aerL;
@@ -252,7 +248,7 @@ public class SubidaDeArchivos extends Thread {
       if( nombreAVerificar.equals(NOMBRES[6])){
           int noPasNew= Integer.parseInt(datosObtenidos[0]);
           String codigoVuelo= datosObtenidos[1];
-          int numT= Integer.parseInt(datosObtenidos[2]);
+          long numT= Long.parseLong(datosObtenidos[2]);
           String asiento= datosObtenidos[3];
           Reservacion Rev;
           try{
@@ -362,6 +358,7 @@ public class SubidaDeArchivos extends Thread {
                    
       }
      }
+     
     
         
        
