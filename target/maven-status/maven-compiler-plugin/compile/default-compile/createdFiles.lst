@@ -46,6 +46,7 @@ com/mycompany/Interfaz/CrearAvion$1.class
 com/mycompany/Interfaz/MenuAdmin$6.class
 com/mycompany/Manejador/ManejadorNuevoCliente.class
 com/mycompany/Interfaz/CrearAvion.class
+com/mycompany/Interfaz/MenuPrincipal$5.class
 com/mycompany/Interfaz/IngresarNuevaAerolinea$1.class
 com/mycompany/Interfaz/IngresoNuevaTarjeta$2.class
 com/mycompany/Interfaz/MenuOperador.class
@@ -62,9 +63,11 @@ com/mycompany/Enum/EstadoUsuario.class
 com/mycompany/Interfaz/InterfazSubidaDeDatos.class
 com/mycompany/Interfaz/MenuAdmin$7.class
 com/mycompany/Enum/GENERO.class
+com/mycompany/Interfaz/MenuGerente$1.class
 com/mycompany/Clases/Usuario.class
 com/mycompany/Interfaz/MenuPrincipal$1.class
 com/mycompany/Interfaz/IngresarReservacion.class
+com/mycompany/Interfaz/MenuAdmin$11.class
 com/mycompany/Interfaz/IngresarNuevoCliente.class
 com/mycompany/Interfaz/RenovacionPasaporte.class
 com/mycompany/Interfaz/CrearUsuario$3.class

@@ -1,6 +1,17 @@
 package com.mycompany.Interfaz;
 
+import com.mycompany.Clases.Avion;
+import com.mycompany.Clases.Vuelo;
+import static com.mycompany.GestorArchivos.GuardarArchivoBinario.FILE_AVIONES;
+import static com.mycompany.GestorArchivos.GuardarArchivoBinario.FILE_VUELO;
 import static com.mycompany.Interfaz.MenuPrincipal.pantalla;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 public class MenuAdmin extends javax.swing.JInternalFrame {
     private String nomAdmi;
@@ -31,6 +42,8 @@ public class MenuAdmin extends javax.swing.JInternalFrame {
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem6 = new javax.swing.JMenuItem();
+        jMenuItem17 = new javax.swing.JMenuItem();
+        jMenuItem18 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenuItem8 = new javax.swing.JMenuItem();
@@ -151,7 +164,7 @@ public class MenuAdmin extends javax.swing.JInternalFrame {
         jMenuBar1.add(jMenu2);
 
         jMenu3.setIcon(new javax.swing.ImageIcon("/home/daniel/NetBeansProjects/Proyecto2IPC/actu.png")); // NOI18N
-        jMenu3.setText("ACTUALIZAR DATOS");
+        jMenu3.setText("MAS OPCIONES");
         jMenu3.setFont(new java.awt.Font("aakar", 3, 14)); // NOI18N
 
         jMenuItem6.setFont(new java.awt.Font("aakar", 3, 10)); // NOI18N
@@ -163,6 +176,21 @@ public class MenuAdmin extends javax.swing.JInternalFrame {
             }
         });
         jMenu3.add(jMenuItem6);
+
+        jMenuItem17.setFont(new java.awt.Font("aakar", 3, 12)); // NOI18N
+        jMenuItem17.setIcon(new javax.swing.ImageIcon("/home/daniel/NetBeansProjects/Proyecto2IPC/avion.png")); // NOI18N
+        jMenuItem17.setText("VER DISTRIBUCION DE LOS AVIONES");
+        jMenuItem17.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem17ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem17);
+
+        jMenuItem18.setFont(new java.awt.Font("aakar", 3, 12)); // NOI18N
+        jMenuItem18.setIcon(new javax.swing.ImageIcon("/home/daniel/NetBeansProjects/Proyecto2IPC/vuelosS.png")); // NOI18N
+        jMenuItem18.setText("OPERAR VUELO");
+        jMenu3.add(jMenuItem18);
 
         jMenuBar1.add(jMenu3);
 
@@ -296,6 +324,51 @@ public class MenuAdmin extends javax.swing.JInternalFrame {
         NV.show();
     }//GEN-LAST:event_jMenuItem16ActionPerformed
 
+    private void jMenuItem17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem17ActionPerformed
+        String codA=JOptionPane.showInputDialog(null,vuelosVuelos()+"\n INGRESE EL CODIGO DE AVION QUE DESEA VER: ");
+        try{
+            AsientosVuelos VA = new AsientosVuelos(codA);
+            pantalla.add(VA);
+            VA.show();
+            VA.generarLabels();
+        }catch(NumberFormatException exepcionNula){
+                    JOptionPane.showMessageDialog(null, "**CAMPO VACIO** DEBES DIGITAR UNA OPCION PARA CONTINUAR");
+        }catch(java.lang.NullPointerException ex){
+            JOptionPane.showMessageDialog(null,"*** CAMPO VACIO ***");
+        }
+        
+    }//GEN-LAST:event_jMenuItem17ActionPerformed
+
+     public String vuelosVuelos(){
+        String[]posiblesVuelos= FILE_VUELO.list();
+        String presentar="";
+        int contador=0;
+            for(int i=0;i<posiblesVuelos.length;i++){
+                FileInputStream archivoL;
+            try {
+                archivoL = new FileInputStream(FILE_VUELO+"/"+posiblesVuelos[i]);
+                ObjectInputStream lectura = new ObjectInputStream(archivoL);
+                Vuelo vuelo =(Vuelo)lectura.readObject();
+                
+                FileInputStream archivoA = new FileInputStream(FILE_AVIONES+"/"+vuelo.getCodAvion().toUpperCase());
+                ObjectInputStream lecturaA = new ObjectInputStream(archivoA);
+                Avion avion =(Avion)lecturaA.readObject();
+                    contador++;
+                    presentar+= contador+". CODIGO DE VUELO: "+avion.getCodigoAvion().toUpperCase()+" \n";
+                lectura.close();
+                lectura.close();
+            } catch (FileNotFoundException ex) {
+                JOptionPane.showConfirmDialog(null, "NO HAS INGRESADO UNA OPCION VALIDA :(");
+            } catch (IOException ex) {
+                Logger.getLogger(MenuOperador.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(MenuOperador.class.getName()).log(Level.SEVERE, null, ex);
+            }
+                
+             }
+        
+        return presentar;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -312,6 +385,8 @@ public class MenuAdmin extends javax.swing.JInternalFrame {
     private javax.swing.JMenuItem jMenuItem14;
     private javax.swing.JMenuItem jMenuItem15;
     private javax.swing.JMenuItem jMenuItem16;
+    private javax.swing.JMenuItem jMenuItem17;
+    private javax.swing.JMenuItem jMenuItem18;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;

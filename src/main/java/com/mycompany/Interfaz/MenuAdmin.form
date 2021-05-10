@@ -161,7 +161,7 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="2" name="/home/daniel/NetBeansProjects/Proyecto2IPC/actu.png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="ACTUALIZAR DATOS"/>
+            <Property name="text" type="java.lang.String" value="MAS OPCIONES"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="aakar" size="14" style="3"/>
             </Property>
@@ -180,6 +180,31 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem6ActionPerformed"/>
               </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem17">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="aakar" size="12" style="3"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="2" name="/home/daniel/NetBeansProjects/Proyecto2IPC/avion.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="VER DISTRIBUCION DE LOS AVIONES"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem17ActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem18">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="aakar" size="12" style="3"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="2" name="/home/daniel/NetBeansProjects/Proyecto2IPC/vuelosS.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="OPERAR VUELO"/>
+              </Properties>
             </MenuItem>
           </SubComponents>
         </Menu>
