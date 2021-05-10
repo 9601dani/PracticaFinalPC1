@@ -34,10 +34,10 @@
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="origen" max="32767" attributes="0"/>
-                          <Component id="destino" max="32767" attributes="0"/>
+                          <Component id="origenText" max="32767" attributes="0"/>
+                          <Component id="destinoText" max="32767" attributes="0"/>
                           <Component id="aerolineaText" max="32767" attributes="0"/>
-                          <Component id="fechaS" pref="160" max="32767" attributes="0"/>
+                          <Component id="fechaSText" pref="160" max="32767" attributes="0"/>
                       </Group>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
@@ -50,23 +50,16 @@
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="titulo1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="titulo2" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="titulo" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Component id="titulo" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
-                                      <Component id="noPasText" min="-2" pref="169" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="titulo1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="titulo2" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="codVuelo" pref="174" max="32767" attributes="0"/>
-                                          <Component id="noAsiento" max="32767" attributes="0"/>
-                                      </Group>
-                                  </Group>
+                                  <Component id="codVueloText" pref="174" max="32767" attributes="0"/>
+                                  <Component id="noAsientoText" max="32767" attributes="0"/>
+                                  <Component id="noPasText" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
@@ -87,16 +80,16 @@
               <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="origen" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="origenText" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="titulo" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="noPasText" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
+                  <Component id="noPasText" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="destino" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="destinoText" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="titulo1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="codVuelo" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="codVueloText" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
@@ -106,9 +99,9 @@
                   <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="fechaS" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
+                          <Component id="fechaSText" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
                           <Component id="titulo2" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="noAsiento" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="noAsientoText" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -149,11 +142,20 @@
         <Property name="text" type="java.lang.String" value="AEROLINEA"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="origen">
+    <Component class="javax.swing.JTextField" name="origenText">
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+      </AuxValues>
     </Component>
-    <Component class="javax.swing.JTextField" name="destino">
+    <Component class="javax.swing.JTextField" name="destinoText">
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+      </AuxValues>
     </Component>
     <Component class="javax.swing.JTextField" name="aerolineaText">
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+      </AuxValues>
     </Component>
     <Container class="javax.swing.JPanel" name="jPanel1">
 
@@ -205,27 +207,19 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonBuscarActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JFormattedTextField" name="fechaS">
+    <Component class="javax.swing.JFormattedTextField" name="fechaSText">
       <Properties>
         <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
           <Format format="##/##/####" subtype="-1" type="5"/>
         </Property>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="titulo">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="INGRESA NUMERO DE PASAPORTE"/>
-      </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JFormattedTextField" name="noPasText">
+    <Component class="javax.swing.JLabel" name="titulo">
       <Properties>
-        <Property name="editable" type="boolean" value="false"/>
-        <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
-          <Format format="########" subtype="-1" type="5"/>
-        </Property>
+        <Property name="text" type="java.lang.String" value="INGRESA NUMERO DE PASAPORTE"/>
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
@@ -239,7 +233,7 @@
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JTextField" name="codVuelo">
+    <Component class="javax.swing.JTextField" name="codVueloText">
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
       </AuxValues>
@@ -252,7 +246,7 @@
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JTextField" name="noAsiento">
+    <Component class="javax.swing.JTextField" name="noAsientoText">
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
       </AuxValues>
@@ -261,6 +255,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="HACER RESERVACION"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonReservacionActionPerformed"/>
+      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
       </AuxValues>
@@ -272,6 +269,14 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonVerAsientosActionPerformed"/>
       </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JTextField" name="noPasText">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
       </AuxValues>

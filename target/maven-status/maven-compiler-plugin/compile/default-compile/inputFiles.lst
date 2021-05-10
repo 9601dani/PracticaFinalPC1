@@ -29,9 +29,12 @@
 /home/daniel/NetBeansProjects/Proyecto2IPC/src/main/java/com/mycompany/Clases/Operador.java
 /home/daniel/NetBeansProjects/Proyecto2IPC/src/main/java/com/mycompany/Interfaz/IngresarNuevoCliente.java
 /home/daniel/NetBeansProjects/Proyecto2IPC/src/main/java/com/mycompany/Interfaz/IngresarReservacion.java
+/home/daniel/NetBeansProjects/Proyecto2IPC/src/main/java/com/mycompany/Interfaz/CrearAvion.java
 /home/daniel/NetBeansProjects/Proyecto2IPC/src/main/java/com/mycompany/Enum/ESTADO_CIVIL.java
 /home/daniel/NetBeansProjects/Proyecto2IPC/src/main/java/com/mycompany/Interfaz/MenuGerente.java
 /home/daniel/NetBeansProjects/Proyecto2IPC/src/main/java/com/mycompany/Interfaz/InterfazMenuUsuario.java
+/home/daniel/NetBeansProjects/Proyecto2IPC/src/main/java/com/mycompany/Enum/ESTADO_AVION.java
 /home/daniel/NetBeansProjects/Proyecto2IPC/src/main/java/com/mycompany/Clases/Vuelo.java
 /home/daniel/NetBeansProjects/Proyecto2IPC/src/main/java/com/mycompany/Interfaz/IngresarNuevaAerolinea.java
+/home/daniel/NetBeansProjects/Proyecto2IPC/src/main/java/com/mycompany/Interfaz/NuevoVuelo.java
 /home/daniel/NetBeansProjects/Proyecto2IPC/src/main/java/com/mycompany/Manejador/ManejadorNuevoCliente.java

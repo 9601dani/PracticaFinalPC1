@@ -1,18 +1,24 @@
 package com.mycompany.GestorArchivos;
 
+import com.mycompany.Clases.Aeropuerto;
 import com.mycompany.Clases.Avion;
+import com.mycompany.Clases.Cliente;
+import com.mycompany.Clases.Reservacion;
+import com.mycompany.Clases.Tarjeta;
 import com.mycompany.Clases.Vuelo;
 import com.mycompany.Enum.ESTADO_VUELO;
+import static com.mycompany.GestorArchivos.GuardarArchivoBinario.FILE_AEROPUERTO;
 import static com.mycompany.GestorArchivos.GuardarArchivoBinario.FILE_AVIONES;
+import static com.mycompany.GestorArchivos.GuardarArchivoBinario.FILE_CLIENTES;
 import static com.mycompany.GestorArchivos.GuardarArchivoBinario.FILE_RESERVACIONES;
+import static com.mycompany.GestorArchivos.GuardarArchivoBinario.FILE_TARJETAS;
 import static com.mycompany.GestorArchivos.GuardarArchivoBinario.FILE_VUELO;
 import com.mycompany.Interfaz.AsientosVuelos;
 import com.mycompany.Interfaz.IngresarReservacion;
+import static com.mycompany.Interfaz.IngresarReservacion.aerolineaText;
 import static com.mycompany.Interfaz.IngresarReservacion.botonReservacion;
 import static com.mycompany.Interfaz.IngresarReservacion.botonVerAsientos;
-import static com.mycompany.Interfaz.IngresarReservacion.codVuelo;
 import static com.mycompany.Interfaz.IngresarReservacion.limpiarLista;
-import static com.mycompany.Interfaz.IngresarReservacion.noAsiento;
 import static com.mycompany.Interfaz.IngresarReservacion.titulo;
 import static com.mycompany.Interfaz.IngresarReservacion.titulo1;
 import static com.mycompany.Interfaz.IngresarReservacion.titulo2;
@@ -27,6 +33,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import static com.mycompany.Interfaz.IngresarReservacion.noPasText;
+import static com.mycompany.Interfaz.IngresarReservacion.codVueloText;
+import static com.mycompany.Interfaz.IngresarReservacion.destinoText;
+import static com.mycompany.Interfaz.IngresarReservacion.fechaSText;
+import static com.mycompany.Interfaz.IngresarReservacion.noAsientoText;
+import static com.mycompany.Interfaz.IngresarReservacion.origenText;
 
 public class NuevaReservacion {
     IngresarReservacion datos;
@@ -93,9 +104,9 @@ public class NuevaReservacion {
         titulo.setVisible(false);
         titulo1.setVisible(false);
         titulo2.setVisible(false);
-        codVuelo.setVisible(false);
+        codVueloText.setVisible(false);
         noPasText.setVisible(false);
-        noAsiento.setVisible(false);
+        noAsientoText.setVisible(false);
         botonReservacion.setVisible(false);
         botonVerAsientos.setVisible(false);
     }
@@ -103,9 +114,9 @@ public class NuevaReservacion {
         titulo.setVisible(true);
         titulo1.setVisible(true);
         titulo2.setVisible(true);
-        codVuelo.setVisible(true);
+        codVueloText.setVisible(true);
         noPasText.setVisible(true);
-        noAsiento.setVisible(true);
+        noAsientoText.setVisible(true);
         botonReservacion.setVisible(true); 
         botonVerAsientos.setVisible(true);
     }
@@ -136,41 +147,75 @@ public class NuevaReservacion {
                 System.err.println("CLASE NO SE PUEDE LEER");
             }
     }
-    public static void realizarReservacion(int noPas,String codVuelo,int noTarj,int noAsiento){
-         try {
-                    FileInputStream archivoRe = new FileInputStream(FILE_RESERVACIONES + "/" + noPas+"_"+codVuelo.toUpperCase());
-                    JOptionPane.showMessageDialog(null, "YA HAS REALIZADO UNA RESERVACION");
-                    try{
-                        FileInputStream archivoVuelo = new FileInputStream(FILE_VUELO + "/" + codVuelo.toUpperCase());
-                        ObjectInputStream lecturaA = new ObjectInputStream(archivoVuelo);
-                        Avion avion = (Avion) lecturaA.readObject(); 
-                        for (int i = 0; i < avion.getAsientos().length; i++) {
-                            System.out.println(avion.getAsientos()[i]);
-                        }
-                        lecturaA.close();
-                    }catch (FileNotFoundException ex) {
-                        JOptionPane.showMessageDialog(null, "NO EXISTE EL CODIGO DE VUELO");
-                      
-                    } catch (ClassNotFoundException ex) {
-                         Logger.getLogger(NuevaReservacion.class.getName()).log(Level.SEVERE, null, ex);
+    public static void realizarReservacion(int noPas,String codVuelo,String noTarj,String noAsiento){
+        try {
+            FileInputStream archivoRe = new FileInputStream(FILE_RESERVACIONES + "/" + noPas + "_" + codVuelo.toUpperCase());
+            JOptionPane.showMessageDialog(null, "YA HAS REALIZADO UNA RESERVACION");
+            codVueloText.setText("");
+            noAsientoText.setText("");
+        } catch (FileNotFoundException ex) {
+            try {
+                FileInputStream archivoVuelo = new FileInputStream(FILE_VUELO + "/" + codVuelo.toUpperCase());
+                ObjectInputStream lecturaVuelo = new ObjectInputStream(archivoVuelo);
+                Vuelo vuelo = (Vuelo) lecturaVuelo.readObject();
+                
+                FileInputStream archivoAvion = new FileInputStream(FILE_AEROPUERTO + "/" +vuelo.getAeroOrigen().toUpperCase());
+                ObjectInputStream lecturaAvion = new ObjectInputStream(archivoAvion);
+                Aeropuerto aeropuerto = (Aeropuerto) lecturaAvion.readObject();
+                
+                FileInputStream archivoCliente = new FileInputStream(FILE_CLIENTES + "/" + noPas);
+                ObjectInputStream lecturaA = new ObjectInputStream(archivoCliente);
+                Cliente cliente = (Cliente) lecturaA.readObject();
+                
+                FileInputStream archivoTarjeta = new FileInputStream(FILE_TARJETAS + "/" + noTarj);
+                ObjectInputStream lecturaTarjeta = new ObjectInputStream(archivoTarjeta);
+                Tarjeta tarjeta = (Tarjeta) lecturaTarjeta.readObject();
+                //METODO PARA VER QUE NO TENGA OTRO VUELO EN LA FECHA DE UNA NUEVA RESERVACION
+                
+               /* String[]vuelos= FILE_RESERVACIONES.list();
+                for(int i=0;i<vuelos.length;i++){
+                    FileInputStream archivoReservacion = new FileInputStream(FILE_RESERVACIONES + "/" + noPas + "_" + codVuelo.toUpperCase());
+                    ObjectInputStream lecturaReservacion = new ObjectInputStream(archivoReservacion);
+                    Reservacion reservacion = (Reservacion) lecturaReservacion.readObject();
+                    
+                    lecturaReservacion.close();
+                }*/
+                ////// TERMINA METODO
+                System.out.println(tarjeta.getDineroActual());
+                if(cliente.getPaisActual().equalsIgnoreCase(aeropuerto.getPais())){
+                    if(tarjeta.getDineroActual()>= vuelo.getPrecioBoleto()){
+                        Reservacion NR= new Reservacion(noPas,codVuelo, Long.parseLong(noTarj),noAsiento);
+                        double dineroA= tarjeta.getDineroActual()-vuelo.getPrecioBoleto();
+                        System.out.println(dineroA);
+                        Tarjeta NT = new Tarjeta(tarjeta.getNumeroTarjeta(),tarjeta.getNoPasaporte(),dineroA,tarjeta.getCodigo_CVC());
+                        GuardarArchivoBinario.guardarResevacion(NR);
+                        GuardarArchivoBinario.guardarTarjeta(NT);
+                        JOptionPane.showMessageDialog(null, "SE A REALIZADO LA RESERVACION");
+                        limpiarLista();
+                        inicio();
+                        origenText.setText("");
+                        destinoText.setText("");
+                        fechaSText.setText("");
+                        aerolineaText.setText("");
+                        codVueloText.setText("");
+                        noAsientoText.setText("");
+                    }else{
+                        JOptionPane.showMessageDialog(null, "NO POSEES DINERO PARA REALIZAR LA COMPRA Q."+vuelo.getPrecioBoleto());
                     }
-          } /*catch (FileNotFoundException ex) {
-                    FileInputStream archivoA = new FileInputStream(FILE_AVIONES + "/" + vuel.getCodAvion().toUpperCase());
-                    ObjectInputStream lecturaA = new ObjectInputStream(archivoA);
-                    Avion avion = (Avion)lecturaA.readObject();
-                    if(ciudad_origen.equalsIgnoreCase(vuel.getAeroOrigen())){
-                        if(ciudad_destino.equalsIgnoreCase(vuel.getAeroDestino())){
-                            if(fecha_vuelo.equals(vuel.getFechaSalida()) || vuel.getFechaSalida().after(fecha_vuelo) && vuel.getEstado()==ESTADO_VUELO.EN_ESPERA){
-                                if(aerolinea.equalsIgnoreCase(avion.getNomAerolinea())){
-                                     contador++;
-                                   datos.verVuelosLista(contador+". "+"CODIGO VUELO: "+vuel.getCodigoVuelo().toUpperCase()+ " ORIGEN: "+vuel.getAeroOrigen().toUpperCase()+" DESTINO: "+vuel.getAeroDestino().toUpperCase()+" FECHA SALIDA: "+sdf.format(vuel.getFechaSalida())+" PRECIO DEL BOLETO: "+vuel.getPrecioBoleto());
-                                }
-                            }
-                        }
-                    }
-                }*/ catch (IOException ex) {
-                    Logger.getLogger(NuevaReservacion.class.getName()).log(Level.SEVERE, null, ex);
+                }else{
+                    JOptionPane.showMessageDialog(null, "NO TE ENCUENTRAS EN EL PAIS PARA REALIZAR LA RESERVACION");
                 }
+                lecturaAvion.close();
+                lecturaVuelo.close();        
+                lecturaA.close();
+            }catch (IOException ex1) {
+                Logger.getLogger(NuevaReservacion.class.getName()).log(Level.SEVERE, null, ex1);
+            } catch (ClassNotFoundException ex1) {
+                Logger.getLogger(NuevaReservacion.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(NuevaReservacion.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
      
     

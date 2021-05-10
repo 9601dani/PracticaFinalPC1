@@ -163,16 +163,13 @@ public class InterfazSubidaDeDatos extends javax.swing.JInternalFrame {
           if(opcion == JFileChooser.APPROVE_OPTION){
             String archivo = buscadorArchivos.getSelectedFile().getAbsolutePath();
             String archivo1 = buscadorArchivos.getSelectedFile().toString();
-            // si se encuentra el archivo pide el tiempo en milisegundos
             System.out.println("Se ha encontrado el archivo: "+archivo1);
             try {
                 this.archivoALeer = archivo;
                 this.nombreArchivoALeer = archivo1;
             } catch (Exception e) {
-                // si no se introdujo un dato entero muestra error y no hace nada mas
                 JOptionPane.showMessageDialog(null, "No metiste un dato entero");
                 System.out.println("No se introdujo un dato entero");
-                
             }      
         }
         
@@ -181,16 +178,12 @@ public class InterfazSubidaDeDatos extends javax.swing.JInternalFrame {
             System.out.println("No se ha cargado ningun archivo");
         }
         try{
-            // crea el archivo que se selecciono
         File archivoAProcesar = new File(archivoALeer);
         
-        // solo es prueba para ver si se crea exitosamente el archivo
         if(archivoAProcesar.exists()){
-           // llama al metodo cargar datos de la clase thread
             System.out.println("Se ha almacenado con exito");
             sub = new SubidaDeArchivos(archivoAProcesar, nombreArchivoALeer,this);
             limpiarSubida();
-            //inicia el hilo de los archivos
             sub.start();
         }
         }catch(Exception e){

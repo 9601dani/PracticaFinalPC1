@@ -1,9 +1,18 @@
 package com.mycompany.Interfaz;
 
+
+import com.mycompany.Clases.Tarjeta;
+import static com.mycompany.GestorArchivos.GuardarArchivoBinario.FILE_TARJETAS;
 import com.mycompany.GestorArchivos.NuevaReservacion;
+import static com.mycompany.GestorArchivos.NuevaReservacion.realizarReservacion;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
@@ -16,7 +25,8 @@ public class IngresarReservacion extends javax.swing.JInternalFrame {
         NuevaReservacion.inicio();
         modeloLista = new DefaultListModel();
         jList1.setModel(modeloLista);
-        noPasText.setText(Integer.toString(this.pasaporteCliente));
+        String nom= Integer.toString(noPas);
+        noPasText.setText(nom);
     }
     
     @SuppressWarnings("unchecked")
@@ -27,22 +37,22 @@ public class IngresarReservacion extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        origen = new javax.swing.JTextField();
-        destino = new javax.swing.JTextField();
+        origenText = new javax.swing.JTextField();
+        destinoText = new javax.swing.JTextField();
         aerolineaText = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
         botonBuscar = new javax.swing.JButton();
-        fechaS = new javax.swing.JFormattedTextField();
+        fechaSText = new javax.swing.JFormattedTextField();
         titulo = new javax.swing.JLabel();
-        noPasText = new javax.swing.JFormattedTextField();
         titulo1 = new javax.swing.JLabel();
-        codVuelo = new javax.swing.JTextField();
+        codVueloText = new javax.swing.JTextField();
         titulo2 = new javax.swing.JLabel();
-        noAsiento = new javax.swing.JTextField();
+        noAsientoText = new javax.swing.JTextField();
         botonReservacion = new javax.swing.JButton();
         botonVerAsientos = new javax.swing.JButton();
+        noPasText = new javax.swing.JTextField();
 
         setClosable(true);
 
@@ -79,25 +89,23 @@ public class IngresarReservacion extends javax.swing.JInternalFrame {
         });
 
         try {
-            fechaS.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+            fechaSText.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
 
         titulo.setText("INGRESA NUMERO DE PASAPORTE");
 
-        noPasText.setEditable(false);
-        try {
-            noPasText.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("########")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-
         titulo1.setText("INGRESA CODIGO DE VUELO QUE DESEA");
 
         titulo2.setText("INGRESAR ASIENTO QUE DESEA");
 
         botonReservacion.setText("HACER RESERVACION");
+        botonReservacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonReservacionActionPerformed(evt);
+            }
+        });
 
         botonVerAsientos.setText("VER ASIENTOS");
         botonVerAsientos.addActionListener(new java.awt.event.ActionListener() {
@@ -105,6 +113,8 @@ public class IngresarReservacion extends javax.swing.JInternalFrame {
                 botonVerAsientosActionPerformed(evt);
             }
         });
+
+        noPasText.setEditable(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -121,10 +131,10 @@ public class IngresarReservacion extends javax.swing.JInternalFrame {
                             .addComponent(jLabel4))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(origen)
-                            .addComponent(destino)
+                            .addComponent(origenText)
+                            .addComponent(destinoText)
                             .addComponent(aerolineaText)
-                            .addComponent(fechaS, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE))
+                            .addComponent(fechaSText, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
@@ -135,19 +145,15 @@ public class IngresarReservacion extends javax.swing.JInternalFrame {
                                 .addComponent(botonReservacion))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(26, 26, 26)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(titulo1)
+                                    .addComponent(titulo2)
+                                    .addComponent(titulo))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(titulo)
-                                        .addGap(41, 41, 41)
-                                        .addComponent(noPasText, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(titulo1)
-                                            .addComponent(titulo2))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(codVuelo, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
-                                            .addComponent(noAsiento))))
+                                    .addComponent(codVueloText, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
+                                    .addComponent(noAsientoText)
+                                    .addComponent(noPasText))
                                 .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
@@ -160,15 +166,15 @@ public class IngresarReservacion extends javax.swing.JInternalFrame {
                 .addGap(13, 13, 13)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(origen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(origenText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(titulo)
-                    .addComponent(noPasText, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(noPasText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(destino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(destinoText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(titulo1)
-                    .addComponent(codVuelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(codVueloText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(25, 25, 25)
@@ -176,9 +182,9 @@ public class IngresarReservacion extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(23, 23, 23)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(fechaS, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(fechaSText, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(titulo2)
-                            .addComponent(noAsiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(noAsientoText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
@@ -197,9 +203,9 @@ public class IngresarReservacion extends javax.swing.JInternalFrame {
     private void botonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBuscarActionPerformed
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-            String ciudad_origen= origen.getText();
-            String ciudad_destino= destino.getText();
-            Date fecha_vuelo=sdf.parse(fechaS.getText());
+            String ciudad_origen= origenText.getText();
+            String ciudad_destino= destinoText.getText();
+            Date fecha_vuelo=sdf.parse(fechaSText.getText());
             String aerolinea= aerolineaText.getText();
             if(ciudad_origen!="" && ciudad_destino!="" && aerolinea!=""){
                 NuevaReservacion NR= new NuevaReservacion(this,ciudad_origen.toUpperCase(),ciudad_destino.toUpperCase(),fecha_vuelo,aerolinea.toUpperCase());
@@ -227,15 +233,47 @@ public class IngresarReservacion extends javax.swing.JInternalFrame {
         NuevaReservacion.verAsientosAvion(codV);
     }//GEN-LAST:event_botonVerAsientosActionPerformed
 
+    private void botonReservacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonReservacionActionPerformed
+        int noPas= Integer.parseInt(noPasText.getText());
+        String codV= codVueloText.getText();
+        String noAsien= noAsientoText.getText();
+        try {
+            String[] archivoT= FILE_TARJETAS.list();
+            int contador=0;
+            for(int i=0;i<archivoT.length;i++){
+                FileInputStream archivoPersona = new FileInputStream(FILE_TARJETAS + "/" + archivoT[i]);
+            ObjectInputStream lecturaA = new ObjectInputStream(archivoPersona);
+            Tarjeta tarjeta = (Tarjeta) lecturaA.readObject();
+            System.out.println(tarjeta.getDineroActual());
+                if(noPas== tarjeta.getNoPasaporte()){
+                    contador++;
+                    realizarReservacion(noPas,codV,tarjeta.getNumeroTarjeta(),noAsien);
+                    break;
+                }
+            lecturaA.close();
+            }
+            if (contador==0){
+                JOptionPane.showMessageDialog(null, "NO HEMOS ENCONTRADO TARJETA A TU NOMBRE");
+            }
+
+        }catch (ClassNotFoundException ex) {
+            Logger.getLogger(NuevaReservacion.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(IngresarReservacion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+      
+    }//GEN-LAST:event_botonReservacionActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField aerolineaText;
+    public static javax.swing.JTextField aerolineaText;
     private javax.swing.JButton botonBuscar;
     public static javax.swing.JButton botonReservacion;
     public static javax.swing.JButton botonVerAsientos;
-    public static javax.swing.JTextField codVuelo;
-    private javax.swing.JTextField destino;
-    private javax.swing.JFormattedTextField fechaS;
+    public static javax.swing.JTextField codVueloText;
+    public static javax.swing.JTextField destinoText;
+    public static javax.swing.JFormattedTextField fechaSText;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -243,9 +281,9 @@ public class IngresarReservacion extends javax.swing.JInternalFrame {
     private javax.swing.JList<String> jList1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    public static javax.swing.JTextField noAsiento;
-    public static javax.swing.JFormattedTextField noPasText;
-    private javax.swing.JTextField origen;
+    public static javax.swing.JTextField noAsientoText;
+    public static javax.swing.JTextField noPasText;
+    public static javax.swing.JTextField origenText;
     public static javax.swing.JLabel titulo;
     public static javax.swing.JLabel titulo1;
     public static javax.swing.JLabel titulo2;

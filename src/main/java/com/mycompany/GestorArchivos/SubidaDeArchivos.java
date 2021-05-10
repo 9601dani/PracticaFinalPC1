@@ -10,6 +10,7 @@ import com.mycompany.Clases.Reservacion;
 import com.mycompany.Clases.Tarjeta;
 import com.mycompany.Clases.Usuario;
 import com.mycompany.Clases.Vuelo;
+import com.mycompany.Enum.ESTADO_AVION;
 import static com.mycompany.GestorArchivos.GuardarArchivoBinario.FILE_AEROLINEA;
 import static com.mycompany.GestorArchivos.GuardarArchivoBinario.FILE_AEROPUERTO;
 import static com.mycompany.GestorArchivos.GuardarArchivoBinario.FILE_AVIONES;
@@ -217,8 +218,8 @@ public class SubidaDeArchivos extends Thread {
                 ObjectInputStream lectura = new ObjectInputStream(archivoL);
                 Cliente cliente;
                 cliente = (Cliente)lectura.readObject(); 
-                if(datosObtenidos[1].equals(sdf.format(cliente.getFecha_vencimiento()))){
-                  datos.introducirDatosALaLista(lineaPrincipal + "NO SE PUDO GUARDAR LA NUEVA FECHA PORQUE ES IGUAL A LA ACTUAL");  
+                if(datosObtenidos[1].equals(sdf.format(cliente.getFecha_vencimiento())) || sdf.parse(datosObtenidos[1]).before(cliente.getFecha_vencimiento())){
+                  datos.introducirDatosALaLista(lineaPrincipal + "NO SE PUDO GUARDAR LA NUEVA FECHA ES IGUAL O MENOR A LA ACTUAL");  
                 }else{
                 int noPasNew=cliente.getNoPasaporte();
                 String contraseñaNew= cliente.getContraseña();
@@ -295,9 +296,16 @@ public class SubidaDeArchivos extends Thread {
                              double gasMini = avion.getConsumoMilla() * distancia.getCantMillas();
                                  if (gasMini <= avion.getCantGasolina()) {
                                      if (avion.getAeropuertoActual().equalsIgnoreCase(origen)) {
-                                         Vuelo NV = new Vuelo(codVuelo, codAvion, origen, destino, precioB, fSalida);
-                                         GuardarArchivoBinario.guardarVuelo(NV);
-                                         datos.introducirDatosALaLista(lineaPrincipal + " ***GUARDADA CON EXITO***");
+                                         if(avion.getEstado().equals(ESTADO_AVION.DISPONIBLE)){
+                                             Vuelo NV = new Vuelo(codVuelo, codAvion, origen, destino, precioB, fSalida);
+                                            GuardarArchivoBinario.guardarVuelo(NV);
+                                             Avion av = new Avion(avion.getNomAerolinea(), avion.getAeropuertoActual(), avion.getCodigoAvion(), avion.getCapacidadP(), avion.getCantGasolina(), avion.getConsumoMilla(), avion.getAsientos(), ESTADO_AVION.OCUPADO);
+                                             GuardarArchivoBinario.guardarAvion(av);
+                                            datos.introducirDatosALaLista(lineaPrincipal + " ***GUARDADA CON EXITO***");
+                                         }else if(avion.getEstado().equals(ESTADO_AVION.OCUPADO)){
+                                            datos.introducirDatosALaLista(lineaPrincipal + " EL AVION " + avion.getCodigoAvion().toUpperCase()+"ACUTALMENTE NO ESTA DISPONIBLE"); 
+                                         }
+                                         
                                      } else {
                                          datos.introducirDatosALaLista(lineaPrincipal + " EL AVION " + avion.getCodigoAvion().toUpperCase() + " NO SE ENCUENTRA EN " + origen.toUpperCase());
                                      }
@@ -344,7 +352,7 @@ public class SubidaDeArchivos extends Thread {
                     FileInputStream archivoA = new FileInputStream(FILE_AEROPUERTO + "/" +aeroActual.toUpperCase());
                      try {
                         FileInputStream archivoAerolinea = new FileInputStream(FILE_AEROLINEA + "/" +aeroActual.toUpperCase()+"_"+ nomA.toUpperCase());
-                         Avion NA= new Avion(nomA,aeroActual,codAvion,cap,cantGas,cantPorMilla);
+                         Avion NA= new Avion(nomA,aeroActual,codAvion,cap,cantGas,cantPorMilla,ESTADO_AVION.DISPONIBLE);
                          GuardarArchivoBinario.guardarAvion(NA);
                          datos.introducirDatosALaLista(lineaPrincipal + " ***GUARDADA CON EXITO***");
                      } catch (FileNotFoundException e) {

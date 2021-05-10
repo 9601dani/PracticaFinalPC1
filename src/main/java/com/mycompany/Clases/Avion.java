@@ -1,6 +1,7 @@
 
 package com.mycompany.Clases;
 
+import com.mycompany.Enum.ESTADO_AVION;
 import java.io.Serializable;
 
 public class Avion implements Serializable{
@@ -10,17 +11,19 @@ public class Avion implements Serializable{
     private int capacidadP;
     private double cantGasolina;
     private double consumoMilla;
+    private ESTADO_AVION estado;
     private int[]asientos;
     private int[]pasillos;
     private int residuo=0;
 
-    public Avion(String nomAerolinea, String aeropuertoActual, String codigoAvion, int capacidadP, double cantGasolina, double consumoMilla) {
+    public Avion(String nomAerolinea, String aeropuertoActual, String codigoAvion, int capacidadP, double cantGasolina, double consumoMilla, ESTADO_AVION estado) {
         this.nomAerolinea = nomAerolinea;
         this.aeropuertoActual = aeropuertoActual;
         this.codigoAvion = codigoAvion;
         this.capacidadP = capacidadP;
         this.cantGasolina = cantGasolina;
         this.consumoMilla = consumoMilla;
+        this.estado= estado;
         
         //DEFINIR COLUMNAS Y PASILLOS
         int num1= capacidadP/4;
@@ -41,6 +44,16 @@ public class Avion implements Serializable{
         
     }
 
+    public Avion(String nomAerolinea, String aeropuertoActual, String codigoAvion, int capacidadP, double cantGasolina, double consumoMilla, int[] asientos,ESTADO_AVION estado) {
+        this.nomAerolinea = nomAerolinea;
+        this.aeropuertoActual = aeropuertoActual;
+        this.codigoAvion = codigoAvion;
+        this.capacidadP = capacidadP;
+        this.cantGasolina = cantGasolina;
+        this.consumoMilla = consumoMilla;
+        this.asientos = asientos;
+        this.estado= estado;
+    }
     public Avion(String nomAerolinea, String aeropuertoActual, String codigoAvion, int capacidadP, double cantGasolina, double consumoMilla, int[] asientos) {
         this.nomAerolinea = nomAerolinea;
         this.aeropuertoActual = aeropuertoActual;
@@ -49,9 +62,14 @@ public class Avion implements Serializable{
         this.cantGasolina = cantGasolina;
         this.consumoMilla = consumoMilla;
         this.asientos = asientos;
+        this.estado=ESTADO_AVION.OCUPADO;
+    }
+
+    public ESTADO_AVION getEstado() {
+        return estado;
     }
     
-
+    
     public int[] getAsientos() {
         return asientos;
     }
@@ -114,6 +132,10 @@ public class Avion implements Serializable{
 
     public void setPasillos(int[] pasillos) {
         this.pasillos = pasillos;
+    }
+
+    public void setEstado(ESTADO_AVION estado) {
+        this.estado = estado;
     }
     
     

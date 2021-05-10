@@ -1,13 +1,27 @@
 package com.mycompany.Interfaz;
 
+import com.mycompany.Clases.Avion;
 import com.mycompany.Clases.Operador;
+import com.mycompany.Clases.Vuelo;
+import static com.mycompany.GestorArchivos.GuardarArchivoBinario.FILE_AVIONES;
+import static com.mycompany.GestorArchivos.GuardarArchivoBinario.FILE_VUELO;
+import static com.mycompany.Interfaz.MenuPrincipal.pantalla;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 public class MenuOperador extends javax.swing.JInternalFrame {
     private String nombreOperador;
+    private String aerolinea;
     public MenuOperador(Operador operador) {
         initComponents();
         nomAerolinea.setText("*** "+operador.getAerolinea().toUpperCase()+" ***");
         nomTitulo.setText("*** "+operador.getNombreG().toUpperCase()+" ***");
+        this.aerolinea= operador.getAerolinea();
         
     }
 
@@ -54,6 +68,11 @@ public class MenuOperador extends javax.swing.JInternalFrame {
         jMenuItem2.setFont(new java.awt.Font("aakar", 3, 14)); // NOI18N
         jMenuItem2.setIcon(new javax.swing.ImageIcon("/home/daniel/NetBeansProjects/Proyecto2IPC/ruta.png")); // NOI18N
         jMenuItem2.setText("VER DISTRIBUCION DE AVION");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem2);
 
         jMenuBar1.add(jMenu2);
@@ -100,6 +119,53 @@ public class MenuOperador extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        String codA=JOptionPane.showInputDialog(null,vuelosVuelos()+"\n INGRESE EL CODIGO DE AVION QUE DESEA VER: ");
+        try{
+            AsientosVuelos VA = new AsientosVuelos(codA);
+            pantalla.add(VA);
+            VA.show();
+            VA.generarLabels();
+        }catch(NumberFormatException exepcionNula){
+                    JOptionPane.showMessageDialog(null, "**CAMPO VACIO** DEBES DIGITAR UNA OPCION PARA CONTINUAR");
+        }catch(java.lang.NullPointerException ex){
+            JOptionPane.showMessageDialog(null,"*** CAMPO VACIO ***");
+        }
+        
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    public String vuelosVuelos(){
+        String[]posiblesVuelos= FILE_VUELO.list();
+        String presentar="";
+        int contador=0;
+            for(int i=0;i<posiblesVuelos.length;i++){
+                FileInputStream archivoL;
+            try {
+                archivoL = new FileInputStream(FILE_VUELO+"/"+posiblesVuelos[i]);
+                ObjectInputStream lectura = new ObjectInputStream(archivoL);
+                Vuelo vuelo =(Vuelo)lectura.readObject();
+                
+                FileInputStream archivoA = new FileInputStream(FILE_AVIONES+"/"+vuelo.getCodAvion().toUpperCase());
+                ObjectInputStream lecturaA = new ObjectInputStream(archivoA);
+                Avion avion =(Avion)lecturaA.readObject();
+                if(avion.getNomAerolinea().equalsIgnoreCase(this.aerolinea)){
+                    contador++;
+                    presentar+= contador+". CODIGO DE VUELO: "+avion.getCodigoAvion().toUpperCase()+" \n";
+                }
+                lectura.close();
+                lectura.close();
+            } catch (FileNotFoundException ex) {
+                JOptionPane.showConfirmDialog(null, "NO HAS INGRESADO UNA OPCION VALIDA :(");
+            } catch (IOException ex) {
+                Logger.getLogger(MenuOperador.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(MenuOperador.class.getName()).log(Level.SEVERE, null, ex);
+            }
+                
+             }
+        
+        return presentar;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;

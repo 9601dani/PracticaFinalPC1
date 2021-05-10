@@ -124,6 +124,7 @@ public class RenovacionPasaporte extends javax.swing.JInternalFrame {
                 FileInputStream archivoL = new FileInputStream(FILE_CLIENTES+"/"+noPasNew);
                 ObjectInputStream lectura = new ObjectInputStream(archivoL);
                 Date fVencimientoNew= sdf.parse(newFecha.getText());
+                
                 Cliente cliente;
                 cliente = (Cliente)lectura.readObject(); 
                 String contraseñaNew= cliente.getContraseña();
@@ -137,10 +138,14 @@ public class RenovacionPasaporte extends javax.swing.JInternalFrame {
                 String paisANew= cliente.getPaisActual();
                 double millasRNew= cliente.getMillas_Recorridas();
                 lectura.close();
-                cliente = new Cliente(noPasNew,contraseñaNew,fNacimientoNew,nacionalidadNew,estadoCNew,nomNew,apellNew,generoNew,fVencimientoNew,fEmisionNew,paisANew,millasRNew);
-                GuardarArchivoBinario.guardarUsuarioCliente(cliente);
-                JOptionPane.showMessageDialog(null, "SE ACTUALIZO LA FECHA DE VENCIMIENTO DEL PASAPORTE "+noPasNew);
-                noPasText.setText("");
+                if(fVencimientoNew.equals(cliente.getFecha_vencimiento()) || fVencimientoNew.before(cliente.getFecha_vencimiento())){
+                    JOptionPane.showMessageDialog(null, "ESTAS INGRESANDO UNA FECHA IGUAL O MENOR A LA ACTUAL");
+                }else{
+                    cliente = new Cliente(noPasNew, contraseñaNew, fNacimientoNew, nacionalidadNew, estadoCNew, nomNew, apellNew, generoNew, fVencimientoNew, fEmisionNew, paisANew, millasRNew);
+                    GuardarArchivoBinario.guardarUsuarioCliente(cliente);
+                    JOptionPane.showMessageDialog(null, "SE ACTUALIZO LA FECHA DE VENCIMIENTO DEL PASAPORTE " + noPasNew);
+                }
+                 noPasText.setText("");
                 newFecha.setText("");
             } catch (ClassNotFoundException ex) {
                 JOptionPane.showMessageDialog(null, "NO SE ENCONTRO EL ARCHIVO");
