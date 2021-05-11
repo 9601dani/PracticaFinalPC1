@@ -190,7 +190,7 @@ public class NuevoVuelo extends javax.swing.JInternalFrame {
                                                     limpiarTodo();
                                                     lecturaA.close();
                                                 } else if (avion.getEstado().equals(ESTADO_AVION.OCUPADO)) {
-                                                     JOptionPane.showMessageDialog(null," EL AVION " + avion.getCodigoAvion().toUpperCase() + "ACUTALMENTE NO ESTA DISPONIBLE");
+                                                     JOptionPane.showMessageDialog(null," EL AVION " + avion.getCodigoAvion().toUpperCase() + " ACTUALMENTE NO ESTA DISPONIBLE");
                                                 }
                                             } else {
                                                 JOptionPane.showMessageDialog(null," EL AVION " + avion.getCodigoAvion().toUpperCase() + " NO SE ENCUENTRA EN " + m3.toUpperCase());

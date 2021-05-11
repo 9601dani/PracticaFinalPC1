@@ -19,6 +19,7 @@ import static com.mycompany.GestorArchivos.GuardarArchivoBinario.FILE_DISTANCIA;
 import static com.mycompany.GestorArchivos.GuardarArchivoBinario.FILE_RESERVACIONES;
 import static com.mycompany.GestorArchivos.GuardarArchivoBinario.FILE_TARJETAS;
 import static com.mycompany.GestorArchivos.GuardarArchivoBinario.FILE_VUELO;
+import static com.mycompany.GestorArchivos.NuevaReservacion.realizarReservacion;
 import com.mycompany.Interfaz.InterfazSubidaDeDatos;
 import java.io.BufferedReader;
 import java.io.File;
@@ -30,6 +31,8 @@ import java.io.ObjectInputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class SubidaDeArchivos extends Thread {
@@ -197,7 +200,7 @@ public class SubidaDeArchivos extends Thread {
         }
         if(nombreAVerificar.equalsIgnoreCase(NOMBRES[4])){
             Tarjeta tarjeta;
-            String noTarj= datosObtenidos[0];
+            long noTarj= Long.parseLong(datosObtenidos[0]);
             int noPas= Integer.parseInt(datosObtenidos[1]);
             double dineroA= Double.parseDouble(datosObtenidos[2]);
             String codigoS= datosObtenidos[3];
@@ -221,7 +224,7 @@ public class SubidaDeArchivos extends Thread {
                 if(datosObtenidos[1].equals(sdf.format(cliente.getFecha_vencimiento())) || sdf.parse(datosObtenidos[1]).before(cliente.getFecha_vencimiento())){
                   datos.introducirDatosALaLista(lineaPrincipal + "NO SE PUDO GUARDAR LA NUEVA FECHA ES IGUAL O MENOR A LA ACTUAL");  
                 }else{
-                int noPasNew=cliente.getNoPasaporte();
+                long noPasNew= cliente.getNoPasaporte();
                 String contraseñaNew= cliente.getContraseña();
                 Date fNacimientoNew = cliente.getFecha_nacimiento();
                 String nacionalidadNew= cliente.getNacionalidad();
@@ -246,27 +249,69 @@ public class SubidaDeArchivos extends Thread {
                 datos.introducirDatosALaLista(lineaPrincipal+" NO SE GUARGO PORQUE NO EXISTE UN CLIENTE CON ESTE PASAPORTE ");
             }
         }
-      if( nombreAVerificar.equals(NOMBRES[6])){
-          int noPasNew= Integer.parseInt(datosObtenidos[0]);
-          String codigoVuelo= datosObtenidos[1];
-          long numT= Long.parseLong(datosObtenidos[2]);
-          String asiento= datosObtenidos[3];
-          Reservacion Rev;
-          try{
-              FileInputStream archivoL = new FileInputStream(FILE_VUELO+"/"+codigoVuelo.toUpperCase());
+         if (nombreAVerificar.equals(NOMBRES[6])) {
+             int noPasNew = Integer.parseInt(datosObtenidos[0]);
+             String codigoVuelo = datosObtenidos[1];
+             long numT = Long.parseLong(datosObtenidos[2]);
+             String asiento = datosObtenidos[3];
+             Reservacion Rev;
+             try {
+                 FileInputStream archivoV = new FileInputStream(FILE_VUELO + "/" + codigoVuelo.toUpperCase());
+                 ObjectInputStream lecturaV = new ObjectInputStream(archivoV);
+                 Vuelo vueloV = (Vuelo) lecturaV.readObject();
+                  lecturaV.close();
                  try {
-                  FileInputStream archivoB = new FileInputStream(FILE_RESERVACIONES + "/" + noPasNew + "_" + codigoVuelo.toUpperCase());
-                  datos.introducirDatosALaLista(lineaPrincipal + "NO SE PUDO CARGAR PORQUE YA ESTA REGISTRADO");
-              } catch (FileNotFoundException e) {
-                  Rev = new Reservacion(noPasNew, codigoVuelo, numT, asiento);
-                  GuardarArchivoBinario.guardarResevacion(Rev);
-                  datos.introducirDatosALaLista(lineaPrincipal + " ***GUARDADA CON EXITO ***");
-              }
-              
-          }catch (FileNotFoundException ex) {
-                  datos.introducirDatosALaLista(lineaPrincipal + "NO SE PUDO CARGAR PORQUE NO EXISTE EL CODIGO DE VUELO");
-          }
-      } 
+                     FileInputStream archivoB = new FileInputStream(FILE_RESERVACIONES + "/" + noPasNew + "_" + codigoVuelo.toUpperCase());
+                     datos.introducirDatosALaLista(lineaPrincipal + "NO SE PUDO CARGAR PORQUE YA ESTA REGISTRADO");
+                 } catch (FileNotFoundException e) {
+                     try {
+                         FileInputStream archivoC = new FileInputStream(FILE_CLIENTES + "/" + noPasNew);
+                         ObjectInputStream lecturaC = new ObjectInputStream(archivoC);
+                         Cliente cliente = (Cliente) lecturaC.readObject();
+
+                         FileInputStream archivoA = new FileInputStream(FILE_AEROPUERTO + "/" + vueloV.getAeroOrigen().toUpperCase());
+                         ObjectInputStream lecturaA = new ObjectInputStream(archivoA);
+                         Aeropuerto aeropuerto = (Aeropuerto) lecturaA.readObject();
+
+                         String[] archivoT = FILE_TARJETAS.list();
+                         int contador = 0;
+                         for (int i = 0; i < archivoT.length; i++) {
+                             FileInputStream archivoTarjeta = new FileInputStream(FILE_TARJETAS + "/" + archivoT[i]);
+                             ObjectInputStream lecturaT = new ObjectInputStream(archivoTarjeta);
+                             Tarjeta tarjeta = (Tarjeta) lecturaT.readObject();
+                             System.out.println(tarjeta.getDineroActual());
+                             if (cliente.getNoPasaporte() == tarjeta.getNoPasaporte()) {
+                                 contador++;
+                                 if (cliente.getPaisActual().equalsIgnoreCase(aeropuerto.getPais())) {
+                                     double dineroA = tarjeta.getDineroActual() - vueloV.getPrecioBoleto();
+                                     System.out.println(dineroA);
+                                     Tarjeta NT = new Tarjeta(tarjeta.getNumeroTarjeta(), tarjeta.getNoPasaporte(), dineroA, tarjeta.getCodigo_CVC());
+                                     Rev = new Reservacion(noPasNew, codigoVuelo, numT, asiento);
+                                     GuardarArchivoBinario.guardarResevacion(Rev);
+                                     GuardarArchivoBinario.guardarTarjeta(NT);
+                                     datos.introducirDatosALaLista(lineaPrincipal + " ***GUARDADA CON EXITO ***");
+                                 } else {
+                                     datos.introducirDatosALaLista(lineaPrincipal + " NO SE PUDO GUARDAR PORQUE CLIENTE NO SE ENCUENTRA EN EL PAIS " + aeropuerto.getPais().toUpperCase());
+                                 }
+                                 break;
+                             }
+                             lecturaT.close();
+                             lecturaA.close();
+                         }
+                         if (contador == 0) {
+                             datos.introducirDatosALaLista(lineaPrincipal+" NO HEMOS ENCONTRADO LA TARJETA A NOMBRE DEL CLIENTE");
+                         }
+                     } catch (ClassNotFoundException ex) {
+                         JOptionPane.showMessageDialog(null, "NO EXISTE EL CLIENTE");
+                     }
+
+                 }
+             } catch (FileNotFoundException ex) {
+                 datos.introducirDatosALaLista(lineaPrincipal + "NO SE PUDO CARGAR PORQUE NO EXISTE EL CODIGO DE VUELO");
+             } catch (ClassNotFoundException ex) {
+                 System.err.println("ERROR CLASNOTFOUND");
+             }
+         }
       if(nombreAVerificar.equals(NOMBRES[7])){
             try {
                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -278,7 +323,7 @@ public class SubidaDeArchivos extends Thread {
                 Date fSalida= sdf.parse(datosObtenidos[5]);
                 try{
                    FileInputStream archivoL = new FileInputStream(FILE_VUELO + "/" + codVuelo.toUpperCase());
-                   datos.introducirDatosALaLista(lineaPrincipal + " NO SE PUDO CARGAR PORQUE YA EXISTE LA RESERVACION"); 
+                   datos.introducirDatosALaLista(lineaPrincipal + " NO SE PUDO CARGAR PORQUE YA EXISTE EL VUELO"); 
                 }catch (FileNotFoundException eo) {
                     try {
                     FileInputStream archivoL = new FileInputStream(FILE_AVIONES + "/" + codAvion.toUpperCase());

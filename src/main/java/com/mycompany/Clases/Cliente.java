@@ -10,7 +10,7 @@ public class Cliente implements Serializable{
    public static final String  MASCULINO="MASCULINO";
    public static final String  FEMENINO="FEMENINO";
    public static final String  SIN_DEFINIR="SIN_DEFINIR";
-    private int noPasaporte;
+    private long noPasaporte;
     private String contraseña;
     private Date fecha_nacimiento;
     private String nacionalidad;
@@ -23,7 +23,7 @@ public class Cliente implements Serializable{
     private String paisActual;
     private double millas_Recorridas;
     // CONTRUCTOR PARA UN NUEVO CLIENTE
-    public Cliente(int noPasaporte, String contraseña, Date fecha_nacimiento, String nacionalidad,int selecC, String nombre, String apellido,int selecG, Date fecha_vencimiento, Date fecha_emision, String paisActual) {
+    public Cliente(long noPasaporte, String contraseña, Date fecha_nacimiento, String nacionalidad,int selecC, String nombre, String apellido,int selecG, Date fecha_vencimiento, Date fecha_emision, String paisActual) {
         this.noPasaporte = noPasaporte;
         this.contraseña = contraseña;
         this.fecha_nacimiento = fecha_nacimiento;
@@ -38,7 +38,7 @@ public class Cliente implements Serializable{
         this.millas_Recorridas = 0;
     }
     //CONTRUCTR PARA LA CARGA DE DATOS
-    public Cliente(int noPasaporte, String contraseña, Date fecha_nacimiento, String nacionalidad,int selecC, String nombre, String apellido,int selecG, Date fecha_vencimiento, Date fecha_emision, String paisActual, double millas_Recorridas) {
+    public Cliente(long noPasaporte, String contraseña, Date fecha_nacimiento, String nacionalidad,int selecC, String nombre, String apellido,int selecG, Date fecha_vencimiento, Date fecha_emision, String paisActual, double millas_Recorridas) {
         this.noPasaporte = noPasaporte;
         this.contraseña = contraseña;
         this.fecha_nacimiento = fecha_nacimiento;
@@ -62,7 +62,7 @@ public class Cliente implements Serializable{
     }
     
 
-    public int getNoPasaporte() {
+    public long getNoPasaporte() {
         return noPasaporte;
     }
 

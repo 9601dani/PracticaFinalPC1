@@ -1,7 +1,7 @@
 
 package com.mycompany.Interfaz;
 
-import com.mycompany.GestorArchivos.ManejadorMenuGerente;
+import com.mycompany.GestorArchivos.ManejadorOperadorVuelo;
 import java.awt.Frame;
 
 public class MenuPrincipal extends javax.swing.JFrame{
@@ -31,7 +31,6 @@ public class MenuPrincipal extends javax.swing.JFrame{
         inicioSesion = new javax.swing.JMenu();
         botonInicioSesion = new javax.swing.JMenuItem();
         salir = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
         cerrarSesion = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -77,12 +76,9 @@ public class MenuPrincipal extends javax.swing.JFrame{
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(origenTextAnimacion)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(avionImagen)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addComponent(origenTextAnimacion)
+                    .addComponent(avionImagen))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(destinoTextAnimacion)
@@ -124,14 +120,6 @@ public class MenuPrincipal extends javax.swing.JFrame{
         salir.setForeground(new java.awt.Color(0, 0, 0));
         salir.setText("Salir");
         salir.setFont(new java.awt.Font("aakar", 3, 18)); // NOI18N
-
-        jMenuItem1.setText("jMenuItem1");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
-            }
-        });
-        salir.add(jMenuItem1);
 
         cerrarSesion.setFont(new java.awt.Font("aakar", 3, 18)); // NOI18N
         cerrarSesion.setForeground(new java.awt.Color(0, 0, 0));
@@ -202,11 +190,6 @@ public class MenuPrincipal extends javax.swing.JFrame{
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         // TODO add your handling code here:
     }//GEN-LAST:event_formWindowClosed
-
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-            ManejadorMenuGerente NH= new ManejadorMenuGerente();
-            NH.iniciarHilo("ESPAÑA", "GUATEMALA");
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
     
     public void limpiarPantalla(){
         pantalla.removeAll();
@@ -221,7 +204,6 @@ public class MenuPrincipal extends javax.swing.JFrame{
     private javax.swing.JLabel imagenLogo;
     private javax.swing.JMenu inicioSesion;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     public static javax.swing.JLabel origenTextAnimacion;
     public static javax.swing.JDesktopPane pantalla;

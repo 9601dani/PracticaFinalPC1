@@ -1,18 +1,22 @@
 
 package com.mycompany.Interfaz;
 
+import com.mycompany.Clases.Avion;
 import com.mycompany.Clases.Cliente;
 import com.mycompany.Clases.Gerente;
 import com.mycompany.Clases.Operador;
 import com.mycompany.Clases.Tarjeta;
 import com.mycompany.Enum.EstadoUsuario;
 import com.mycompany.Clases.Usuario;
+import com.mycompany.Clases.Vuelo;
 import com.mycompany.GestorArchivos.GuardarArchivoBinario;
+import static com.mycompany.GestorArchivos.GuardarArchivoBinario.FILE_AVIONES;
 import static com.mycompany.GestorArchivos.GuardarArchivoBinario.FILE_CLIENTES;
 import static com.mycompany.GestorArchivos.GuardarArchivoBinario.FILE_GERENTE;
 import static com.mycompany.GestorArchivos.GuardarArchivoBinario.FILE_OPERADORES;
 import static com.mycompany.GestorArchivos.GuardarArchivoBinario.FILE_TARJETAS;
 import static com.mycompany.GestorArchivos.GuardarArchivoBinario.FILE_USUARIOS;
+import static com.mycompany.GestorArchivos.GuardarArchivoBinario.FILE_VUELO;
 import static com.mycompany.Interfaz.MenuPrincipal.pantalla;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -153,18 +157,35 @@ public class InicioSesion extends javax.swing.JInternalFrame {
             pantalla.add(NT);
             NT.show();*/
              String[] clientes=FILE_CLIENTES.list();
-             String[] Aclientes= new String[clientes.length];
+             String[] vuelos=FILE_VUELO.list();
              
+             for(int i=0;i<vuelos.length;i++){
+                FileInputStream archivoV = new FileInputStream(FILE_VUELO+"/"+vuelos[i]);
+                ObjectInputStream lecturaV = new ObjectInputStream(archivoV);
+                Vuelo vuelo =(Vuelo)lecturaV.readObject();
+                
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                if(vuelo.getCodigoVuelo().equalsIgnoreCase("B16W")){
+                    System.out.println(vuelo.getEstado());
+                    FileInputStream archivoAV = new FileInputStream(FILE_AVIONES + "/" + vuelo.getCodAvion().toUpperCase());
+                    ObjectInputStream lecturaAV = new ObjectInputStream(archivoAV);
+                    System.out.println("--------------------------------");
+                    Avion avion = (Avion) lecturaAV.readObject();
+                    System.out.println(avion.getAeropuertoActual());
+                    System.out.println(avion.getEstado());
+                    lecturaAV.close();
+                }
+                 lecturaV.close();
+             }
             for(int i=0;i<clientes.length;i++){
                 FileInputStream archivoL = new FileInputStream(FILE_CLIENTES+"/"+clientes[i]);
                 ObjectInputStream lectura = new ObjectInputStream(archivoL);
                 Cliente cliente =(Cliente)lectura.readObject();
-                System.out.println(cliente.getApellido());
-
+                System.out.println("--------------------------------");
+                System.out.println(cliente.getNoPasaporte());
+                System.out.println(cliente.getPaisActual());
                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-                String fechaCadena= sdf.format(cliente.getFecha_vencimiento());
 
-                 System.out.println(fechaCadena);
                  lectura.close();
              }
              System.out.println("-----------------------------------");  

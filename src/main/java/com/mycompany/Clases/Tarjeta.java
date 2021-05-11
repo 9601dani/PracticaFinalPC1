@@ -4,19 +4,19 @@ package com.mycompany.Clases;
 import java.io.Serializable;
 
 public class Tarjeta implements Serializable{
-   private String numeroTarjeta;
+   private long numeroTarjeta;
    private int noPasaporte;
    private double dineroActual;
    private String codigo_CVC;
 
-    public Tarjeta(String numeroTarjeta, int noPasaporte, double dineroActual, String codigo_CVC) {
+    public Tarjeta(long numeroTarjeta, int noPasaporte, double dineroActual, String codigo_CVC) {
         this.numeroTarjeta = numeroTarjeta;
         this.noPasaporte = noPasaporte;
         this.dineroActual = dineroActual;
         this.codigo_CVC = codigo_CVC;
     }
 
-    public String getNumeroTarjeta() {
+    public Long getNumeroTarjeta() {
         return numeroTarjeta;
     }
 
@@ -32,7 +32,7 @@ public class Tarjeta implements Serializable{
         return codigo_CVC;
     }
 
-    public void setNumeroTarjeta(String numeroTarjeta) {
+    public void setNumeroTarjeta(long numeroTarjeta) {
         this.numeroTarjeta = numeroTarjeta;
     }
 

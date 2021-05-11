@@ -23,7 +23,7 @@
 /home/daniel/NetBeansProjects/Proyecto2IPC/src/main/java/com/mycompany/Interfaz/MenuAdmin.java
 /home/daniel/NetBeansProjects/Proyecto2IPC/src/main/java/com/mycompany/Interfaz/AsientosVuelos.java
 /home/daniel/NetBeansProjects/Proyecto2IPC/src/main/java/com/mycompany/Clases/Usuario.java
-/home/daniel/NetBeansProjects/Proyecto2IPC/src/main/java/com/mycompany/GestorArchivos/ManejadorMenuGerente.java
+/home/daniel/NetBeansProjects/Proyecto2IPC/src/main/java/com/mycompany/GestorArchivos/ManejadorOperadorVuelo.java
 /home/daniel/NetBeansProjects/Proyecto2IPC/src/main/java/com/mycompany/Clases/Cliente.java
 /home/daniel/NetBeansProjects/Proyecto2IPC/src/main/java/com/mycompany/GestorArchivos/SubidaDeArchivos.java
 /home/daniel/NetBeansProjects/Proyecto2IPC/src/main/java/com/mycompany/Clases/Operador.java
@@ -33,6 +33,7 @@
 /home/daniel/NetBeansProjects/Proyecto2IPC/src/main/java/com/mycompany/Enum/ESTADO_CIVIL.java
 /home/daniel/NetBeansProjects/Proyecto2IPC/src/main/java/com/mycompany/Interfaz/MenuGerente.java
 /home/daniel/NetBeansProjects/Proyecto2IPC/src/main/java/com/mycompany/Interfaz/InterfazMenuUsuario.java
+/home/daniel/NetBeansProjects/Proyecto2IPC/src/main/java/com/mycompany/Interfaz/PosponerVuelo.java
 /home/daniel/NetBeansProjects/Proyecto2IPC/src/main/java/com/mycompany/Enum/ESTADO_AVION.java
 /home/daniel/NetBeansProjects/Proyecto2IPC/src/main/java/com/mycompany/Clases/Vuelo.java
 /home/daniel/NetBeansProjects/Proyecto2IPC/src/main/java/com/mycompany/Interfaz/IngresarNuevaAerolinea.java

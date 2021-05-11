@@ -24,6 +24,17 @@ public class Vuelo implements Serializable{
         this.estado= ESTADO_VUELO.EN_ESPERA;
     }
 
+    public Vuelo(String codigoVuelo, String codAvion, String aeroOrigen, String aeroDestino, double precioBoleto, Date fechaSalida, ESTADO_VUELO estado) {
+        this.codigoVuelo = codigoVuelo;
+        this.codAvion = codAvion;
+        this.aeroOrigen = aeroOrigen;
+        this.aeroDestino = aeroDestino;
+        this.precioBoleto = precioBoleto;
+        this.fechaSalida = fechaSalida;
+        this.estado = estado;
+    }
+    
+
     public String getCodigoVuelo() {
         return codigoVuelo;
     }

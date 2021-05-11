@@ -146,7 +146,7 @@ private int noPasaporte;
         double dineroA= Double.parseDouble(dineroText.getText());
         String cod= codigoText.getText();
         int pas= Integer.parseInt(pasaporteText.getText());
-        String noT=tarjetaText.getText();
+        Long noT= Long.parseLong(tarjetaText.getText());
         try {
             FileInputStream archivoC = new FileInputStream(FILE_CLIENTES + "/" +noPasaporte);
             try {

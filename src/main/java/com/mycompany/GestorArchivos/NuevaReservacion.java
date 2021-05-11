@@ -147,7 +147,7 @@ public class NuevaReservacion {
                 System.err.println("CLASE NO SE PUEDE LEER");
             }
     }
-    public static void realizarReservacion(int noPas,String codVuelo,String noTarj,String noAsiento){
+    public static void realizarReservacion(int noPas,String codVuelo,Long noTarj,String noAsiento){
         try {
             FileInputStream archivoRe = new FileInputStream(FILE_RESERVACIONES + "/" + noPas + "_" + codVuelo.toUpperCase());
             JOptionPane.showMessageDialog(null, "YA HAS REALIZADO UNA RESERVACION");
@@ -184,21 +184,46 @@ public class NuevaReservacion {
                 System.out.println(tarjeta.getDineroActual());
                 if(cliente.getPaisActual().equalsIgnoreCase(aeropuerto.getPais())){
                     if(tarjeta.getDineroActual()>= vuelo.getPrecioBoleto()){
-                        Reservacion NR= new Reservacion(noPas,codVuelo, Long.parseLong(noTarj),noAsiento);
-                        double dineroA= tarjeta.getDineroActual()-vuelo.getPrecioBoleto();
-                        System.out.println(dineroA);
-                        Tarjeta NT = new Tarjeta(tarjeta.getNumeroTarjeta(),tarjeta.getNoPasaporte(),dineroA,tarjeta.getCodigo_CVC());
-                        GuardarArchivoBinario.guardarResevacion(NR);
-                        GuardarArchivoBinario.guardarTarjeta(NT);
-                        JOptionPane.showMessageDialog(null, "SE A REALIZADO LA RESERVACION");
-                        limpiarLista();
-                        inicio();
-                        origenText.setText("");
-                        destinoText.setText("");
-                        fechaSText.setText("");
-                        aerolineaText.setText("");
-                        codVueloText.setText("");
-                        noAsientoText.setText("");
+                        if(cliente.getPaisActual().equalsIgnoreCase(aeropuerto.getPais())){
+                            if(vuelo.getFechaSalida().before(cliente.getFecha_vencimiento())){
+                                Reservacion NR = new Reservacion(noPas, codVuelo,(noTarj), noAsiento);
+                                double dineroA = tarjeta.getDineroActual() - vuelo.getPrecioBoleto();
+                                System.out.println(dineroA);
+                                Tarjeta NT = new Tarjeta(tarjeta.getNumeroTarjeta(), tarjeta.getNoPasaporte(), dineroA, tarjeta.getCodigo_CVC());
+                                GuardarArchivoBinario.guardarResevacion(NR);
+                                GuardarArchivoBinario.guardarTarjeta(NT);
+                                JOptionPane.showMessageDialog(null, "SE A REALIZADO LA RESERVACION");
+                                limpiarLista();
+                                inicio();
+                                origenText.setText("");
+                                destinoText.setText("");
+                                fechaSText.setText("");
+                                aerolineaText.setText("");
+                                codVueloText.setText("");
+                                noAsientoText.setText(""); 
+                            }else{
+                                JOptionPane.showMessageDialog(null, "TU PASAPORTE NO ESTARA VIGENTE PARA LA FECHA DE VUELO");
+                                limpiarLista();
+                                inicio();
+                                origenText.setText("");
+                                destinoText.setText("");
+                                fechaSText.setText("");
+                                aerolineaText.setText("");
+                                codVueloText.setText("");
+                                noAsientoText.setText("");
+                            }
+                        }else{
+                            JOptionPane.showMessageDialog(null, "NO TE ENCUENTRAS EN EL PAIS DE ORIGEN");
+                            limpiarLista();
+                            inicio();
+                            origenText.setText("");
+                            destinoText.setText("");
+                            fechaSText.setText("");
+                            aerolineaText.setText("");
+                            codVueloText.setText("");
+                            noAsientoText.setText(""); 
+                        }
+                        
                     }else{
                         JOptionPane.showMessageDialog(null, "NO POSEES DINERO PARA REALIZAR LA COMPRA Q."+vuelo.getPrecioBoleto());
                     }

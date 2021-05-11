@@ -3,15 +3,15 @@ package com.mycompany.Interfaz;
 import com.mycompany.Clases.Avion;
 import com.mycompany.Clases.Operador;
 import com.mycompany.Clases.Vuelo;
+import com.mycompany.Enum.ESTADO_VUELO;
 import static com.mycompany.GestorArchivos.GuardarArchivoBinario.FILE_AVIONES;
 import static com.mycompany.GestorArchivos.GuardarArchivoBinario.FILE_VUELO;
+import static com.mycompany.GestorArchivos.ManejadorOperadorVuelo.MenuOperarVuelo;
 import static com.mycompany.Interfaz.MenuPrincipal.pantalla;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class MenuOperador extends javax.swing.JInternalFrame {
@@ -57,6 +57,11 @@ public class MenuOperador extends javax.swing.JInternalFrame {
         jMenuItem1.setFont(new java.awt.Font("aakar", 3, 12)); // NOI18N
         jMenuItem1.setIcon(new javax.swing.ImageIcon("/home/daniel/NetBeansProjects/Proyecto2IPC/boleto.png")); // NOI18N
         jMenuItem1.setText("OPERAR VUELO");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem1);
 
         jMenuBar1.add(jMenu1);
@@ -120,7 +125,7 @@ public class MenuOperador extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        String codA=JOptionPane.showInputDialog(null,vuelosVuelos()+"\n INGRESE EL CODIGO DE AVION QUE DESEA VER: ");
+        String codA=JOptionPane.showInputDialog(null, vuelosVuelos()+"\nINGRESE EL CODIGO DEL VUELO A OPERAR");
         try{
             AsientosVuelos VA = new AsientosVuelos(codA);
             pantalla.add(VA);
@@ -133,6 +138,26 @@ public class MenuOperador extends javax.swing.JInternalFrame {
         }
         
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        String codV= JOptionPane.showInputDialog(null,operarVuelo()+"\n INGRESE EL CODIGO DE AVION QUE DESEA VER: ");
+         try {
+            int opcion = Integer.parseInt(JOptionPane.showInputDialog(null, "1.INICIAR VUELO\n2.CANCELAR VUELO\n3.POSPONER VUELO\n" + "INGRESE LA OPCION QUE DESEA DEL VUELO A OPERAR:"));
+             try { 
+                 MenuOperarVuelo(codV, opcion);
+             } catch (NumberFormatException exepcionNul) {
+                 JOptionPane.showMessageDialog(null, "**CAMPO VACIO** DEBES DIGITAR UNA OPCION PARA CONTINUAR");
+             } catch (java.lang.NullPointerException e) {
+                 JOptionPane.showMessageDialog(null, "*** CAMPO VACIO ***");
+             }
+        } catch (NumberFormatException exepcionNula) {
+            JOptionPane.showMessageDialog(null, "**CAMPO VACIO** DEBES DIGITAR UNA OPCION PARA CONTINUAR");
+        } catch (java.lang.NullPointerException ex) {
+            JOptionPane.showMessageDialog(null, "*** CAMPO VACIO ***");
+        }
+            
+        
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     public String vuelosVuelos(){
         String[]posiblesVuelos= FILE_VUELO.list();
@@ -148,25 +173,65 @@ public class MenuOperador extends javax.swing.JInternalFrame {
                 FileInputStream archivoA = new FileInputStream(FILE_AVIONES+"/"+vuelo.getCodAvion().toUpperCase());
                 ObjectInputStream lecturaA = new ObjectInputStream(archivoA);
                 Avion avion =(Avion)lecturaA.readObject();
+                
                 if(avion.getNomAerolinea().equalsIgnoreCase(this.aerolinea)){
-                    contador++;
-                    presentar+= contador+". CODIGO DE VUELO: "+avion.getCodigoAvion().toUpperCase()+" \n";
+                    if(vuelo.getEstado().equals(ESTADO_VUELO.EN_ESPERA) || vuelo.getEstado().equals(ESTADO_VUELO.RETRASADO) ){
+                        contador++;
+                        presentar += contador + ". CODIGO DE AVION " + avion.getCodigoAvion().toUpperCase() + " \n";
+                    }
+                   
                 }
                 lectura.close();
-                lectura.close();
+                lecturaA.close();
             } catch (FileNotFoundException ex) {
                 JOptionPane.showConfirmDialog(null, "NO HAS INGRESADO UNA OPCION VALIDA :(");
             } catch (IOException ex) {
-                Logger.getLogger(MenuOperador.class.getName()).log(Level.SEVERE, null, ex);
+                System.err.println("ERROR IO VUELVOSVUELOS");
             } catch (ClassNotFoundException ex) {
-                Logger.getLogger(MenuOperador.class.getName()).log(Level.SEVERE, null, ex);
+                System.err.println("CLASSNOT VUELOVUELOS");
             }
                 
              }
         
         return presentar;
     }
+    public String operarVuelo() {
+        String[] posiblesVuelos = FILE_VUELO.list();
+        String presentar = "";
+        int contador = 0;
+        for (int i = 0; i < posiblesVuelos.length; i++) {
+            FileInputStream archivoL;
+            try {
+                archivoL = new FileInputStream(FILE_VUELO + "/" + posiblesVuelos[i]);
+                ObjectInputStream lectura = new ObjectInputStream(archivoL);
+                Vuelo vuelo = (Vuelo) lectura.readObject();
 
+                FileInputStream archivoA = new FileInputStream(FILE_AVIONES + "/" + vuelo.getCodAvion().toUpperCase());
+                ObjectInputStream lecturaA = new ObjectInputStream(archivoA);
+                Avion avion = (Avion) lecturaA.readObject();
+                if (avion.getNomAerolinea().equalsIgnoreCase(this.aerolinea)) {
+                    if (vuelo.getEstado().equals(ESTADO_VUELO.EN_ESPERA) || vuelo.getEstado().equals(ESTADO_VUELO.RETRASADO)) {
+                        contador++;
+                        presentar += contador + ". CODIGO DE VUELO: " + vuelo.getCodigoVuelo().toUpperCase() + "\n";
+                    }
+                }
+                lectura.close();
+                lectura.close();
+            } catch (FileNotFoundException ex) {
+                JOptionPane.showConfirmDialog(null, "NO HAS INGRESADO UN CODIGO DE VUELO VALIDO :(");
+            } catch (IOException ex) {
+                System.err.println("ERROR IO");
+            } catch (ClassNotFoundException ex) {
+                System.err.println("CLASNOTFOUN OPERARVuelo");
+            }
+
+        }
+
+        return presentar;
+    }
+
+    
+   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

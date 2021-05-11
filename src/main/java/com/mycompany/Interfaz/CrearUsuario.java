@@ -259,6 +259,7 @@ private String noUsuario;
                                     GuardarArchivoBinario.guardarUsuario(usuario);
                                     operador= new Operador(nombre,Aeroline);
                                     GuardarArchivoBinario.guardarOperador(operador);
+                                    JOptionPane.showMessageDialog(null, "HEMOS CREADO EL OPERADOR EXITOSAMENTE");
                                     newNombreText.setText("");
                                     newContraseñaText.setText("");
                                     comboArea.setSelectedIndex(1);
@@ -282,6 +283,7 @@ private String noUsuario;
                     if(newNombreText.getText()!=null || newContraseñaText.getText()!=null){
                         usuario = new Usuario(nombre, contra, Area);
                         GuardarArchivoBinario.guardarUsuario(usuario);
+                        JOptionPane.showMessageDialog(null, "HEMOS CREADO EL ADMIN EXITOSAMENTE");
                         this.setVisible(false);
                         newNombreText.setText("");
                         newContraseñaText.setText("");
