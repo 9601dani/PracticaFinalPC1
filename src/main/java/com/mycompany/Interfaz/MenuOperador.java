@@ -37,6 +37,7 @@ public class MenuOperador extends javax.swing.JInternalFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
 
@@ -63,6 +64,15 @@ public class MenuOperador extends javax.swing.JInternalFrame {
             }
         });
         jMenu1.add(jMenuItem1);
+
+        jMenuItem3.setFont(new java.awt.Font("aakar", 3, 14)); // NOI18N
+        jMenuItem3.setText("PROGRAMAR VUELO");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem3);
 
         jMenuBar1.add(jMenu1);
 
@@ -159,6 +169,12 @@ public class MenuOperador extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+       NuevoVuelo NV= new NuevoVuelo();
+        pantalla.add(NV);
+        NV.show();
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
     public String vuelosVuelos(){
         String[]posiblesVuelos= FILE_VUELO.list();
         String presentar="";
@@ -240,6 +256,7 @@ public class MenuOperador extends javax.swing.JInternalFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JLabel logo;
     private javax.swing.JLabel nomAerolinea;
     private javax.swing.JLabel nomTitulo;

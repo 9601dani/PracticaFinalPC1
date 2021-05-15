@@ -5,6 +5,7 @@ com/mycompany/Interfaz/MenuAdmin$1.class
 com/mycompany/Clases/Tarjeta.class
 com/mycompany/Interfaz/MenuAdmin$12.class
 com/mycompany/Interfaz/InicioSesion$2.class
+com/mycompany/Interfaz/ZREPORTEPASAJERO$1.class
 com/mycompany/Interfaz/InterfazMenuUsuario$5.class
 com/mycompany/Ejecutable/Ejecutable.class
 com/mycompany/GestorArchivos/ManejadorOperadorVuelo.class
@@ -21,10 +22,12 @@ com/mycompany/Clases/Distancia.class
 com/mycompany/Interfaz/InicioSesion.class
 com/mycompany/Interfaz/PosponerVuelo$1.class
 com/mycompany/Interfaz/InterfazMenuUsuario$2.class
+com/mycompany/Interfaz/MenuAdmin$13.class
 com/mycompany/Interfaz/IngresarNuevoCliente$1.class
 com/mycompany/Interfaz/MenuAdmin$8.class
 com/mycompany/Interfaz/InterfazMenuUsuario$4.class
 com/mycompany/Interfaz/MenuAdmin$2.class
+com/mycompany/GestorArchivos/GestorReportesAdmin.class
 com/mycompany/Interfaz/MenuGerente.class
 com/mycompany/Interfaz/InicioSesion$1.class
 com/mycompany/Interfaz/IngresarReservacion$3.class
@@ -50,6 +53,7 @@ com/mycompany/Interfaz/CrearAvion$1.class
 com/mycompany/Interfaz/MenuAdmin$6.class
 com/mycompany/Manejador/ManejadorNuevoCliente.class
 com/mycompany/Interfaz/CrearAvion.class
+com/mycompany/Manejador/Manejador_Admin.class
 com/mycompany/Interfaz/IngresarNuevaAerolinea$1.class
 com/mycompany/Interfaz/IngresoNuevaTarjeta$2.class
 com/mycompany/Interfaz/MenuOperador.class
@@ -63,9 +67,11 @@ com/mycompany/Clases/Reservacion.class
 com/mycompany/Interfaz/CrearUsuario$1.class
 com/mycompany/Clases/Aeropuerto.class
 com/mycompany/GestorArchivos/SubidaDeArchivos.class
+com/mycompany/Interfaz/MenuOperador$3.class
 com/mycompany/Enum/EstadoUsuario.class
 com/mycompany/Interfaz/InterfazSubidaDeDatos.class
 com/mycompany/Interfaz/MenuAdmin$7.class
+com/mycompany/Interfaz/ZREPORTEPASAJERO.class
 com/mycompany/Enum/GENERO.class
 com/mycompany/Interfaz/MenuGerente$1.class
 com/mycompany/Clases/Usuario.class

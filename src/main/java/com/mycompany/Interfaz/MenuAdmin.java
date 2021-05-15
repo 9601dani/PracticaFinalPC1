@@ -53,6 +53,7 @@ public class MenuAdmin extends javax.swing.JInternalFrame {
         jMenuItem10 = new javax.swing.JMenuItem();
         jMenuItem11 = new javax.swing.JMenuItem();
         jMenuItem12 = new javax.swing.JMenuItem();
+        jMenuItem19 = new javax.swing.JMenuItem();
 
         jLabel1.setFont(new java.awt.Font("aakar", 3, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
@@ -235,6 +236,16 @@ public class MenuAdmin extends javax.swing.JInternalFrame {
         jMenuItem12.setText("GANANCIAS");
         jMenu4.add(jMenuItem12);
 
+        jMenuItem19.setFont(new java.awt.Font("aakar", 3, 14)); // NOI18N
+        jMenuItem19.setIcon(new javax.swing.ImageIcon("/home/daniel/NetBeansProjects/Proyecto2IPC/pasaporte.png")); // NOI18N
+        jMenuItem19.setText("PASAJEROS");
+        jMenuItem19.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem19ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem19);
+
         jMenuBar1.add(jMenu4);
 
         setJMenuBar(jMenuBar1);
@@ -364,6 +375,12 @@ public class MenuAdmin extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jMenuItem18ActionPerformed
 
+    private void jMenuItem19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem19ActionPerformed
+            ZREPORTEPASAJERO RP= new ZREPORTEPASAJERO();
+            pantalla.add(RP);
+            RP.show();
+    }//GEN-LAST:event_jMenuItem19ActionPerformed
+
      public String vuelosVuelos(){
         String[]posiblesVuelos= FILE_VUELO.list();
         String presentar="";
@@ -447,6 +464,7 @@ public class MenuAdmin extends javax.swing.JInternalFrame {
     private javax.swing.JMenuItem jMenuItem16;
     private javax.swing.JMenuItem jMenuItem17;
     private javax.swing.JMenuItem jMenuItem18;
+    private javax.swing.JMenuItem jMenuItem19;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;

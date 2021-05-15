@@ -19,7 +19,6 @@ import static com.mycompany.GestorArchivos.GuardarArchivoBinario.FILE_DISTANCIA;
 import static com.mycompany.GestorArchivos.GuardarArchivoBinario.FILE_RESERVACIONES;
 import static com.mycompany.GestorArchivos.GuardarArchivoBinario.FILE_TARJETAS;
 import static com.mycompany.GestorArchivos.GuardarArchivoBinario.FILE_VUELO;
-import static com.mycompany.GestorArchivos.NuevaReservacion.realizarReservacion;
 import com.mycompany.Interfaz.InterfazSubidaDeDatos;
 import java.io.BufferedReader;
 import java.io.File;
@@ -31,8 +30,6 @@ import java.io.ObjectInputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class SubidaDeArchivos extends Thread {
@@ -40,7 +37,7 @@ public class SubidaDeArchivos extends Thread {
     private String nombreArchivo;
     private InterfazSubidaDeDatos datos;
     private static final String AEROPUERTO = "AEROPUERTO";
-    private static final String AEROLINEA = "AEROLINEA";
+    private static final String AEROLINEA = "AEROLÍNEA";
     private static final String DISTANCIA = "DISTANCIA";
     private static final String PASAPORTE= "PASAPORTE";
     private static final String TARJETA = "TARJETA";
@@ -161,9 +158,14 @@ public class SubidaDeArchivos extends Thread {
             FileInputStream archivoB = new FileInputStream(FILE_DISTANCIA + "/" + nomOrigen.toUpperCase()+"_"+nomDestino.toUpperCase());
             datos.introducirDatosALaLista(lineaPrincipal+" NO SE PUDO CARGAR PORQUE YA ESTA REGISTRADA");
             } catch (FileNotFoundException ex) {
-                distancia = new Distancia(nomOrigen,nomDestino,cantMillas);
-                GuardarArchivoBinario.guardarDistancias(distancia);
-                datos.introducirDatosALaLista(lineaPrincipal +" ***GUARDADA CON EXITO ***");
+                if(datosObtenidos[0].equalsIgnoreCase(datosObtenidos[1])){
+                    datos.introducirDatosALaLista(lineaPrincipal+" NO PUEDE HABER UNA DISTANCIA ENTRE EL PAIS DE ORIGEN Y PAIS DESTINO");
+                }else{
+                    distancia = new Distancia(nomOrigen, nomDestino, cantMillas);
+                    GuardarArchivoBinario.guardarDistancias(distancia);
+                    datos.introducirDatosALaLista(lineaPrincipal + " ***GUARDADA CON EXITO ***");
+                }
+               
             }
             
         }
@@ -172,7 +174,7 @@ public class SubidaDeArchivos extends Thread {
                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
                 Cliente cliente;
                 Usuario usuario;
-                int noPas=Integer.parseInt(datosObtenidos[0]);
+                long noPas=Long.parseLong(datosObtenidos[0]);
                 String contraseña= datosObtenidos[1];
                 Date fNacimiento = sdf.parse(datosObtenidos[2]);
                 String nacionalidad=datosObtenidos[3];
@@ -214,7 +216,7 @@ public class SubidaDeArchivos extends Thread {
                 }
         }
         if(nombreAVerificar.equals(NOMBRES[5])){
-            int noPasN= Integer.parseInt(datosObtenidos[0]);
+            long noPasN= Integer.parseInt(datosObtenidos[0]);
             try {
                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
                 FileInputStream archivoL = new FileInputStream(FILE_CLIENTES+"/"+noPasN);

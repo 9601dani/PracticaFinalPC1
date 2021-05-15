@@ -34,6 +34,7 @@ public class InicioSesion extends javax.swing.JInternalFrame {
     public static Usuario usuario;
     public InicioSesion() {
         initComponents();
+        jButton2.setVisible(false);
     }
 
     @SuppressWarnings("unchecked")

@@ -32,6 +32,7 @@
 /home/daniel/NetBeansProjects/Proyecto2IPC/src/main/java/com/mycompany/Interfaz/CrearAvion.java
 /home/daniel/NetBeansProjects/Proyecto2IPC/src/main/java/com/mycompany/Enum/ESTADO_CIVIL.java
 /home/daniel/NetBeansProjects/Proyecto2IPC/src/main/java/com/mycompany/Interfaz/MenuGerente.java
+/home/daniel/NetBeansProjects/Proyecto2IPC/src/main/java/com/mycompany/GestorArchivos/GestorReportesAdmin.java
 /home/daniel/NetBeansProjects/Proyecto2IPC/src/main/java/com/mycompany/Interfaz/InterfazMenuUsuario.java
 /home/daniel/NetBeansProjects/Proyecto2IPC/src/main/java/com/mycompany/Interfaz/PosponerVuelo.java
 /home/daniel/NetBeansProjects/Proyecto2IPC/src/main/java/com/mycompany/Enum/ESTADO_AVION.java
