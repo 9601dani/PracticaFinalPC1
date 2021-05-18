@@ -1,0 +1,94 @@
+/usr/lib/jvm/java-11-openjdk-amd64/bin/javadoc
+@options
+@packages
+-encoding
+'UTF-8'
+-protected
+-sourcepath
+'/home/daniel/NetBeansProjects/Proyecto2IPC/src/main/java'
+-author
+-bottom
+'Copyright &#169; 2021. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'/home/daniel/NetBeansProjects/Proyecto2IPC/target/site/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'Proyecto2IPC 1.0-SNAPSHOT API'
+-linkoffline
+'https://docs.oracle.com/en/java/javase/11/docs/api' '/home/daniel/NetBeansProjects/Proyecto2IPC/target/javadoc-bundle-options'
+-use
+-version
+-windowtitle
+'Proyecto2IPC 1.0-SNAPSHOT API'
+com.mycompany.Interfaz
+com.mycompany.Interfaz
+com.mycompany.Interfaz
+com.mycompany.Interfaz
+com.mycompany.Interfaz
+com.mycompany.Interfaz
+com.mycompany.Interfaz
+com.mycompany.Interfaz
+com.mycompany.Interfaz
+com.mycompany.Interfaz
+com.mycompany.Interfaz
+com.mycompany.Interfaz
+com.mycompany.Interfaz
+com.mycompany.Interfaz
+com.mycompany.Interfaz
+com.mycompany.Interfaz
+com.mycompany.Interfaz
+com.mycompany.Interfaz
+com.mycompany.Interfaz
+com.mycompany.Interfaz
+com.mycompany.Interfaz
+com.mycompany.Interfaz
+com.mycompany.Interfaz
+com.mycompany.Enum
+com.mycompany.Enum
+com.mycompany.Enum
+com.mycompany.Enum
+com.mycompany.Enum
+com.mycompany.Clases
+com.mycompany.Clases
+com.mycompany.Clases
+com.mycompany.Clases
+com.mycompany.Clases
+com.mycompany.Clases
+com.mycompany.Clases
+com.mycompany.Clases
+com.mycompany.Clases
+com.mycompany.Clases
+com.mycompany.Clases
+com.mycompany.Ejecutable
+com.mycompany.GestorArchivos
+com.mycompany.GestorArchivos
+com.mycompany.GestorArchivos
+com.mycompany.GestorArchivos
+com.mycompany.GestorArchivos
+com.mycompany.Manejador
+com.mycompany.Manejador
+/home/daniel/NetBeansProjects/Proyecto2IPC/src/main/java = 1619150254716
+/home/daniel/NetBeansProjects/Proyecto2IPC/target/site/apidocs/overview-summary.html = 1621305488288
+/home/daniel/NetBeansProjects/Proyecto2IPC/target/site/apidocs/help-doc.html = 1621305488292
+/home/daniel/NetBeansProjects/Proyecto2IPC/target/site/apidocs/allclasses.html = 1621305488280
+/home/daniel/NetBeansProjects/Proyecto2IPC/target/site/apidocs/constant-values.html = 1621305487952
+/home/daniel/NetBeansProjects/Proyecto2IPC/target/site/apidocs/overview-tree.html = 1621305488172
+/home/daniel/NetBeansProjects/Proyecto2IPC/target/site/apidocs/deprecated-list.html = 1621305488276
+/home/daniel/NetBeansProjects/Proyecto2IPC/target/site/apidocs/member-search-index.js = 1621305488256
+/home/daniel/NetBeansProjects/Proyecto2IPC/target/site/apidocs/stylesheet.css = 1621305488296
+/home/daniel/NetBeansProjects/Proyecto2IPC/target/site/apidocs/index-all.html = 1621305488260
+/home/daniel/NetBeansProjects/Proyecto2IPC/target/site/apidocs/package-search-index.zip = 1621305488252
+/home/daniel/NetBeansProjects/Proyecto2IPC/target/site/apidocs/search.js = 1621305488296
+/home/daniel/NetBeansProjects/Proyecto2IPC/target/site/apidocs/package-search-index.js = 1621305488236
+/home/daniel/NetBeansProjects/Proyecto2IPC/target/site/apidocs/index.html = 1621305488284
+/home/daniel/NetBeansProjects/Proyecto2IPC/target/site/apidocs/element-list = 1621305487904
+/home/daniel/NetBeansProjects/Proyecto2IPC/target/site/apidocs/allclasses-index.html = 1621305488268
+/home/daniel/NetBeansProjects/Proyecto2IPC/target/site/apidocs/type-search-index.js = 1621305488252
+/home/daniel/NetBeansProjects/Proyecto2IPC/target/site/apidocs/script.js = 1621305488296
+/home/daniel/NetBeansProjects/Proyecto2IPC/target/site/apidocs/member-search-index.zip = 1621305488256
+/home/daniel/NetBeansProjects/Proyecto2IPC/target/site/apidocs/type-search-index.zip = 1621305488252
+/home/daniel/NetBeansProjects/Proyecto2IPC/target/site/apidocs/serialized-form.html = 1621305488000
+/home/daniel/NetBeansProjects/Proyecto2IPC/target/site/apidocs/allpackages-index.html = 1621305488272
