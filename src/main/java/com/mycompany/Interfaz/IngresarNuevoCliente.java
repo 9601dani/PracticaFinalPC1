@@ -18,6 +18,9 @@ public class IngresarNuevoCliente extends javax.swing.JInternalFrame {
         initComponents();
         this.noUsuario=noUsuario;
     }
+    public IngresarNuevoCliente() {
+        initComponents();
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -258,6 +261,7 @@ public class IngresarNuevoCliente extends javax.swing.JInternalFrame {
                 fechaVencimientoText.setText("");
                 fechaEmisionText.setText("");
                 paisAcutalText.setText("");
+                this.dispose();
 
             } catch (FileNotFoundException ex) {
                 if (noPas != 0 && contra != null && fechaN != null && nacio != null && nom != null && ape != null && fechaV != null && fechaE != null && pa != null) {
@@ -265,6 +269,8 @@ public class IngresarNuevoCliente extends javax.swing.JInternalFrame {
                     NCl.registrarNuevoCliente(noPas, contra, fechaN, nacio, selecC, nom, ape, selecG, fechaV, fechaE, pa);
                     Usuario usuario = new Usuario(Integer.toString(noPas), contra);
                     GuardarArchivoBinario.guardarUsuario(usuario);
+                    JOptionPane.showMessageDialog(null, "Creado exitosamente bienvenido: "+nom.toUpperCase()+" "+ape.toUpperCase());
+                    JOptionPane.showMessageDialog(null, "!RECUERDA¡\n\tUSUARIO: "+noPas+"\n\tCONTRASEÑA: "+contra);
                     noPasaporteText.setText("");
                     contraseñaText.setText("");
                     fechaNacimientoText.setText("");
@@ -276,6 +282,7 @@ public class IngresarNuevoCliente extends javax.swing.JInternalFrame {
                     fechaVencimientoText.setText("");
                     fechaEmisionText.setText("");
                     paisAcutalText.setText("");
+                    this.dispose();
                 } else {
                     JOptionPane.showMessageDialog(null, "REVISA EL INGRESO DE CAMPOS, PARECE QUE HAY CAMPOS VACIOS");
                 }

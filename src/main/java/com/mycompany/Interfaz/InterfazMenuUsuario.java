@@ -233,10 +233,13 @@ public class InterfazMenuUsuario extends javax.swing.JInternalFrame {
                 FileInputStream archivo2 = new FileInputStream(FILE_VUELO+"/"+rev.getCodigo_vuelo().toUpperCase());
                 ObjectInputStream lectura2 = new ObjectInputStream(archivo2);
                 Vuelo vue =(Vuelo)lectura2.readObject();
-                if(tar.getNoPasaporte()==rev.getNo_Pasaporte()){
-                    presentar+= contador+"."+ " NO. PASAPORTE: "+rev.getNo_Pasaporte()+" NO. TARJETA: "+tar.getNumeroTarjeta()+" CODIGO DEL VUELO: "+rev.getCodigo_vuelo().toUpperCase()+" COSTO DE VUELO: Q."+vue.getPrecioBoleto()+" ORIGEN: "+ vue.getAeroOrigen().toUpperCase()+" HASTA: "+vue.getAeroDestino().toUpperCase()+"\n";
-                    contador++;
+                if (cliente.getNoPasaporte() == tar.getNoPasaporte()) {
+                    if (tar.getNoPasaporte() == rev.getNo_Pasaporte()) {
+                        presentar += contador + "." + " NO. PASAPORTE: " + rev.getNo_Pasaporte() + " NO. TARJETA: " + tar.getNumeroTarjeta() + " CODIGO DEL VUELO: " + rev.getCodigo_vuelo().toUpperCase() + " COSTO DE VUELO: Q." + vue.getPrecioBoleto() + " ORIGEN: " + vue.getAeroOrigen().toUpperCase() + " HASTA: " + vue.getAeroDestino().toUpperCase() + "\n";
+                        contador++;
+                    }
                 }
+                
                 lectura.close();
              }
         } catch (FileNotFoundException ex) {     

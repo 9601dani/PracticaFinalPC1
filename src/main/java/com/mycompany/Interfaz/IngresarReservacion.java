@@ -2,10 +2,13 @@ package com.mycompany.Interfaz;
 
 
 import com.mycompany.Clases.Tarjeta;
+import static com.mycompany.GestorArchivos.GuardarArchivoBinario.FILE_CLIENTES;
 import static com.mycompany.GestorArchivos.GuardarArchivoBinario.FILE_TARJETAS;
 import com.mycompany.GestorArchivos.NuevaReservacion;
 import static com.mycompany.GestorArchivos.NuevaReservacion.realizarReservacion;
+import static com.mycompany.Interfaz.MenuPrincipal.pantalla;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.text.ParseException;
@@ -27,6 +30,13 @@ public class IngresarReservacion extends javax.swing.JInternalFrame {
         jList1.setModel(modeloLista);
         String nom= Integer.toString(noPas);
         noPasText.setText(nom);
+    }
+    public IngresarReservacion() {
+        initComponents();
+        NuevaReservacion.inicio();
+        modeloLista = new DefaultListModel();
+        jList1.setModel(modeloLista);
+        noPasText.setEditable(true);
     }
     
     @SuppressWarnings("unchecked")
@@ -56,9 +66,9 @@ public class IngresarReservacion extends javax.swing.JInternalFrame {
 
         setClosable(true);
 
-        jLabel1.setText("CIUDAD DE ORIGEN");
+        jLabel1.setText("AEROP. DE ORIGEN");
 
-        jLabel2.setText("CIUDAD DESTINO");
+        jLabel2.setText("AEROP. DESTINO");
 
         jLabel3.setText("FECHA DE VUELO");
 
@@ -234,33 +244,52 @@ public class IngresarReservacion extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_botonVerAsientosActionPerformed
 
     private void botonReservacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonReservacionActionPerformed
-        int noPas= Integer.parseInt(noPasText.getText());
-        String codV= codVueloText.getText();
-        String noAsien= noAsientoText.getText();
+        int noPas = Integer.parseInt(noPasText.getText());
+        String codV = codVueloText.getText();
+        String noAsien = noAsientoText.getText();
         try {
-            String[] archivoT= FILE_TARJETAS.list();
-            int contador=0;
-            for(int i=0;i<archivoT.length;i++){
-                FileInputStream archivoPersona = new FileInputStream(FILE_TARJETAS + "/" + archivoT[i]);
-            ObjectInputStream lecturaA = new ObjectInputStream(archivoPersona);
-            Tarjeta tarjeta = (Tarjeta) lecturaA.readObject();
-            System.out.println(tarjeta.getDineroActual());
-                if(noPas== tarjeta.getNoPasaporte()){
-                    contador++;
-                    realizarReservacion(noPas,codV,tarjeta.getNumeroTarjeta(),noAsien);
-                    break;
+            FileInputStream archivoCliente = new FileInputStream(FILE_CLIENTES + "/" + noPas);
+            try {
+                String[] archivoT = FILE_TARJETAS.list();
+                int contador = 0;
+                for (int i = 0; i < archivoT.length; i++) {
+                    FileInputStream archivoPersona = new FileInputStream(FILE_TARJETAS + "/" + archivoT[i]);
+                    ObjectInputStream lecturaA = new ObjectInputStream(archivoPersona);
+                    Tarjeta tarjeta = (Tarjeta) lecturaA.readObject();
+                    System.out.println(tarjeta.getDineroActual());
+                    if (noPas == tarjeta.getNoPasaporte()) {
+                        contador++;
+                        realizarReservacion(noPas, codV, tarjeta.getNumeroTarjeta(), noAsien);
+                        break;
+                    }
+                    lecturaA.close();
                 }
-            lecturaA.close();
-            }
-            if (contador==0){
-                JOptionPane.showMessageDialog(null, "NO HEMOS ENCONTRADO TARJETA A TU NOMBRE");
+                if (contador == 0) {
+                    JOptionPane.showMessageDialog(null, "NO HEMOS ENCONTRADO TARJETA A TU NOMBRE DEBES REGISTRARLA");
+                    IngresoNuevaTarjeta NT= new IngresoNuevaTarjeta(noPas);
+                    pantalla.add(NT);
+                    NT.show();
+                }
+
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(NuevaReservacion.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(IngresarReservacion.class.getName()).log(Level.SEVERE, null, ex);
             }
 
-        }catch (ClassNotFoundException ex) {
-            Logger.getLogger(NuevaReservacion.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(IngresarReservacion.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (FileNotFoundException e) {
+            JOptionPane.showMessageDialog(null, "DEBERAS REGISTRARTE PRIMERO");
+            IngresarNuevoCliente NC = new IngresarNuevoCliente();
+            pantalla.add(NC);
+            NC.show();
+
+        } catch (IOException e) {
+            Logger.getLogger(IngresarReservacion.class.getName()).log(Level.SEVERE, null, e);
         }
+            
+        
+        
+        
         
       
     }//GEN-LAST:event_botonReservacionActionPerformed

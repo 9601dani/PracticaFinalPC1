@@ -105,7 +105,7 @@ public class SubidaDeArchivos extends Thread {
             datos.introducirDatosALaLista("**SE COMPLETO LA CARGA DE ARCHIVOS**".toUpperCase());
         }catch(Exception e){ 
             datos.introducirDatosALaLista("NO CUMPLE CON EL FORMATO VALIDO : "+lineaPrincipal);
-            e.printStackTrace();
+            
             
             
         }
@@ -285,13 +285,18 @@ public class SubidaDeArchivos extends Thread {
                              if (cliente.getNoPasaporte() == tarjeta.getNoPasaporte()) {
                                  contador++;
                                  if (cliente.getPaisActual().equalsIgnoreCase(aeropuerto.getPais())) {
-                                     double dineroA = tarjeta.getDineroActual() - vueloV.getPrecioBoleto();
-                                     System.out.println(dineroA);
-                                     Tarjeta NT = new Tarjeta(tarjeta.getNumeroTarjeta(), tarjeta.getNoPasaporte(), dineroA, tarjeta.getCodigo_CVC());
-                                     Rev = new Reservacion(noPasNew, codigoVuelo, numT, asiento);
-                                     GuardarArchivoBinario.guardarResevacion(Rev);
-                                     GuardarArchivoBinario.guardarTarjeta(NT);
-                                     datos.introducirDatosALaLista(lineaPrincipal + " ***GUARDADA CON EXITO ***");
+                                     if(vueloV.getFechaSalida().before(cliente.getFecha_vencimiento())){
+                                         double dineroA = tarjeta.getDineroActual() - vueloV.getPrecioBoleto();
+                                         System.out.println(dineroA);
+                                         Tarjeta NT = new Tarjeta(tarjeta.getNumeroTarjeta(), tarjeta.getNoPasaporte(), dineroA, tarjeta.getCodigo_CVC());
+                                         Rev = new Reservacion(noPasNew, codigoVuelo, numT, asiento);
+                                         GuardarArchivoBinario.guardarResevacion(Rev);
+                                         GuardarArchivoBinario.guardarTarjeta(NT);
+                                         datos.introducirDatosALaLista(lineaPrincipal + " ***GUARDADA CON EXITO ***");
+                                     }else{
+                                         datos.introducirDatosALaLista(lineaPrincipal+" NO SE GUARDO POR QUE EL PASAPORTE ESTARA VENCIDO EN LA FECHA DE VUELO");
+                                     }
+                                     
                                  } else {
                                      datos.introducirDatosALaLista(lineaPrincipal + " NO SE PUDO GUARDAR PORQUE CLIENTE NO SE ENCUENTRA EN EL PAIS " + aeropuerto.getPais().toUpperCase());
                                  }

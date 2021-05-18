@@ -74,8 +74,11 @@ public class NuevaReservacion {
                         if(ciudad_destino.equalsIgnoreCase(vuel.getAeroDestino())){
                             if(fecha_vuelo.equals(vuel.getFechaSalida()) || vuel.getFechaSalida().after(fecha_vuelo) && vuel.getEstado()==ESTADO_VUELO.EN_ESPERA){
                                 if(aerolinea.equalsIgnoreCase(avion.getNomAerolinea())){
-                                     contador++;
-                                   datos.verVuelosLista(contador+". "+"CODIGO VUELO: "+vuel.getCodigoVuelo().toUpperCase()+ " ORIGEN: "+vuel.getAeroOrigen().toUpperCase()+" DESTINO: "+vuel.getAeroDestino().toUpperCase()+" FECHA SALIDA: "+sdf.format(vuel.getFechaSalida())+" PRECIO DEL BOLETO: "+vuel.getPrecioBoleto());
+                                    if(vuel.getEstado().equals(ESTADO_VUELO.EN_ESPERA) || vuel.getEstado().equals(ESTADO_VUELO.RETRASADO)){
+                                        contador++;
+                                        datos.verVuelosLista(contador + ". " + "CODIGO VUELO: " + vuel.getCodigoVuelo().toUpperCase() + " ORIGEN: " + vuel.getAeroOrigen().toUpperCase() + " DESTINO: " + vuel.getAeroDestino().toUpperCase() + " FECHA SALIDA: " + sdf.format(vuel.getFechaSalida()) + " PRECIO DEL BOLETO: " + vuel.getPrecioBoleto()); 
+                                    }
+                                     
                                 }
                             }
                         }

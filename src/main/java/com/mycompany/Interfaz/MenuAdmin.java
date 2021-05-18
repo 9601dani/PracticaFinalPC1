@@ -51,8 +51,6 @@ public class MenuAdmin extends javax.swing.JInternalFrame {
         jMenuItem8 = new javax.swing.JMenuItem();
         jMenuItem9 = new javax.swing.JMenuItem();
         jMenuItem10 = new javax.swing.JMenuItem();
-        jMenuItem11 = new javax.swing.JMenuItem();
-        jMenuItem12 = new javax.swing.JMenuItem();
         jMenuItem19 = new javax.swing.JMenuItem();
 
         jLabel1.setFont(new java.awt.Font("aakar", 3, 18)); // NOI18N
@@ -208,33 +206,38 @@ public class MenuAdmin extends javax.swing.JInternalFrame {
 
         jMenuItem7.setFont(new java.awt.Font("aakar", 3, 14)); // NOI18N
         jMenuItem7.setIcon(new javax.swing.ImageIcon("/home/daniel/NetBeansProjects/Proyecto2IPC/avion.png")); // NOI18N
-        jMenuItem7.setText("RUTAS");
+        jMenuItem7.setText("AEROLINEA");
         jMenu4.add(jMenuItem7);
 
         jMenuItem8.setFont(new java.awt.Font("aakar", 3, 14)); // NOI18N
         jMenuItem8.setIcon(new javax.swing.ImageIcon("/home/daniel/NetBeansProjects/Proyecto2IPC/vuelosS.png")); // NOI18N
-        jMenuItem8.setText("AEROLINEAS MAS USADAS");
+        jMenuItem8.setText("AEROPUERTO");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
         jMenu4.add(jMenuItem8);
 
         jMenuItem9.setFont(new java.awt.Font("aakar", 3, 14)); // NOI18N
         jMenuItem9.setIcon(new javax.swing.ImageIcon("/home/daniel/NetBeansProjects/Proyecto2IPC/reporte.png")); // NOI18N
         jMenuItem9.setText("AVIONES");
+        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem9ActionPerformed(evt);
+            }
+        });
         jMenu4.add(jMenuItem9);
 
         jMenuItem10.setFont(new java.awt.Font("aakar", 3, 14)); // NOI18N
         jMenuItem10.setIcon(new javax.swing.ImageIcon("/home/daniel/NetBeansProjects/Proyecto2IPC/actua.png")); // NOI18N
         jMenuItem10.setText("VUELO");
+        jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem10ActionPerformed(evt);
+            }
+        });
         jMenu4.add(jMenuItem10);
-
-        jMenuItem11.setFont(new java.awt.Font("aakar", 3, 14)); // NOI18N
-        jMenuItem11.setIcon(new javax.swing.ImageIcon("/home/daniel/NetBeansProjects/Proyecto2IPC/actu.png")); // NOI18N
-        jMenuItem11.setText("DE GASOLINA");
-        jMenu4.add(jMenuItem11);
-
-        jMenuItem12.setFont(new java.awt.Font("aakar", 3, 14)); // NOI18N
-        jMenuItem12.setIcon(new javax.swing.ImageIcon("/home/daniel/NetBeansProjects/Proyecto2IPC/ganancias.png")); // NOI18N
-        jMenuItem12.setText("GANANCIAS");
-        jMenu4.add(jMenuItem12);
 
         jMenuItem19.setFont(new java.awt.Font("aakar", 3, 14)); // NOI18N
         jMenuItem19.setIcon(new javax.swing.ImageIcon("/home/daniel/NetBeansProjects/Proyecto2IPC/pasaporte.png")); // NOI18N
@@ -381,6 +384,22 @@ public class MenuAdmin extends javax.swing.JInternalFrame {
             RP.show();
     }//GEN-LAST:event_jMenuItem19ActionPerformed
 
+    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
+        ReporteVuelo RV= new ReporteVuelo();
+        pantalla.add(RV);
+        RV.show();
+    }//GEN-LAST:event_jMenuItem10ActionPerformed
+
+    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+        ReportePorAvion RA= new ReportePorAvion();
+        pantalla.add(RA);
+        RA.show();
+    }//GEN-LAST:event_jMenuItem9ActionPerformed
+
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
+
      public String vuelosVuelos(){
         String[]posiblesVuelos= FILE_VUELO.list();
         String presentar="";
@@ -414,7 +433,7 @@ public class MenuAdmin extends javax.swing.JInternalFrame {
         
         return presentar;
     }
-         public String operarVuelo() {
+        public String operarVuelo() {
         String[] posiblesVuelos = FILE_VUELO.list();
         String presentar = "";
         int contador = 0;
@@ -456,8 +475,6 @@ public class MenuAdmin extends javax.swing.JInternalFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
-    private javax.swing.JMenuItem jMenuItem11;
-    private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem13;
     private javax.swing.JMenuItem jMenuItem14;
     private javax.swing.JMenuItem jMenuItem15;

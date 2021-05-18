@@ -9,6 +9,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.Serializable;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -25,7 +26,6 @@ public class Reservacion implements Serializable{
         this.no_Tarjeta = no_Tarjeta;
         this.no_Asiento = no_Asiento;
         this.modificarAsiento(no_Asiento,codigo_vuelo);
-        
     }
 
     public int getNo_Pasaporte() {

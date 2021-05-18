@@ -30,6 +30,7 @@ public class MenuPrincipal extends javax.swing.JFrame{
         jMenuBar1 = new javax.swing.JMenuBar();
         inicioSesion = new javax.swing.JMenu();
         botonInicioSesion = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
         salir = new javax.swing.JMenu();
         cerrarSesion = new javax.swing.JMenuItem();
 
@@ -107,13 +108,21 @@ public class MenuPrincipal extends javax.swing.JFrame{
 
         botonInicioSesion.setFont(new java.awt.Font("aakar", 3, 14)); // NOI18N
         botonInicioSesion.setForeground(new java.awt.Color(0, 0, 0));
-        botonInicioSesion.setText("Inicia Sesion");
+        botonInicioSesion.setText("INICIAR SESION");
         botonInicioSesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonInicioSesionActionPerformed(evt);
             }
         });
         inicioSesion.add(botonInicioSesion);
+
+        jMenuItem1.setText("COMPRA DE BOLETO SIN USUARIO");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        inicioSesion.add(jMenuItem1);
 
         jMenuBar1.add(inicioSesion);
 
@@ -190,6 +199,12 @@ public class MenuPrincipal extends javax.swing.JFrame{
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         // TODO add your handling code here:
     }//GEN-LAST:event_formWindowClosed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        IngresarReservacion NR= new IngresarReservacion();
+        pantalla.add(NR);
+        NR.show();
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
     
     public void limpiarPantalla(){
         pantalla.removeAll();
@@ -204,6 +219,7 @@ public class MenuPrincipal extends javax.swing.JFrame{
     private javax.swing.JLabel imagenLogo;
     private javax.swing.JMenu inicioSesion;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     public static javax.swing.JLabel origenTextAnimacion;
     public static javax.swing.JDesktopPane pantalla;

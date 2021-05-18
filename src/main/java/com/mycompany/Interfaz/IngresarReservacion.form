@@ -124,12 +124,12 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="CIUDAD DE ORIGEN"/>
+        <Property name="text" type="java.lang.String" value="AEROP. DE ORIGEN"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
-        <Property name="text" type="java.lang.String" value="CIUDAD DESTINO"/>
+        <Property name="text" type="java.lang.String" value="AEROP. DESTINO"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">

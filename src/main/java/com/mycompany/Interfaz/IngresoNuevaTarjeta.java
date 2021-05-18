@@ -12,12 +12,14 @@ import javax.swing.JOptionPane;
 public class IngresoNuevaTarjeta extends javax.swing.JInternalFrame {
 private String noTarj;
 private int noPasaporte;
-    public IngresoNuevaTarjeta(String noTarjeta, int noPasaport) {
-        this.noTarj=noTarjeta;
-        this.noPasaporte=noPasaport;
+    public IngresoNuevaTarjeta(int noPasa) {
         initComponents();
-        pasaporteText.setText(noTarjeta);
-        tarjetaText.setText(Integer.toString(noPasaport));
+        pasaporteText.setText(Integer.toString(noPasa));
+        pasaporteText.setEnabled(true);
+        pasaporteText.setEditable(false);
+        tarjetaText.setEnabled(true);
+        tarjetaText.setEditable(true);
+        
     }
     public IngresoNuevaTarjeta() {
         initComponents();
@@ -38,10 +40,10 @@ private int noPasaporte;
         jLabel5 = new javax.swing.JLabel();
         logo = new javax.swing.JLabel();
         botoNuevaTarjeta = new javax.swing.JButton();
-        tarjetaText = new javax.swing.JTextField();
         pasaporteText = new javax.swing.JTextField();
         dineroText = new javax.swing.JTextField();
         codigoText = new javax.swing.JTextField();
+        tarjetaText = new javax.swing.JFormattedTextField();
 
         setClosable(true);
 
@@ -66,8 +68,6 @@ private int noPasaporte;
             }
         });
 
-        tarjetaText.setEditable(false);
-
         pasaporteText.setEnabled(false);
 
         codigoText.addActionListener(new java.awt.event.ActionListener() {
@@ -75,6 +75,12 @@ private int noPasaporte;
                 codigoTextActionPerformed(evt);
             }
         });
+
+        try {
+            tarjetaText.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("############")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -97,9 +103,9 @@ private int noPasaporte;
                                 .addGap(13, 13, 13)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(pasaporteText)
-                                    .addComponent(tarjetaText)
                                     .addComponent(dineroText)
-                                    .addComponent(codigoText, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)))
+                                    .addComponent(codigoText, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
+                                    .addComponent(tarjetaText)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(177, 177, 177)
                                 .addComponent(botoNuevaTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -117,7 +123,7 @@ private int noPasaporte;
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(tarjetaText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(29, 29, 29)
+                        .addGap(31, 31, 31)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
                             .addComponent(pasaporteText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -132,7 +138,7 @@ private int noPasaporte;
                         .addGap(28, 28, 28)
                         .addComponent(botoNuevaTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(logo, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         pack();
@@ -148,7 +154,7 @@ private int noPasaporte;
         int pas= Integer.parseInt(pasaporteText.getText());
         Long noT= Long.parseLong(tarjetaText.getText());
         try {
-            FileInputStream archivoC = new FileInputStream(FILE_CLIENTES + "/" +noPasaporte);
+            FileInputStream archivoC = new FileInputStream(FILE_CLIENTES + "/" +pas);
             try {
                 FileInputStream archivoT = new FileInputStream(FILE_TARJETAS + "/" +noTarj );
                 JOptionPane.showMessageDialog(null, "YA EXISTE ESTA TARJETA");
@@ -158,15 +164,16 @@ private int noPasaporte;
                 if (dineroA != 0 && (cod != "" || cod != null)) {
                     Tarjeta NTarjeta = new Tarjeta(noT, pas, dineroA, cod);
                     GuardarArchivoBinario.guardarTarjeta(NTarjeta);
-                    JOptionPane.showMessageDialog(null, "VAMOS A INGRESAR LA SOLICITUD");
+                    JOptionPane.showMessageDialog(null, "SE AH INGRESADO TU TARJETA");
                     dineroText.setText("");
                     codigoText.setText("");
+                    this.dispose();
                 } else {
                  JOptionPane.showMessageDialog(null, "REVISA EL INGRESO DE CAMPOS, PARECE QUE HAY CAMPOS VACIOS");
                 }
 
          }
-        }catch (FileNotFoundException ex) {
+        }catch (FileNotFoundException e) {
             JOptionPane.showMessageDialog(null, "NO EXISTE EL CLIENTE");
         }
     }//GEN-LAST:event_botoNuevaTarjetaActionPerformed
@@ -183,6 +190,6 @@ private int noPasaporte;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel logo;
     private javax.swing.JTextField pasaporteText;
-    private javax.swing.JTextField tarjetaText;
+    private javax.swing.JFormattedTextField tarjetaText;
     // End of variables declaration//GEN-END:variables
 }

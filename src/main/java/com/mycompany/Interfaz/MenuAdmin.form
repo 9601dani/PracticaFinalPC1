@@ -230,7 +230,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="2" name="/home/daniel/NetBeansProjects/Proyecto2IPC/avion.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="RUTAS"/>
+                <Property name="text" type="java.lang.String" value="AEROLINEA"/>
               </Properties>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem8">
@@ -241,8 +241,11 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="2" name="/home/daniel/NetBeansProjects/Proyecto2IPC/vuelosS.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="AEROLINEAS MAS USADAS"/>
+                <Property name="text" type="java.lang.String" value="AEROPUERTO"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem8ActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem9">
               <Properties>
@@ -254,6 +257,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="AVIONES"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem9ActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem10">
               <Properties>
@@ -265,28 +271,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="VUELO"/>
               </Properties>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem11">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="aakar" size="14" style="3"/>
-                </Property>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="/home/daniel/NetBeansProjects/Proyecto2IPC/actu.png"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="DE GASOLINA"/>
-              </Properties>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem12">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="aakar" size="14" style="3"/>
-                </Property>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="/home/daniel/NetBeansProjects/Proyecto2IPC/ganancias.png"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="GANANCIAS"/>
-              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem10ActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem19">
               <Properties>
